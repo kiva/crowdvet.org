@@ -1,0 +1,36 @@
+{
+  "name": "crowdvet.org",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js --ignore tests",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build":
+      "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "heroku-postbuild": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deviget/crowdvet.org.git"
+  },
+  "keywords": ["crowdvet"],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/deviget/crowdvet.org/issues"
+  },
+  "homepage": "https://github.com/deviget/crowdvet.org#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "concurrently": "^3.5.1",
+    "cookie-session": "^2.0.0-beta.3",
+    "express": "^4.16.3",
+    "nodemon": "^1.17.4",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0",
+    "path-parser": "^4.1.0"
+  }
+}
