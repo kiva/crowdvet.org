@@ -1,0 +1,92 @@
+.text {
+  background-color: #247037;
+  text-align: center;
+  color: white;
+  padding-bottom: 75px;
+}
+
+.text > div {
+  font-size: 32px;
+}
+
+.title {
+  padding-top: 40px;
+  color: #a8d340;
+  font-size: 28px;
+}
+
+.world {
+  margin-top: 33px;
+  color: #407c40;
+  font-size: 32px;
+  text-align: center;
+}
+
+.recent {
+  background-color: #61a63a;
+  font-size: 32px;
+  color: white;
+  height: 129px;
+  padding-top: 46px;
+}
+
+#prefooter {
+  margin-top: 76px;
+}
+
+#after-text {
+  font-size: 18px;
+  color: #61a63a;
+  margin-top: 34px;
+}
+
+#evaluate {
+  background-color: #61a63a;
+  margin-top: 47px;
+  margin-bottom: 37px;
+  width: 357px;
+  height: 80px;
+  font-size: 24px;
+  padding-top: 26px;
+}
+
+#learn-btn {
+  background-color: #13b5ea;
+  color: white;
+}
+
+.btn {
+  text-transform: none;
+}
+
+#title {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.video-text .btn {
+  width: 390px;
+  height: 60px;
+  font-size: 27px;
+  padding-top: 13px;
+  background-color: #13b5ea;
+}
+
+.video-text {
+  text-align: center;
+  margin-top: 90px;
+}
+
+.carousel-text {
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.carousel-text .btn {
+  width: 280px;
+  height: 60px;
+  font-size: 27px;
+  padding-top: 13px;
+  background-color: #13b5ea;
+}

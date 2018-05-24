@@ -1,0 +1,45 @@
+small {
+  color: #9b9b9b;
+  font-size: 15px;
+}
+
+.btn {
+  text-transform: none;
+}
+
+.grid {
+  margin-top: 40px;
+}
+
+.signup {
+  background-color: white;
+  color:#4A4A4A;
+  width:263px;
+  height: 40px;
+}
+
+.signup > div {
+  margin-top: 5px;
+  font-size: 16px;
+}
+.signup:hover {
+  background: white;
+}
+
+#google{
+  margin-top:5px;
+  float: left;
+}
+
+.small {
+  font-size: 16px;
+}
+
+#signup {
+  background-color: #61A63A;
+  padding-top: 13px;
+  color:white;
+  width:280px;
+  height: 60px;
+  font-size: 28px;
+}
