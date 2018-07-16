@@ -1,14 +1,35 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import logo from './logo.svg';
-import './Header.css';
-import $ from 'jquery';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actions from "../actions";
+import logo from "./logo.svg";
+import "./Header.css";
 
 class Header extends Component {
   componentDidMount() {
-    $('.button-collapse').sideNav();
+    window.jQuery(document).ready(function() {
+      window.jQuery(".sidenav").sidenav();
+    });
   }
-
+  renderSingIn() {
+    if (this.props.auth) {
+      return [
+        <li key="1">
+          <Link to={"/user"}>My Profile</Link>
+        </li>,
+        <li key="2">
+          <a href={"/auth/logout"}>Logout</a>
+        </li>
+      ];
+    }
+    return (
+      <li>
+        <Link className="modal-trigger" to={"#modal1"}>
+          Sign Up or Sing In
+        </Link>
+      </li>
+    );
+  }
   render() {
     return (
       <div>
@@ -17,11 +38,7 @@ class Header extends Component {
             <Link to={'/'} className="left brand-logo">
               Crowdvetting at <img src={logo} className="App-logo" alt="logo" />
             </Link>
-            <a
-              href="#"
-              data-activates="mobile-demo"
-              className="button-collapse"
-            >
+            <a href="#" data-target="mobile-demo" className="sidenav-trigger">
               <i className="material-icons">menu</i>
             </a>
             <ul className="right hide-on-med-and-down">
@@ -31,29 +48,27 @@ class Header extends Component {
               <li>
                 <Link to={'badges.html'}>Take Action</Link>
               </li>
-              <li>
-                <Link className="modal-trigger" to={'#modal1'}>Sign Up or Sign In</Link>
-              </li>
-            </ul>
-            <ul className="side-nav" id="mobile-demo">
-              <li>
-                <Link to={'sass.html'}>Learn about Crowdvetting</Link>
-              </li>
-              <li>
-                <Link to={'badges.html'}>Take Action</Link>
-              </li>
-              <li>
-                <a href="collapsible.html">Javascript</a>
-              </li>
-              <li>
-                <Link to={'collapsible.html'}>Sign Up or Sign In</Link>
-              </li>
+              {this.renderSingIn()}
             </ul>
           </div>
         </nav>
+
+        <ul className="sidenav" id="mobile-demo">
+          <li>
+            <Link to={'sass.html'}>Learn about Crowdvetting</Link>
+          </li>
+          <li>
+              <Link to={'badges.html'}>Take Action</Link>
+          </li>
+              {this.renderSingIn()}
+        </ul>
       </div>
     );
   }
 }
-//this.props.auth ? '/blogs' : '/'
-export default Header;
+
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+export default connect(mapStateToProps)(Header);
