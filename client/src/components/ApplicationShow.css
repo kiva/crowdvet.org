@@ -1,0 +1,31 @@
+.card-review .card-panel.teal {
+  background-color: #f8f8f8 !important;
+  color: #99cd32;
+}
+
+.title {
+  font-size: 14px;
+  color: #206231;
+}
+
+.card-text {
+  font-size: 19px;
+}
+
+.table-name {
+  font-weight: initial;
+  color: #236133;
+  font-size: 24px;
+}
+
+#selected-metrics {
+  list-style-type: circle;
+}
+
+ul#selected-metrics > li {
+  list-style-type: circle;
+}
+
+table a {
+  color:black;
+}
