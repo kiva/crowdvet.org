@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import carousel from './caroussel-1.png';
-import $ from 'jquery';
+//import $ from 'jquery';
 
 class Carousel extends Component {
   componentDidMount() {
-    $('.carousel').carousel({
-      fullWidth: true,
-      indicators: true
-    });
+    window.jQuery(document).ready(function() {
+     window.jQuery('.carousel').carousel({
+       fullWidth: true,
+       indicators: true
+     });
+   })
   }
 
   renderText() {
@@ -16,7 +18,7 @@ class Carousel extends Component {
         <div className="col s12 hide-on-med-and-down">
         <div>Help us enable dreams</div>
         <div>around the world</div>
-        <a className="btn">Join Today</a>
+        <div className="btn">Join Today</div>
         </div>
       </div>
     );
