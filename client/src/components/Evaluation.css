@@ -1,0 +1,122 @@
+ul.response {
+  font-size: 20px;
+  text-align: left;
+  color: #666666;
+}
+
+.question {
+  font-size: 24px;
+}
+
+.gray-background {
+  background: rgb(248, 248, 248);
+}
+
+.font-title {
+  font-size: 34px;
+}
+
+#info {
+  color: #206231;
+  font-size: 24px;
+}
+
+ @media only screen and (max-width: 40em) {
+  /* small */
+  .rb-tab [type="radio"] + label:before,
+  .rb-tab [type="radio"] + label:after {
+    width: 22px;
+    height: 22px;
+  }
+
+  .rb-txt {
+    position: absolute;
+    top: 15%;
+    right: 45%;
+    font-size: 1em;
+    color: black;
+    cursor: pointer;
+  }
+}
+
+[type="radio"]:checked+span:after  {
+  background-color: #61a63a;
+  border-color: #61a63a;
+}
+
+#title-img {
+  position: absolute;
+  color:white;
+  margin-top: 12%;
+  width:100%;
+}
+
+#title-time {
+  position: absolute;
+  margin-top: 18%;
+  width:100%;
+}
+
+#radio-text {
+  padding-left: 15px;
+  padding-top: 7px;
+  color:black;
+  font-size:1em.
+}
+
+.img-pic{
+  margin-top: -1px;
+}
+
+[type="radio"] + span:before,
+[type="radio"] + span:after {
+  width: 32px;
+  height: 32px;
+  padding-left: 14px;
+  padding-top: 7px;
+}
+
+/* .rb-tab [type="radio"]:checked + label:after {
+  background-color: #61a63a;
+  border-color: #61a63a;
+} */
+
+[type="radio"]:disabled+span {
+    color: #61a63a;
+}
+
+[type="radio"]:disabled:checked+span:after {
+    background-color: #61a63a;
+    border-color: #61a63a;
+}
+
+.rb-tab {
+  display: inline-block;
+  position: relative;
+}
+
+.button-large {
+  background-color: #61a63a;
+  margin-top: 47px;
+  margin-bottom: 37px;
+  width: 350px;
+  height: 80px;
+  font-size: 24px;
+  text-transform: none;
+}
+
+.button-large:hover {
+  background-color: #61a63a;
+}
+.btn-results {
+  padding-top: 24px;
+}
+
+.img-header {
+  position:relative;
+}
+
+.answer-result {
+  margin-top: 25px;
+  font-size: 16px;
+}
