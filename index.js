@@ -3,8 +3,14 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
+const config = require('./config/config');
+const datasource = require('./config/datasource');
 
 const app = express();
+
+app.config = config;
+app.datasource = datasource(app);
+require('./services/passport')(app);
 
 app.use(bodyParser.json());
 app.use(
@@ -15,6 +21,13 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+
+require('./routes/auth')(app);
+require('./routes/enterprises')(app);
+require('./routes/questions')(app);
+require('./routes/evaluations')(app);
+require('./routes/sectors')(app);
+require('./routes/users')(app);
 
 if (['production'].includes(process.env.NODE_ENV)) {
   app.use(express.static('client/build'));
