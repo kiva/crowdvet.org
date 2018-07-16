@@ -1,0 +1,80 @@
+/* .crop-vetted {
+ height: 250px;
+ width: 350px;
+ overflow: hidden;
+}
+.crop-vetted img {
+ height: auto;
+ width: 350px;
+} */
+
+#card-vetted {
+  color: black;
+  font-size: 32px;
+  font-weight: 400;
+
+  margin:0;
+}
+
+#investment-card {
+  color: black;
+  font-size: 16px;
+  font-weight: 400;
+  margin:0;
+}
+
+#read-card {
+  color:#236133;
+  float:right;
+  font-size:20px;
+}
+.card .card-image .card-title {
+  position: absolute;
+  bottom: 10px;
+  width: 80%;
+  left: 10%;
+  height: auto;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 0px;
+}
+.card .card-image img{
+  min-height: 200px;
+}
+
+.load-more {
+  font-size: 20px;
+  color: white;
+}
+
+#load-more-header {
+  background-color: #61a63a;
+}
+
+.margin-zero {
+  margin-bottom: 0px;
+}
+
+#user-title {
+  color: #a8d340;
+  font-size: 28px;
+  margin-top:40px;
+}
+
+#user-msg {
+  color: white;
+  margin-bottom: 40px;
+}
+#user-container {
+  background-color: #407c40;
+}
+
+.red-text {
+  color: #d0021b;
+}
+
+.yellow-text {
+  color: yellow;
+}
+.green-text {
+  color: #236133;
+}
