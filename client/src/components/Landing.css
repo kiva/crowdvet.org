@@ -10,7 +10,6 @@
 }
 
 .title {
-  padding-top: 40px;
   color: #a8d340;
   font-size: 28px;
 }
@@ -47,7 +46,7 @@
   width: 357px;
   height: 80px;
   font-size: 24px;
-  padding-top: 26px;
+  padding-top: 20px;
 }
 
 #learn-btn {
