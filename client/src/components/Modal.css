@@ -16,6 +16,7 @@ small {
   color:#4A4A4A;
   width:263px;
   height: 40px;
+  margin-top: 55px;
 }
 
 .signup > div {
@@ -37,7 +38,7 @@ small {
 
 #signup {
   background-color: #61A63A;
-  padding-top: 13px;
+  padding-top: 9px;
   color:white;
   width:280px;
   height: 60px;

@@ -1,44 +1,77 @@
 import React, { Component } from 'react';
+import { Field, reduxForm } from 'redux-form';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 import logoGreen from './logo-green.svg';
 import Google from './Google.svg';
 import './Modal.css';
-import $ from 'jquery';
+//import $ from 'jquery';
 
 class SignUp extends Component {
   componentDidMount() {
-    $('.modal').modal();
+    window.jQuery(document).ready(function() {
+      window.jQuery('.modal').modal();
+    })
+  }
+
+  handleFormSubmit(values) {
+    this.props.signUpUser(values, this.props.history);
+  }
+
+  renderAlert() {
+    if (this.props.errorMessage) {
+      return (
+        <div className="alert alert-danger">
+          <strong>Oops!</strong> {this.props.errorMessage}
+        </div>
+      );
+    }
+  }
+
+  renderField(field) {
+    const { type, meta: { touched, error } } = field;
+    const className = `form-group ${touched && error ? 'invalid' : ''}`;
+    return (
+      <div>
+        <label>{field.label}</label>
+        <input className={className} type={type || 'text'} {...field.input} />
+        <div className="text-help">{touched ? error : ''}</div>
+      </div>
+    );
   }
 
   renderForm() {
+    const { handleSubmit } = this.props;
     return (
       <div className="row">
-        <form className="col s12">
+        <form
+          className="col s12"
+          onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        >
           <div className="row">
             <div className="input-field col s12">
-              <input
-                placeholder="Name"
-                id="name"
-                type="text"
-                className="validate"
+              <Field label="Name" name="name" component={this.renderField} />
+            </div>
+          </div>
+          <div className="row">
+            <div className="input-field col s12">
+              <Field label="Email" name="email" component={this.renderField} />
+            </div>
+          </div>
+          <div className="row">
+            <div className="input-field col s12">
+              <Field
+                label="Password"
+                name="password"
+                type="password"
+                component={this.renderField}
               />
-              <label for="first_name">First Name</label>
             </div>
           </div>
-          <div className="row">
-            <div className="input-field col s12">
-              <input id="email" type="email" className="validate" />
-              <label for="email">Email</label>
-            </div>
-          </div>
-          <div className="row">
-            <div className="input-field col s12">
-              <input id="password" type="password" className="validate" />
-              <label for="password">Password</label>
-            </div>
-          </div>
-          <a class="btn" id="signup">
+          <button className="btn" id="signup">
             <div>Sign Up</div>
-          </a>
+          </button>
         </form>
       </div>
     );
@@ -49,10 +82,9 @@ class SignUp extends Component {
         <div id="modal1" className="modal modal-fixed-footer">
           <div className="modal-content">
             <div>
-              <img src={logoGreen} Name="App-logo" alt="logo" />
+              <img src={logoGreen} alt="logo" />
             </div>
             <small>Enabling Dreams All Around the world</small>
-
             <div className="row">
               <div className="grid col s12 m6">
                 <span className="flow-text small">Sign Up with Us</span>
@@ -63,7 +95,7 @@ class SignUp extends Component {
                   Connect a Social Media Account
                 </span>
                 <span className="flow-text">
-                  <a class="btn signup">
+                  <a href={'/auth/google'} className="btn signup">
                     <img src={Google} id="google" alt="logo" />
                     <div>Sign Up with Google</div>
                   </a>
@@ -71,11 +103,32 @@ class SignUp extends Component {
               </div>
             </div>
           </div>
-          <div class="modal-footer" />
+          <div className="modal-footer" />
         </div>
       </div>
     );
   }
 }
+function validate(formProps) {
+  const errors = {};
+  if (!formProps.name) {
+    errors.name = 'Please enter a name';
+  }
+  if (!formProps.email) {
+    errors.email = 'Please enter an email';
+  }
+  if (!formProps.password) {
+    errors.password = 'Please enter a password';
+  }
+  return errors;
+}
 
-export default SignUp;
+function mapStateToProps(state) {
+  return { errorMessage: state.auth };
+}
+
+export default reduxForm({
+  form: 'signup',
+  fields: ['email', 'password', 'name'],
+  validate
+})(connect(mapStateToProps, actions)(withRouter(SignUp)));
