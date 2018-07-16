@@ -1,0 +1,38 @@
+.card-action {
+  border: 1px solid #979797;
+}
+.card-action.card-continue {
+  background-color: #aee15c;
+  height:40px;
+  padding: 9px 24px;
+}
+
+.card-action #card-link {
+  color: #4A4A4A;
+}
+
+.card-action.red-status {
+  background-color: #D0021B;
+}
+
+.card-action.warning-status {
+  background-color: #F5A623;
+  height: 35px;
+  padding: 7px 24px;
+}
+
+.card-action.green-status {
+  background-color: #AEE15C;
+
+}
+
+.remove-btn{
+  height: 22px;
+  color:white;
+  margin-bottom: -10px;
+  background-color: #979797;
+}
+
+.remove-btn > a{
+  color:white;
+}
