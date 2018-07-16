@@ -1,0 +1,40 @@
+
+.btn-flat {
+  background-color:#61A63A;
+  color:white;
+}
+
+.btn-large:hover {
+  background-color: rgba(0,0,0,0.1);
+}
+
+.name {
+  font-size: 36px;
+}
+
+.score {
+  font-size: 24px;
+  color: #236133;
+}
+
+.community {
+  font-size: 18px;
+  color: #898989;
+}
+
+.dashboard {
+  background-color: #61A63A;
+  height: auto;
+  margin-bottom: 0px;
+
+}
+
+.dashboard-item {
+  color: white;
+  font-size: 26px;
+  height: auto;
+}
+
+ .dashboard .active {
+  background-color: #407c40;
+}
