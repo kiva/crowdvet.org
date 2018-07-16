@@ -1,0 +1,45 @@
+
+h3 {
+  font-size: 34px;
+}
+
+.card-stacked .item-name {
+  font-size: 24px;
+  color:#1BA5E5;
+  padding: 10px;
+  padding-bottom: 0px;
+}
+
+.card-stacked .item-description {
+  font-size: 16px;
+  padding:  10px;
+}
+
+.card-stacked .item-date {
+  padding-left: 10px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+.card-stacked .right-align {
+  padding-right: 20px;
+}
+.card-stacked .btn {
+  background-color: #13B5EA;
+  color: white;
+  width: 230px;
+  height: 36px;
+}
+
+.card{
+  padding-bottom: 10px;
+}
+
+.crop {
+ height: 220px;
+ width: 300px;
+ overflow: hidden;
+}
+.crop img {
+ height: auto;
+ width: 300px;
+}
