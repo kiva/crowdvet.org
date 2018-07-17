@@ -1,4 +1,6 @@
 import _ from "lodash";
+import moment from "moment";
+import React from 'react';
 
 function getScoreAndAccuracy(votes, officialVotes) {
   if (_.isEmpty(officialVotes)) return;
@@ -160,15 +162,102 @@ function getOverallResults(userEvaluations, officialEvaluations) {
 }
 
 function getValues(data, value) {
-  return _.map(data, value); // [12, 14, 16, 18]
+  return _.map(data, value);
 }
 
-function getCrowdResults() {
-
+function isPending(officialEvaluation) {
+  if (!officialEvaluation) {
+    return true;
+  }
+  return _.get(officialEvaluation, "status") === "Pending";
 }
+
+function isOpen(enterprise) {
+  return moment().isBefore(enterprise.endDate);
+}
+
+function getPage(enterprise, officialEvaluation) {
+  if (isOpen(enterprise)) {
+    const page = `/users/evaluations/${enterprise.id}`;
+    return page;
+  }
+  if (!isOpen(enterprise) && isPending(officialEvaluation)) {
+    const page = `/users/evaluations/results/${enterprise.id}`;
+    return page;
+  }
+  if (!isOpen(enterprise) && !isPending(officialEvaluation)) {
+    const page = `/users/evaluations/results/${enterprise.id}`;
+    return page;
+  }
+}
+
+function getMessage(enterprise, evaluation, officialEvaluation) {
+  if (
+    isOpen(enterprise) &&
+    !_.isEmpty(evaluation) &&
+    !isPending(officialEvaluation)
+  ) {
+    return {
+      message: "BELOW ARE THE RESULTS YOU SUBMITTED",
+      page: "/user",
+      text: "EXit"
+    };
+  }
+
+  if (
+    isOpen(enterprise) &&
+    !_.isEmpty(evaluation) &&
+    isPending(officialEvaluation)
+  ) {
+    return {
+      message: "BELOW ARE THE RESULTS YOU SUBMITTED",
+      page: "/user",
+      text: "Exit"
+    };
+  }
+
+  if (
+    !isOpen(enterprise) &&
+    !_.isEmpty(evaluation) &&
+    isPending(officialEvaluation)
+  ) {
+    return {
+      message: "KIVA WILL POST A DECISION SOON",
+      page: "/user",
+      text: "EXit"
+    }
+  }
+  if (
+    !isOpen(enterprise) &&
+    !_.isEmpty(evaluation) &&
+    !isPending(officialEvaluation)
+  ) {
+    return {
+      message: "BELOW ARE THE RESULTS YOU SUBMITTED",
+      page: `/evaluations/results/${enterprise.id}`,
+      text: "Evaluation Results"
+    }
+  }
+}
+
+function timeRenderer({ days, hours, minutes, seconds }) {
+  let renderText = "";
+  if (days) {
+    renderText = `${days} Days, ${hours} Hours`;
+  } else if (hours) {
+    renderText = `${hours} Hours, ${minutes} minutes`;
+  } else if (minutes) {
+    renderText = `${minutes} minutes, ${seconds} seconds`;
+  }
+  return <span> {renderText} left</span>;
+}
+
 export default {
   getScoreAndAccuracy,
   getOverallResults,
   getValues,
-  getCrowdResults
+  getPage,
+  getMessage,
+  isOpen,
+  timeRenderer
 };
