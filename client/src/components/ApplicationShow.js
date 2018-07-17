@@ -9,6 +9,9 @@ import TopMenu from "./TopMenu";
 import Card from "./Card";
 import PDF from "./PDF.svg";
 import Countdown from "react-countdown-now";
+import utils from "./utils";
+import _ from "lodash";
+import moment from "moment";
 
 class ApplicationShow extends Component {
   constructor(props) {
@@ -23,6 +26,8 @@ class ApplicationShow extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     this.props.fetchEnterprise(this.props.match.params.id);
+    this.props.fetchUserEvaluation(this.props.match.params.id);
+    this.props.fetchOfficialEvaluations();
   }
 
   onSubMenuChange = (menu, active) => {
@@ -200,21 +205,33 @@ class ApplicationShow extends Component {
     );
   }
 
+
+  renderCountDown(enterprise, evaluation) {
+    if (!utils.isOpen(enterprise) && !_.isEmpty(evaluation)) {
+      return (
+        <div>Vetted {moment(evaluation.created_at).format("MM-DD-YYYY")}</div>
+      );
+    }
+
+    return <Countdown date={enterprise.endDate} renderer={utils.timeRenderer} />;
+  }
+
   render() {
-    const enterprise = this.props.enterprise;
+    const { enterprise, officialEvaluation, evaluation } = this.props;
     if (!enterprise) return null;
     this.sector = enterprise.Sector ? enterprise.Sector.name : "Water";
-
     const imgName = `/sectors/${this.sector}.jpg`;
+    console.log(evaluation, "coon eval");
+    const toPage = utils.getPage(enterprise, officialEvaluation);
     return (
       <div>
         <TopMenu onSubMenuChange={this.onSubMenuChange} />
-        <div style={{ "marginBottom": "-25px" }}>
+        <div style={{ marginBottom: "-25px" }}>
           <div className="row">
             <div className="col s12 center img-header">
               <h2 id="title-img" className=" center">
                 {enterprise.name}
-                <h3 style={{/*color:"#236133"*/}}><Countdown date={enterprise.endDate} /></h3>
+                <h3>{this.renderCountDown(enterprise, evaluation)}</h3>
               </h2>
             </div>
             <img
@@ -232,13 +249,10 @@ class ApplicationShow extends Component {
           {this.renderCards()}
           {this.renderContent()}
           {this.renderTable()}
+
           <div>
             <div className="center-align">
-              <Link
-                className="btn"
-                to={`/users/evaluations/${this.props.enterprise.id}`}
-                id="evaluate"
-              >
+              <Link className="btn" to={toPage} id="evaluate">
                 Continue to Evaluation
               </Link>
             </div>
@@ -249,8 +263,16 @@ class ApplicationShow extends Component {
   }
 }
 
-function mapStateToProps({ auth, enterprises }, ownProps) {
-  return { auth, enterprise: enterprises[ownProps.match.params.id] };
+function mapStateToProps(
+  { auth, enterprises, evaluations, officialEvaluations },
+  ownProps
+) {
+  return {
+    auth,
+    enterprise: enterprises[ownProps.match.params.id],
+    evaluation: evaluations[ownProps.match.params.id],
+    officialEvaluation: officialEvaluations[ownProps.match.params.id]
+  };
 }
 
 export default connect(mapStateToProps, actions)(ApplicationShow);
