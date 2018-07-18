@@ -205,11 +205,10 @@ class ApplicationShow extends Component {
     );
   }
 
-
   renderCountDown(enterprise, evaluation) {
     if (!utils.isOpen(enterprise) && !_.isEmpty(evaluation)) {
       return (
-        <div>Vetted {moment(evaluation.created_at).format("MM-DD-YYYY")}</div>
+        <div>Vetted {moment(evaluation.created_at).format("MMMM DD, YYYY")}</div>
       );
     }
 
