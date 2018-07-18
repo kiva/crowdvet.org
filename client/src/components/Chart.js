@@ -7,7 +7,6 @@ import Dots from "./Dots";
 class LineChart extends Component {
   render() {
     var data = [
-      { score: 0, count: 0 },
       { score: 1, count: 180 },
       { score: 2, count: 250 },
       { score: 3, count: 150 },
@@ -20,49 +19,39 @@ class LineChart extends Component {
       h = this.props.height - (margin.top + margin.bottom);
 
     var x = d3
-      .scaleLinear()
-      .domain([
-        0,
-        d3.max(data, function(d) {
+      .scaleBand()
+      .domain(
+        data.map(function(d) {
           return d.score;
         })
-      ])
-      .range([0, w]);
+      )
+      .rangeRound([0, this.props.width])
+      .padding(0.3);
 
     var y = d3
       .scaleLinear()
-      .domain([
-        0,
-        d3.max(data, function(d) {
-          return d.count + 100;
-        })
-      ])
-      .range([h, 0]);
+      .domain([0, 500])
+      .range([this.props.height, 0]);
 
-    var line = d3
-      .line()
-      .curve(d3.curveCardinal)
-      .x(function(d) {
-        return x(d.score);
-      })
-      .y(function(d) {
-        return y(d.count);
-      });
+    var rectForeground = data.map(function(d, i) {
+      return (
+        <rect
+          fill="#74d3eb"
+          rx="3"
+          ry="3"
+          key={i}
+          x={x(d.score)}
+          y={y(d.count)}
+          className="shadow"
+          height={h - y(d.count)}
+          width={x.bandwidth()}
+        />
+      );
+    });
 
     var transform = "translate(" + margin.left + "," + margin.top + ")";
-
     var yAxis = d3.axisLeft(y).ticks(5);
-
-    var xAxis = d3
-      .axisBottom(x)
-      .tickValues(
-        data
-          .map(function(d, i) {
-            if (i > 0) return d.score;
-          })
-          .splice(1)
-      )
-      .ticks(4);
+    var xAxis = d3.axisBottom(x);
 
     return (
       <div>
@@ -74,12 +63,7 @@ class LineChart extends Component {
           <g transform={transform}>
             <Axis h={h} axis={yAxis} axisType="y" />
             <Axis h={h} axis={xAxis} axisType="x" />
-            <path
-              className="line shadow"
-              d={line(data)}
-              strokeLinecap="round"
-            />
-             <Dots data={data} x={x} y={y}/>
+            {rectForeground}
           </g>
         </svg>
       </div>
