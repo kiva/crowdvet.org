@@ -1,0 +1,38 @@
+.btn-comment {
+  background-color: #13B5EA;
+  min-width: 270px;
+  width:100%;
+  height:60px;
+  font-size: 18px;
+}
+
+.btn-comment:focus {
+  background-color: #13B5EA;
+}
+
+.btn-comment:hover {
+  background-color: #13B5EA;
+}
+
+.grey-background {
+  background-color: #F8F8F8;
+}
+
+.grey-background.comment-height {
+  min-height: 80px;
+}
+
+.comment-votes {
+  background-color: #13B5EA;
+  color:white;
+  border-radius: 5px;
+}
+
+#comment-icons{
+  margin-top: -45px;
+}
+
+#comments-table .collapsible {
+  -webkit-box-shadow: none;
+  border:none;
+}
