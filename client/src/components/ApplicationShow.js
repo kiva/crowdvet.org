@@ -9,6 +9,8 @@ import TopMenu from "./TopMenu";
 import Card from "./Card";
 import PDF from "./PDF.svg";
 import Countdown from "react-countdown-now";
+import CommentForm from "./Comment";
+import CommentList from "./CommentList";
 import utils from "./utils";
 import _ from "lodash";
 import moment from "moment";
@@ -28,6 +30,7 @@ class ApplicationShow extends Component {
     this.props.fetchEnterprise(this.props.match.params.id);
     this.props.fetchUserEvaluation(this.props.match.params.id);
     this.props.fetchOfficialEvaluations();
+    this.props.fetchEnterpriseComments(this.props.match.params.id);
   }
 
   onSubMenuChange = (menu, active) => {
@@ -208,19 +211,24 @@ class ApplicationShow extends Component {
   renderCountDown(enterprise, evaluation) {
     if (!utils.isOpen(enterprise) && !_.isEmpty(evaluation)) {
       return (
-        <div>Vetted {moment(evaluation.created_at).format("MMMM DD, YYYY")}</div>
+        <div>
+          Vetted {moment(evaluation.created_at).format("MMMM DD, YYYY")}
+        </div>
       );
     }
 
-    return <Countdown date={enterprise.endDate} renderer={utils.timeRenderer} />;
+    return (
+      <Countdown date={enterprise.endDate} renderer={utils.timeRenderer} />
+    );
   }
 
   render() {
-    const { enterprise, officialEvaluation, evaluation } = this.props;
+    const { enterprise, officialEvaluation, evaluation, comments } = this.props;
+    console.log(this.props.comments, "los comments");
     if (!enterprise) return null;
     this.sector = enterprise.Sector ? enterprise.Sector.name : "Water";
     const imgName = `/sectors/${this.sector}.jpg`;
-    console.log(evaluation, "coon eval");
+
     const toPage = utils.getPage(enterprise, officialEvaluation);
     return (
       <div>
@@ -249,28 +257,41 @@ class ApplicationShow extends Component {
           {this.renderContent()}
           {this.renderTable()}
 
-          <div>
+          <div className="row">
+            <div className="col s12 center">
+              <h4>Discussion</h4>
+            </div>
+          </div>
+            <div className="row">
+              <CommentList enterprise_id={enterprise.id} comments={comments} />
+            </div>
+            <div className="row">
+            <CommentForm enterprise_id={enterprise.id} />
+            </div>
             <div className="center-align">
               <Link className="btn" to={toPage} id="evaluate">
                 Continue to Evaluation
               </Link>
             </div>
           </div>
-        </div>
       </div>
     );
   }
 }
 
 function mapStateToProps(
-  { auth, enterprises, evaluations, officialEvaluations },
+  { auth, enterprises, evaluations, officialEvaluations, comments },
   ownProps
 ) {
   return {
     auth,
     enterprise: enterprises[ownProps.match.params.id],
     evaluation: evaluations[ownProps.match.params.id],
-    officialEvaluation: officialEvaluations[ownProps.match.params.id]
+    officialEvaluation: officialEvaluations[ownProps.match.params.id],
+    comments: _.pick(
+      comments,
+      _.map(_.get(enterprises[ownProps.match.params.id], "Comments"), "id")
+    )
   };
 }
 
