@@ -13,8 +13,12 @@ class ProfileHeader extends Component {
     // redirect user if not logged
     if (!auth) return null;
     const result = utils.getOverallResults(userEvaluations, officialEvaluations);
+    let image = "";
+    if (this.props.auth.image) {
+        image = `${this.props.auth.image.slice(0, -2)}200`;
+    }
 
-    const image = `${this.props.auth.image.slice(0, -2)}200`;
+
     return (
       <div>
         <div className="container">
