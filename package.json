@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+  "node": "8.1.1",
+  "npm": "5.0.3"
+  },
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js --ignore tests",
@@ -26,12 +30,17 @@
   "homepage": "https://github.com/deviget/crowdvet.org#readme",
   "dependencies": {
     "@material-ui/core": "^1.3.0",
+    "aws-sdk": "^2.279.1",
     "axios": "^0.18.0",
     "bcrypt": "^2.0.1",
     "body-parser": "^1.18.3",
+    "busboy": "^0.2.14",
+    "busboy-body-parser": "^0.3.2",
     "concurrently": "^3.5.1",
+    "connect-busboy": "0.0.2",
     "cookie-session": "^2.0.0-beta.3",
     "express": "^4.16.3",
+    "filereader": "^0.10.3",
     "http-status": "^1.2.0",
     "jotform": "^0.1.4",
     "jwt-simple": "^0.5.1",
@@ -43,7 +52,8 @@
     "passport-local": "^1.0.0",
     "path-parser": "^4.1.0",
     "react-countdown-now": "^1.3.0",
-    "sequelize": "^4.37.10"
+    "sequelize": "^4.37.10",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "sqlite3": "^4.0.0"
