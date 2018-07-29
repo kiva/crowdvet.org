@@ -223,8 +223,8 @@ class ApplicationShow extends Component {
   }
 
   render() {
-    const { enterprise, officialEvaluation, evaluation, comments } = this.props;
-    console.log(this.props.comments, "los comments");
+    const { enterprise, officialEvaluation, evaluation, comments, auth } = this.props;
+
     if (!enterprise) return null;
     this.sector = enterprise.Sector ? enterprise.Sector.name : "Water";
     const imgName = `/sectors/${this.sector}.jpg`;
@@ -263,7 +263,7 @@ class ApplicationShow extends Component {
             </div>
           </div>
             <div className="row">
-              <CommentList enterprise_id={enterprise.id} comments={comments} />
+              <CommentList user={auth} enterprise_id={enterprise.id} comments={comments} />
             </div>
             <div className="row">
             <CommentForm enterprise_id={enterprise.id} />
