@@ -49,6 +49,14 @@ module.exports = (sequelize, DataType) => {
           notEmpty: true
         }
       }
+      admin: {
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+        validate: {
+          notEmpty: true
+        }
+      }
     },
     {
       hooks: {
@@ -109,10 +117,7 @@ module.exports = (sequelize, DataType) => {
     published: {
       type: DataType.BOOLEAN,
       allowNull: false,
-      defaultValue: false,
-      validate: {
-        notEmpty: true
-      }
+      defaultValue: false
     },
     loan: {
       type: DataType.INTEGER,
