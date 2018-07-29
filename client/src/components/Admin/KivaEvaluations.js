@@ -26,7 +26,6 @@ import {
 } from "react-admin";
 
 import Radio from "./Radio";
-import RadioEdit from "./RadioEdit";
 import Choices from './Choices'
 
 const required = (message = 'Required') =>
