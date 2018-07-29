@@ -12,7 +12,9 @@ app.config = config;
 app.datasource = datasource(app);
 require('./services/passport')(app);
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -27,6 +29,7 @@ require('./routes/enterprises')(app);
 require('./routes/questions')(app);
 require('./routes/evaluations')(app);
 require('./routes/sectors')(app);
+require('./routes/countries')(app);
 require('./routes/users')(app);
 
 if (['production'].includes(process.env.NODE_ENV)) {
