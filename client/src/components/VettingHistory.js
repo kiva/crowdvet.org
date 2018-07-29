@@ -8,8 +8,12 @@ import utils from './utils'
 
 class VettingHistory extends Component {
   render() {
-    const content = <div className="container">{this.renderHistory()}</div>;
-    return content;
+    const content = !_.isEmpty(this.props.userEvaluations) ? this.renderHistory() : this.renderMessage();
+    return <div className="container">{content}</div>;
+  }
+
+  renderMessage() {
+      return <h3 className="center">You have not vetted any enterprises yet...</h3>
   }
 
   componentDidMount() {
@@ -97,7 +101,7 @@ class VettingHistory extends Component {
                 : "Pending"}
             </div>
             <div className="col s1">{EvaluationResult ? EvaluationResult.Score : ""}</div>
-            <div className="col s1">{EvaluationResult ? EvaluationResult.Accuracy : ""}</div>
+            <div className="col s1">{EvaluationResult ? EvaluationResult.Accuracy + "%" : ""}</div>
           </div>
           <div className="collapsible-body">
             {this.renderAnswers(userEvaluations[evaluation.enterprise_id].Votes, _.get(officialEvaluations[evaluation.enterprise_id], "Votes"))}
