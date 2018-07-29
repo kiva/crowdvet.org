@@ -5,7 +5,7 @@ const jwt = require('jwt-simple');
 
 module.exports = app => {
   const config = app.config;
-  const { Users } = app.datasource.models;
+  const { Users } = app.datasource.models.Enterprises.model;
 
   app.get(
     "/auth/google",
