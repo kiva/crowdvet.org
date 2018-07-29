@@ -35,11 +35,29 @@ h3 {
 }
 
 .crop {
- height: 220px;
+ height: 200px;
  width: 300px;
  overflow: hidden;
 }
 .crop img {
  height: auto;
  width: 300px;
+ margin-top: 20px;
+}
+
+/* #card-progress{
+  height:230px;
+  width:300px;
+} */
+
+.carousel.carousel-slider.vetted {
+  height:280px;
+}
+
+.inprogress-evaluation {
+  height:200px
+}
+
+.open-enterprises {
+  height:200px
 }
