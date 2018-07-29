@@ -6,7 +6,6 @@ import * as actions from '../actions';
 import logoGreen from './logo-green.svg';
 import Google from './Google.svg';
 import './Modal.css';
-//import $ from 'jquery';
 
 class SignUp extends Component {
   componentDidMount() {
