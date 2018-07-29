@@ -10,6 +10,8 @@ import _ from "lodash";
 import "./Evaluation.css";
 import EvaluationForm from './EvaluationForm';
 import Countdown from "react-countdown-now";
+import utils from "./utils";
+import moment from "moment";
 
 class ApplicationEvaluate extends Component {
   constructor(props) {
@@ -31,6 +33,20 @@ class ApplicationEvaluate extends Component {
     this.setState({ menu, active });
   };
 
+  renderCountDown(enterprise, evaluation) {
+    if (!utils.isOpen(enterprise) && !_.isEmpty(evaluation)) {
+      return (
+        <div>
+          Vetted {moment(evaluation.created_at).format("MMMM DD, YYYY")}
+        </div>
+      );
+    }
+
+    return (
+      <Countdown date={enterprise.endDate} renderer={utils.timeRenderer} />
+    );
+  }
+
   render() {
     const { auth, questions, enterprise } = this.props;
     // redirect user if not logged
@@ -47,7 +63,7 @@ class ApplicationEvaluate extends Component {
           <div className="row">
             <div className="col s12 center img-header">
               <h2 id="title-img" className=" center">{enterprise.name}
-                <h3><Countdown date={enterprise.endDate} /></h3>
+                <h3>{this.renderCountDown(enterprise)}</h3>
               </h2>
             </div>
           <img className="responsive-img img-pic"src={imgName} width="100%" alt="" />

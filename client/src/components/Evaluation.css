@@ -39,7 +39,7 @@ ul.response {
   }
 }
 
-[type="radio"]:checked+span:after  {
+.radio-evaluation [type="radio"]:checked+span:after  {
   background-color: #61a63a;
   border-color: #61a63a;
 }
@@ -68,8 +68,8 @@ ul.response {
   margin-top: -1px;
 }
 
-[type="radio"] + span:before,
-[type="radio"] + span:after {
+.radio-evaluation [type="radio"] + span:before,
+.radio-evaluation [type="radio"] + span:after {
   width: 32px;
   height: 32px;
   padding-left: 14px;
@@ -81,11 +81,11 @@ ul.response {
   border-color: #61a63a;
 } */
 
-[type="radio"]:disabled+span {
+.radio-evaluation [type="radio"]:disabled+span {
     color: #61a63a;
 }
 
-[type="radio"]:disabled:checked+span:after {
+.radio-evaluation [type="radio"]:disabled:checked+span:after {
     background-color: #61a63a;
     border-color: #61a63a;
 }
@@ -108,6 +108,11 @@ ul.response {
 .button-large:hover {
   background-color: #61a63a;
 }
+
+.button-large:focus {
+  background-color: #61a63a;
+}
+
 .btn-results {
   padding-top: 24px;
 }
