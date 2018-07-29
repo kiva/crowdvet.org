@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import Carousel from './Carousel';
-import SignUpModal from './SignUpModal';
-import './Landing.css';
-import world from './world.svg';
+import React, { Component } from "react";
+import Carousel from "./Carousel";
+import SignUpModal from "./SignUpModal";
+import "./Landing.css";
+import world from "./world.svg";
 
 class Landing extends Component {
   renderText() {
     return (
       <div className="text row flow-text">
-        <p className="title col s12">Here at Kiva we are constanly asking</p>
+        <p className="col s12" id="kiva-message">Here at Kiva we are constanly asking</p>
         <div className="flow-text col s12">
           How can you make social enterprices make the world
         </div>
@@ -63,29 +63,31 @@ class Landing extends Component {
   renderVideo() {
     return (
       <div className="container">
-        <div className="row">
-          <div className="col s12 m6">
-            <h3 className="center-align" id="title">
-              Kiva + You
-            </h3>
-            <p className="flow-text">
-              Crowdvet.org aims to harness the knowledge of the crowd to give
-              social enterprises the capital they need to scale.
-            </p>
+        <div className="row valign-wrapper">
+                <div className="col s12 m6">
+                  <div>
+                    <iframe
+                      src="https://player.vimeo.com/video/210506986?embedparameter=value"
+                      width="440"
+                      height="248"
+                      frameborder="0"
+                      allowFullScreen
+                    />
+                  </div>
+                  </div>
+                  <div className="col s12 m6">
+                    <div className="video-text">
+                      <h3 className="center-align" id="title">
+                        Kiva + You
+                      </h3>
+                      <p className="flow-text">
+                        Crowdvet.org aims to harness the knowledge of the crowd to
+                        give social enterprises the capital they need to scale.
+                      </p>
+                      <a className="btn">Learn About CrowdVetting</a>
+                    </div>
+                  </div>
           </div>
-          <div className="col s12 m6">
-            <div className="video-text">
-              <h3 className="center-align" id="title">
-                Kiva + You
-              </h3>
-              <p className="flow-text">
-                Crowdvet.org aims to harness the knowledge of the crowd to give
-                social enterprises the capital they need to scale.
-              </p>
-              <a className="btn">Learn About CrowdVetting</a>
-            </div>
-          </div>
-        </div>
       </div>
     );
   }

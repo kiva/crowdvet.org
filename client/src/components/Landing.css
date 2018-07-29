@@ -9,7 +9,7 @@
   font-size: 32px;
 }
 
-.title {
+#kiva-message {
   color: #a8d340;
   font-size: 28px;
 }
@@ -73,7 +73,6 @@
 
 .video-text {
   text-align: center;
-  margin-top: 90px;
 }
 
 .carousel-text {
