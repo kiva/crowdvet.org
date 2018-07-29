@@ -27,12 +27,15 @@ class VetEnterprises extends Component {
     this.props.fetchEnterprises();
     this.props.fetchUserEvaluations();
     this.props.fetchOfficialEvaluations();
+    this.props.fetchSectors();
+    this.props.fetchCountries();
   }
 
   render() {
     const { auth, enterprises } = this.props;
     // redirect user if not logged
     if (!auth) return null;
+    if (!enterprises) return null;
     return (
       <div>
         <TopMenu onSubMenuChange={this.onSubMenuChange} />
@@ -54,7 +57,7 @@ class VetEnterprises extends Component {
         return (
           <div>
             <InProgress userEvaluations={_.filter(this.props.evaluations, {'inProgress': true})} enterprises={this.props.enterprises} />
-            <Enterprises enterprises={this.props.enterprises} />
+            <Enterprises enterprises={this.props.enterprises} sectors={this.props.sectors} countries={this.props.countries} />
           </div>
         );
       case 2:
@@ -68,9 +71,11 @@ function mapStateToProps({
   auth,
   enterprises,
   evaluations,
-  officialEvaluations
+  officialEvaluations,
+  sectors,
+  countries
 }) {
-  return { auth, enterprises, evaluations, officialEvaluations };
+  return { auth, enterprises, evaluations, officialEvaluations, sectors, countries };
 }
 
 export default connect(mapStateToProps, actions)(VetEnterprises);
