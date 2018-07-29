@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Field, reduxForm } from "redux-form";
 import * as actions from "../actions";
 import SubMenu from "./SubMenu";
 import TopMenu from "./TopMenu";
 import KivaMessage from "./KivaMessage";
 import _ from "lodash";
 import moment from "moment";
+import Countdown from "react-countdown-now";
+import utils from './utils'
 
 class EvaluationResults extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class EvaluationResults extends Component {
     window.scrollTo(0, 0);
     this.props.fetchEnterprise(this.props.match.params.id);
     this.props.fetchUserEvaluation(this.props.match.params.id);
+    this.props.fetchOfficialEvaluations();
     this.props.fetchQuestions();
   }
 
@@ -30,17 +32,14 @@ class EvaluationResults extends Component {
   };
 
   render() {
-    const { auth, questions, enterprise } = this.props;
-    // redirect user if not logged
+    const { auth, questions, enterprise, evaluation, officialEvaluation } = this.props;
     if (!auth) return null;
     if (!enterprise) return null;
+    if (!evaluation) return null;
 
     this.sector = enterprise.Sector ? enterprise.Sector.name : "Water";
     const imgName = `/sectors/${this.sector}.jpg`;
-    const soonMessage = "KIVA WILL POST A DECISION SOON";
-    const resultsMessage = "BELOW ARE THE RESULTS YOU SUBMITTED"
-    const message = moment().isBefore(enterprise.endDate) ? soonMessage : resultsMessage
-
+    const message = utils.getMessage(enterprise, evaluation, officialEvaluation);
     return (
       <div>
         <TopMenu onSubMenuChange={this.onSubMenuChange} />
@@ -49,6 +48,7 @@ class EvaluationResults extends Component {
             <div className="col s12 center img-header">
               <h2 id="title-img" className=" center">
                 {enterprise.name}
+                <h3>{this.renderCountDown(enterprise, evaluation)}</h3>
               </h2>
             </div>
             <img
@@ -66,14 +66,14 @@ class EvaluationResults extends Component {
           <div className="row flow-text center">
             <h3 className="col s12">Evaluation Results</h3>
           </div>
-          <KivaMessage message={message}/>
+          <KivaMessage message={message.message}/>
           <div className="row">{this.renderResults()}</div>
           <div className="row">
             <div className="col s6">
               <Link to={"/user"} className="btn button-large btn-results">Previous Page</Link>
             </div>
             <div className="col s6">
-              <Link to={"/user"} className="btn button-large btn-results">Exit</Link>
+              <Link to={message.page} className="btn button-large btn-results">{message.text}</Link>
             </div>
           </div>
         </div>
@@ -81,9 +81,22 @@ class EvaluationResults extends Component {
     );
   }
 
+  renderCountDown(enterprise, evaluation) {
+    if (!utils.isOpen(enterprise) && !_.isEmpty(evaluation)) {
+      return (
+        <div>
+          Vetted {moment(evaluation.created_at).format("MMMM DD, YYYY")}
+        </div>
+      );
+    }
+
+    return (
+      <Countdown date={enterprise.endDate} renderer={utils.timeRenderer} />
+    );
+  }
+
   renderResults() {
     const content = _.map(this.props.questions, question => {
-      console.log(question);
       return (
         <div className="row">
           <div className="question">{question.text}</div>
@@ -129,13 +142,14 @@ class EvaluationResults extends Component {
 }
 
 function mapStateToProps(
-  { auth, enterprises, questions, evaluations },
+  { auth, enterprises, questions, evaluations, officialEvaluations },
   ownProps
 ) {
   return {
     auth,
     enterprise: enterprises[ownProps.match.params.id],
     evaluation: evaluations[ownProps.match.params.id],
+    officialEvaluation: officialEvaluations[ownProps.match.params.id],
     questions
   };
 }
