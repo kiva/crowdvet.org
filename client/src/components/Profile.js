@@ -10,6 +10,8 @@ import Enterprises from "./Enterprises";
 import VettedEnterprises from "./VettedEnterprises";
 import VettingHistory from "./VettingHistory";
 import UserMessage from "./UserMessage";
+import PersonalForm from "./PersonalSettingsForm";
+import CommentHistory from "./CommentHistory";
 import _ from "lodash";
 
 class Profile extends Component {
@@ -30,12 +32,13 @@ class Profile extends Component {
     this.props.fetchEnterprises();
     this.props.fetchUserEvaluations();
     this.props.fetchOfficialEvaluations();
+    this.props.fetchSectors();
   }
 
   render() {
-    const { auth, enterprises } = this.props;
-    // redirect user if not logged
+    const { auth, enterprises, sectors } = this.props;
     if (!auth) return null;
+
     return (
       <div>
         <TopMenu onSubMenuChange={this.onSubMenuChange} />
@@ -64,6 +67,8 @@ class Profile extends Component {
               officialEvaluations={this.props.officialEvaluations}
             />
             <UserMessage />
+            <CommentHistory />
+            <PersonalForm sectors={this.props.sectors}/>
           </div>
         );
       case 2:
@@ -86,9 +91,10 @@ function mapStateToProps({
   auth,
   enterprises,
   evaluations,
-  officialEvaluations
+  officialEvaluations,
+  sectors
 }) {
-  return { auth, enterprises, evaluations, officialEvaluations };
+  return { auth, enterprises, evaluations, officialEvaluations, sectors };
 }
 
 export default connect(mapStateToProps, actions)(Profile);
