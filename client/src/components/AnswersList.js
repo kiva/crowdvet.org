@@ -9,7 +9,7 @@ const AnswersList = ({ answers, renderTextArea, question_id }) => {
       <div className="row">
         <div className="col s12 m1 center">
         <p style={{marginTop:"auto"}}>
-        <label>
+        <label className="radio-evaluation">
           <Field name={`votes[${question_id.toString()}].answer`} component="input" type="radio" value={answer.id.toString()} />{" "}
           <span id="radio-text">{answer.score}</span>
         </label>
