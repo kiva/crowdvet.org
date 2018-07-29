@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import carousel from './caroussel-1.png';
-//import $ from 'jquery';
 
 class Carousel extends Component {
   componentDidMount() {
-    window.jQuery(document).ready(function() {
-     window.jQuery('.carousel').carousel({
-       fullWidth: true,
-       indicators: true
-     });
-   })
+    const $ = window.jQuery;
+    $(document).ready(function(){
+      $('.carousel').carousel({
+          fullWidth: true,
+          indicators: true
+        });
+    })
   }
 
   renderText() {
