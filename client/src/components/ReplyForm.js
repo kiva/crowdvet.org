@@ -3,7 +3,7 @@ import * as actions from "../actions";
 import { connect } from "react-redux";
 import "./Comment.css";
 
-class Replay extends Component {
+class Reply extends Component {
   constructor(props) {
     super(props);
     this.state = { text: "" };
@@ -47,4 +47,4 @@ class Replay extends Component {
     );
   }
 }
-export default connect(null, actions)(Replay);
+export default connect(null, actions)(Reply);
