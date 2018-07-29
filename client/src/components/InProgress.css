@@ -2,7 +2,7 @@
   border: 1px solid #979797;
 }
 .card-action.card-continue {
-  background-color: #aee15c;
+  background-color: #407C40;
   height:40px;
   padding: 9px 24px;
 }
@@ -11,6 +11,9 @@
   color: #4A4A4A;
 }
 
+.card-action.card-continue #card-link {
+  color:white;
+}
 .card-action.red-status {
   background-color: #D0021B;
 }
