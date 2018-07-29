@@ -37,9 +37,7 @@
   background-color: rgba(255, 255, 255, 0.6);
   padding: 0px;
 }
-.card .card-image img{
-  min-height: 200px;
-}
+
 
 .load-more {
   font-size: 20px;
@@ -77,4 +75,13 @@
 }
 .green-text {
   color: #236133;
+}
+
+#card-vetted{
+  margin:0;
+  padding:0;
+}
+
+#card-wrapper {
+  padding: 0px;
 }
