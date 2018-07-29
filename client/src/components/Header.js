@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import logo from "./logo.svg";
 import "./Header.css";
+import Dropdown from "./Dropdown";
+import { Button, NavItem } from "react-materialize";
 
 class Header extends Component {
   componentDidMount() {
@@ -15,10 +17,20 @@ class Header extends Component {
     if (this.props.auth) {
       return [
         <li key="1">
-          <Link to={"/user"}>My Profile</Link>
+          <Link to={"/user"}>{this.props.auth.name}</Link>
         </li>,
         <li key="2">
-          <a href={"/auth/logout"}>Logout</a>
+          <Link to={""}>
+            <Dropdown
+              trigger={
+                <div>
+                  <i className="material-icons right">arrow_drop_down</i>
+                </div>
+              }
+            >
+              <a style={{color:"black"}}href={"/auth/logout"}>Sign Out</a>
+            </Dropdown>
+          </Link>
         </li>
       ];
     }
@@ -35,7 +47,7 @@ class Header extends Component {
       <div>
         <nav>
           <div className="nav-wrapper">
-            <Link to={'/'} className="left brand-logo">
+            <Link to={"/"} className="left brand-logo">
               Crowdvetting at <img src={logo} className="App-logo" alt="logo" />
             </Link>
             <a href="#" data-target="mobile-demo" className="sidenav-trigger">
@@ -43,10 +55,10 @@ class Header extends Component {
             </a>
             <ul className="right hide-on-med-and-down">
               <li>
-                <Link to={'sass.html'}>Learn about Crowdvetting</Link>
+                <Link to={"sass.html"}>Learn about Crowdvetting</Link>
               </li>
               <li>
-                <Link to={'badges.html'}>Take Action</Link>
+                <Link to={"badges.html"}>Take Action</Link>
               </li>
               {this.renderSingIn()}
             </ul>
@@ -55,12 +67,12 @@ class Header extends Component {
 
         <ul className="sidenav" id="mobile-demo">
           <li>
-            <Link to={'sass.html'}>Learn about Crowdvetting</Link>
+            <Link to={"sass.html"}>Learn about Crowdvetting</Link>
           </li>
           <li>
-              <Link to={'badges.html'}>Take Action</Link>
+            <Link to={"badges.html"}>Take Action</Link>
           </li>
-              {this.renderSingIn()}
+          {this.renderSingIn()}
         </ul>
       </div>
     );
