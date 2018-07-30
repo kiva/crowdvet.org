@@ -254,7 +254,7 @@ module.exports = (sequelize, DataType) => {
       autoIncrement: true
     },
     idUser: {
-      type: DataType.STRING,
+      type: DataType.INTEGER,
       allowNull: false,
       validate: {
         notEmpty: true
