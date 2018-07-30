@@ -19,7 +19,7 @@ module.exports = app => {
   });
 
   const opts = {}
-  opts.secretOrKey = app.config.jwtSecret
+  opts.secretOrKey = keys.jwtSecret
   opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken()
 
   const strategy = new Strategy(opts, (payload, done) => {
