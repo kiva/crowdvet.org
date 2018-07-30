@@ -2,9 +2,9 @@ const passport = require("passport");
 const requireLogin = require("../middlewares/requireLogin");
 const HttpStatus = require('http-status');
 const jwt = require('jwt-simple');
+const keys = require('../config/keys');
 
 module.exports = app => {
-  const config = app.config;
   const { Users } = app.datasource.models.Enterprises.model;
 
   app.get(
@@ -69,7 +69,7 @@ app.post('/api/token', (req, res) => {
       if(Users.isPassword(user.password, password)) {
         const payload = {id: user.id}
         res.json({
-        token: jwt.encode(payload, config.jwtSecret)
+        token: jwt.encode(payload, keys.jwtSecret)
         })
       } else {
         res.sendStatus(HttpStatus.UNAUTHORIZED)
