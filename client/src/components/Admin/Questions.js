@@ -25,7 +25,6 @@ export const QuestionsList = props => (
 export const QuestionsCreate = props => (
   <Create title="Create" {...props}>
     <SimpleForm>
-    <TextInput source="name" />
     <LongTextInput source="text" />
     </SimpleForm>
   </Create>
@@ -35,7 +34,6 @@ export const QuestionsEdit = props => (
   <Edit title="Edit" {...props}>
     <SimpleForm>
       <DisabledInput source="id" />
-      <TextInput source="name" />
       <LongTextInput source="text" />
     </SimpleForm>
   </Edit>
