@@ -94,7 +94,7 @@ module.exports = (sequelize, DataType) => {
       }
     },
     description: {
-      type: DataType.STRING,
+      type: DataType.TEXT,
       allowNull: false,
       validate: {
         notEmpty: true
@@ -204,7 +204,7 @@ module.exports = (sequelize, DataType) => {
       }
     },
     businessPlan: {
-      type: DataType.STRING,
+      type: DataType.TEXT,
       allowNull: true,
       validate: {
         notEmpty: true
