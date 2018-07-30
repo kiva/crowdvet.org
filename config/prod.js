@@ -6,5 +6,5 @@ module.exports = {
   jwtSecret: process.env.JWT_SECRET,
   cookieKey: process.env.COOKIE_KEY,
   redirectDomain: process.env.REDIRECT_DOMAIN,
-  API_KEY = process.env.API_KEY,
+  API_KEY : process.env.API_KEY,
 };
