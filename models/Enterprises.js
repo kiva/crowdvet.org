@@ -48,7 +48,7 @@ module.exports = (sequelize, DataType) => {
         validate: {
           notEmpty: true
         }
-      }
+      },
       admin: {
         type: DataType.BOOLEAN,
         allowNull: false,
@@ -276,6 +276,13 @@ module.exports = (sequelize, DataType) => {
     },
     inProgress: {
       type: DataType.BOOLEAN,
+      allowNull: true,
+      validate: {
+        notEmpty: true
+      }
+    },
+    comment: {
+      type: DataType.STRING,
       allowNull: true,
       validate: {
         notEmpty: true
