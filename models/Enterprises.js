@@ -148,7 +148,7 @@ module.exports = (sequelize, DataType) => {
       }
     },
     paidEmployees: {
-      type: DataType.INTEGER,
+      type: DataType.STRING,
       allowNull: true,
       validate: {
         notEmpty: true
