@@ -20,7 +20,6 @@ class Header extends Component {
           <Link to={"/user"}>{this.props.auth.name}</Link>
         </li>,
         <li key="2">
-          <Link to={""}>
             <Dropdown
               trigger={
                 <div>
@@ -28,9 +27,8 @@ class Header extends Component {
                 </div>
               }
             >
-              <a style={{color:"black"}}href={"/auth/logout"}>Sign Out</a>
+              <a style={{color:"black"}} href={"/auth/logout"}>Sign Out</a>
             </Dropdown>
-          </Link>
         </li>
       ];
     }
