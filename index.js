@@ -3,12 +3,12 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
-const config = require('./config/config');
+
 const datasource = require('./config/datasource');
 
 const app = express();
 
-app.config = config;
+
 app.datasource = datasource(app);
 require('./services/passport')(app);
 
