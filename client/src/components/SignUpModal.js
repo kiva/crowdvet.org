@@ -13,7 +13,10 @@ class SignUp extends Component {
       window.jQuery('.modal').modal();
     })
   }
-
+  componentWillUnmount() {
+    window.jQuery(".modal").modal('close');
+  }
+  
   handleFormSubmit(values) {
     this.props.signUpUser(values, this.props.history);
   }
