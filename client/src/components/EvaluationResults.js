@@ -118,7 +118,7 @@ class EvaluationResults extends Component {
       return (
         <div>
           <div className="col s2">
-            <p><label>
+            <p><label className="radio-evaluation">
               <input
                 name={question.id.toString()}
                 type="radio"
