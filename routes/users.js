@@ -66,9 +66,9 @@ module.exports = app => {
 
   app.get("/api/users/evaluations", async (req, res) => {
     try {
-      const idUser = req.user.id;
+      const user_id = req.user.id;
       const result = await Evaluations.findAll({
-        where: { idUser, OficialVote: false },
+        where: { user_id, OficialVote: false },
         include: [
           { model: Votes, include: [{ model: Answers }, { model: Questions }] }
         ]
@@ -114,11 +114,11 @@ module.exports = app => {
 
   app.get("/api/users/evaluations/:enterprise_id", async (req, res) => {
     try {
-      const idUser = req.user.id;
+      const user_id = req.user.id;
       const { enterprise_id } = req.params;
       const result = await Evaluations.findOne({
         where: {
-          idUser,
+          user_id,
           enterprise_id,
           OficialVote: false
         },
