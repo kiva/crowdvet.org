@@ -62,14 +62,12 @@ export const EnterprisesEdit = props => (
 
       <ImageField source="Images" src="url" title="Picture" />
 
-      <ImageInput source="pictures" label="Related pictures" multiple accept="image/*" placeholder={<p>Drop your files here</p>}>
+      <ImageInput source="pictures" label="Related pictures" multiple accept="image/*" placeholder={<p>Drop your files here 600 x 400</p>}>
         <ImageField source="src" title="title" />
       </ImageInput>
 
-
-
       <ArrayInput source="Images">
-          <SimpleFormIterator>
+          <SimpleFormIterator disableAdd>
               <TextInput source="url" />
           </SimpleFormIterator>
       </ArrayInput>
