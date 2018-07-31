@@ -9,10 +9,11 @@ import _ from "lodash";
 import moment from "moment";
 import Countdown from "react-countdown-now";
 import utils from './utils'
+import idgen from './idgen';
 
 class EvaluationResults extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       menu: { 1: "Review", 2: "Evaluation", 3: "Results" },
       active: 1
@@ -67,7 +68,7 @@ class EvaluationResults extends Component {
             <h3 className="col s12">Evaluation Results</h3>
           </div>
           <KivaMessage message={message.message}/>
-          <div className="row">{this.renderResults()}</div>
+          <div className="row">{this.renderEvaluation()}</div>
           <div className="row">
             <div className="col s6">
               <Link to={"/user"} className="btn button-large btn-results">Previous Page</Link>
@@ -95,46 +96,46 @@ class EvaluationResults extends Component {
     );
   }
 
-  renderResults() {
-    const content = _.map(this.props.questions, question => {
+  renderRadios(name, choices, question) {
+    const content = _.map(choices, choice => {
       return (
-        <div className="row">
-          <div className="question">{question.text}</div>
-          {this.renderAnswers(question, question.Answers)}
-        </div>
-      );
-    });
-    return content;
-  }
-
-  renderAnswers(question, answers) {
-    const { evaluation } = this.props;
-    const votes = _.get(evaluation, "Votes");
-    let text = "";
-    const content = _.map(answers, answer => {
-      const v = _.mapKeys(votes, "question_id");
-      const checked = answer.id == _.get(v[question.id],"answer_id") ? true : false;
-      answer.id == _.get(v[question.id],"answer_id") ? (text = answer.text) : null;
-      return (
-        <div>
-          <div className="col s2">
-            <p><label className="radio-evaluation">
+          <div key={idgen()} className="col s12 m2 center">
+            <label className="radio-evaluation">
               <input
-                name={question.id.toString()}
+                name={name}
                 type="radio"
-                checked={checked}
+                checked={this.props.evaluation[name] == choice.score ? true : false}
                 disabled={true}
               />
-              <span id="radio-text">{answer.score}</span>
+              <span id="radio-text">{choice.score}</span>
             </label>
-            </p>
           </div>
-        </div>
       );
     });
+
     return (
       <div>
+        <div>
+            <div className="question">{question.text}</div>
+        </div>
         {content}
+      </div>
+    );
+  }
+
+  renderEvaluation() {
+    const { evaluation } = this.props;
+    let text = ""
+    return (
+      <div>
+        <div>
+          <div  className="row">
+          {this.renderRadios("impact", impactChoices, impactQuestion)}
+          </div>
+          <div  className="row">
+          {this.renderRadios("model", modelChoices, modelQuestion)}
+          </div>
+        </div>
         <div className="col s12 answer-result"><p>{text}</p></div>
       </div>
     );
@@ -153,4 +154,34 @@ function mapStateToProps(
     questions
   };
 }
+
+const impactQuestion =
+  {text: "1. Overall, the enterprise has a meaningful impact on low income or excluded communities [strongly disagree - strongly agree] *"}
+const modelQuestion =
+  {text: "2. Overall, the enterprise has a viable business model [strongly disagree - strongly agree] *"}
+const impactChoices = [
+  {
+    score: 1,
+    text:
+      "This company has no discernable social impact at all. Most for-profit companies fall into this category rating."
+  },
+  {
+    score: 2,
+    text:
+      "This company has no discernable social impact at all. Most for-profit companies fall into this category rating."
+  }
+];
+
+const modelChoices = [
+  {
+    score: 1,
+    text:
+      "This business is not making money. It is dependant on donations and grants.​"
+  },
+  {
+    score: 2,
+    text:
+      "This business has some income, but is mostly dependent on grants and donations, somewhere around a 20:80 ratio."
+  }
+];
 export default connect(mapStateToProps, actions)(EvaluationResults);
