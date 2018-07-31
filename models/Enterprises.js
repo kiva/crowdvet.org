@@ -253,13 +253,6 @@ module.exports = (sequelize, DataType) => {
       primaryKey: true,
       autoIncrement: true
     },
-    idUser: {
-      type: DataType.INTEGER,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
-    },
     OficialVote: {
       type: DataType.BOOLEAN,
       allowNull: true,
@@ -276,6 +269,39 @@ module.exports = (sequelize, DataType) => {
     },
     inProgress: {
       type: DataType.BOOLEAN,
+      allowNull: true,
+      validate: {
+        notEmpty: true
+      }
+    },
+    impact: {
+      type: DataType.STRING,
+      allowNull: true,
+    },
+    model: {
+      type: DataType.STRING,
+      allowNull: true,
+    },
+    prioritization: {
+      type: DataType.STRING,
+      allowNull: true,
+    },
+    impactComent: {
+      type: DataType.STRING,
+      allowNull: true,
+      validate: {
+        notEmpty: true
+      }
+    },
+    modelComent: {
+      type: DataType.STRING,
+      allowNull: true,
+      validate: {
+        notEmpty: true
+      }
+    },
+    prioritizationComent: {
+      type: DataType.STRING,
       allowNull: true,
       validate: {
         notEmpty: true
@@ -431,6 +457,7 @@ module.exports = (sequelize, DataType) => {
   Enterprises.belongsTo(Countries);
   Enterprises.hasMany(Comments);
   Users.hasMany(Comments);
+  Users.hasMany(Evaluations);
   Comments.hasMany(Comments, { as: "Replies" });
   Comments.hasMany(CommentVotes);
   Users.hasMany(CommentVotes);
