@@ -25,8 +25,8 @@ class ApplicationEvaluate extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     this.props.fetchEnterprise(this.props.match.params.id);
-    this.props.fetchUserEvaluation(this.props.match.params.id);
     this.props.fetchQuestions();
+    this.props.fetchUserEvaluation(this.props.match.params.id);
   }
 
   onSubMenuChange = (menu, active) => {
@@ -77,7 +77,7 @@ class ApplicationEvaluate extends Component {
             <h3 className="col s12">Loan Evaluation</h3>
           </div>
           <div className="row">
-            <EvaluationForm enterprise_id={this.props.match.params.id} history={this.props.history}/>
+            <EvaluationForm enableReinitialize={true} initialValues={{...this.props.evaluation}} enterprise_id={this.props.match.params.id} history={this.props.history}/>
           </div>
         </div>
       </div>
@@ -85,10 +85,11 @@ class ApplicationEvaluate extends Component {
   }
 }
 
-function mapStateToProps({ auth, enterprises, questions }, ownProps) {
+function mapStateToProps({ auth, enterprises, questions, evaluations }, ownProps) {
   return {
     auth,
     enterprise: enterprises[ownProps.match.params.id],
+    evaluation: evaluations[ownProps.match.params.id]
   };
 }
 export default connect(mapStateToProps, actions)(ApplicationEvaluate);
