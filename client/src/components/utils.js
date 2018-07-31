@@ -137,15 +137,13 @@ function getOverallResults(userEvaluations, officialEvaluations) {
     userEvaluations,
     (results, evaluation) => {
       if (officialEvaluations[evaluation.enterprise_id]) {
-        const answer = getValues(evaluation.Votes, "Answer");
-        const officialAnswer = getValues(
-          officialEvaluations[evaluation.enterprise_id].Votes,
-          "Answer"
-        );
+        const answer = [evaluation.model, evaluation.prioritization, evaluation.impact];
+        const officialAnswer = [officialEvaluations[evaluation.enterprise_id].model, officialEvaluations[evaluation.enterprise_id].prioritization,
+        officialEvaluations[evaluation.enterprise_id].impact]
 
         const result = getScoreAndAccuracy(
-          getValues(answer, "score"),
-          getValues(officialAnswer, "score")
+          answer,
+          officialAnswer
         );
         results.GeneralScore = results.GeneralScore + result.Score;
         results.GeneralAccuracy = results.GeneralAccuracy + result.Accuracy;
