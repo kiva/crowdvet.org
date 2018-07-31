@@ -52,16 +52,13 @@ class VettingHistory extends Component {
   renderHistoryContent() {
     const { userEvaluations, officialEvaluations, enterprises } = this.props;
     const content = _.map(userEvaluations, evaluation => {
-      const answer = this.getValues(
-        userEvaluations[evaluation.enterprise_id].Votes,
-        "Answer"
-      );
+      const answer = [userEvaluations[evaluation.enterprise_id].model,
+      userEvaluations[evaluation.enterprise_id].impact, userEvaluations[evaluation.enterprise_id].prioritization]
+
       let officialAnswer = "";
       if (officialEvaluations) {
-        officialAnswer = this.getValues(
-          _.get(officialEvaluations[evaluation.enterprise_id], "Votes"),
-          "Answer"
-        );
+        officialAnswer = [officialEvaluations[evaluation.enterprise_id].model,
+        officialEvaluations[evaluation.enterprise_id].impact, officialEvaluations[evaluation.enterprise_id].prioritization]
       }
 
       let stateColor = "";
@@ -78,8 +75,7 @@ class VettingHistory extends Component {
         default:
           stateColor = "yellow-text";
       }
-      const EvaluationResult = utils.getScoreAndAccuracy(this.getValues(answer, "score"),
-      this.getValues(officialAnswer, "score"))
+      const EvaluationResult = utils.getScoreAndAccuracy(answer, officialAnswer)
 
       return (
         <li>
@@ -88,12 +84,12 @@ class VettingHistory extends Component {
               {enterprises[evaluation.enterprise_id].name}
             </div>
             <div className="col s2">
-              {this.getAverage(this.getValues(answer, "score"))}
+              {this.getAverage(answer)}
             </div>
 
             <div className="col s2" />
             <div className="col s2">
-              {!_.isEmpty(officialAnswer) ? this.getAverage(this.getValues(officialAnswer, "score")) : ""}
+              {!_.isEmpty(officialAnswer) ? this.getAverage(officialAnswer) : ""}
             </div>
             <div className={`col s2 ${stateColor}`}>
               {_.get(officialEvaluations[evaluation.enterprise_id], "status")
@@ -104,7 +100,7 @@ class VettingHistory extends Component {
             <div className="col s1">{EvaluationResult ? EvaluationResult.Accuracy + "%" : ""}</div>
           </div>
           <div className="collapsible-body">
-            {this.renderAnswers(userEvaluations[evaluation.enterprise_id].Votes, _.get(officialEvaluations[evaluation.enterprise_id], "Votes"))}
+            {this.renderAnswers(userEvaluations[evaluation.enterprise_id], officialEvaluations[evaluation.enterprise_id])}
           </div>
         </li>
       );
@@ -112,28 +108,41 @@ class VettingHistory extends Component {
     return content;
   }
 
-  renderAnswers(votes, officialVotes) {
-    const official = _.mapKeys(officialVotes, "question_id");
-
-    const content = _.map(votes, vote => {
-      const officialScore = official[vote.Question.id] ? official[vote.Question.id].Answer.score : "";
+  renderAnswers(evaluation, officialEvaluation) {
 
       return (
+        < div>
         <div className="row">
-          <div className="col s2">{vote.Question.name}</div>
-          <div className="col s2">{vote.Answer.score}</div>
+          <div className="col s2">Impact</div>
+          <div className="col s2">{evaluation.impact}</div>
           <div className="col s2">First</div>
-          <div className="col s2">{officialScore}</div>
+          <div className="col s2">{officialEvaluation.impact}</div>
           <div className="col s2"></div>
         </div>
+        <div className="row">
+          <div className="col s2">Model</div>
+          <div className="col s2">{evaluation.model}</div>
+          <div className="col s2">First</div>
+          <div className="col s2">{officialEvaluation.model}</div>
+          <div className="col s2"></div>
+        </div>
+        <div className="row">
+          <div className="col s2">Prioritization</div>
+          <div className="col s2">{evaluation.prioritization}</div>
+          <div className="col s2">First</div>
+          <div className="col s2">{officialEvaluation.prioritization}</div>
+          <div className="col s2"></div>
+        </div>
+        </div>
       )
-    })
-
-    return content;
   }
 
   getAverage(data) {
-    return _.round(_.sum(data) / data.length, 4)
+    let r = _.map(_.compact(data), n => parseInt(n, 10))
+
+    console.log(r)
+    console.log(r.length)
+    return _.round(_.sum(r) / r.length, 4)
   }
   getValues(data, value) {
     return _.map(data, value);
