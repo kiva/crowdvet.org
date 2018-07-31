@@ -35,7 +35,7 @@ const EvaluationFilter = props => (
 export const EvaluationsList = props => (
   <List {...props}>
     <Datagrid>
-      <ReferenceField label="Users" source="idUser" reference="users">
+      <ReferenceField label="Users" source="user_id" reference="users">
         <TextField source="name" />
       </ReferenceField>
 
@@ -64,16 +64,18 @@ export const EvaluationsCreate = props => {
           <SelectInput optionText="name" />
         </ReferenceInput>
 
-        <ReferenceManyField label="Evaluation" reference="questions" target="">
-          <Datagrid>
-            <TextField
-              label="Question"
-              source="text"
-              style={{ "font-size": "16px" }}
-            />
-            <Radio />
-          </Datagrid>
-        </ReferenceManyField>
+
+        <RadioButtonGroupInput fullWidth source="impact" choices={[
+            { id: '1', name: 'This indicates any social enterprise you feel has negative social impact, or takes advantage of people - either the people it claims to serve, or other parties.' },
+            { id: '2', name: 'This company has no discernable social impact at all. Most for-profit companies fall into this category rating.' },
+            { id: '3', name: 'This company has one or more of the following: - Questionable social impact; - Social impact based on donations; - Possible social impact that is not integral to the business model.' }
+        ]} />
+
+        <RadioButtonGroupInput fullWidth source="model" choices={[
+            { id: '1', name: 'This business is not making money. It is dependant on donations and grants.​' },
+            { id: '2', name: 'This business has some income, but is mostly dependent on grants and donations, somewhere around a 20:80 ratio.' },
+            { id: '3', name: 'This company has raised cash capital, but has minimal sales, or questionably low sales volume considering its current lifespan.' }
+        ]} />
       </SimpleForm>
     </Create>
   );
@@ -88,8 +90,20 @@ export const EvaluationsEdit = props => (
         source="enterprise_id"
         reference="enterprises"
       >
-        <SelectInput optionText="text" />
+        <SelectInput optionText="name" />
       </ReferenceInput>
+
+      <RadioButtonGroupInput fullWidth source="impact" choices={[
+          { id: '1', name: 'This indicates any social enterprise you feel has negative social impact, or takes advantage of people - either the people it claims to serve, or other parties.' },
+          { id: '2', name: 'This company has no discernable social impact at all. Most for-profit companies fall into this category rating.' },
+          { id: '3', name: 'This company has one or more of the following: - Questionable social impact; - Social impact based on donations; - Possible social impact that is not integral to the business model.' }
+      ]} />
+
+      <RadioButtonGroupInput fullWidth source="model" choices={[
+          { id: '1', name: 'This business is not making money. It is dependant on donations and grants.​' },
+          { id: '2', name: 'This business has some income, but is mostly dependent on grants and donations, somewhere around a 20:80 ratio.' },
+          { id: '3', name: 'This company has raised cash capital, but has minimal sales, or questionably low sales volume considering its current lifespan.' }
+      ]} />
     </SimpleForm>
   </Edit>
 );
