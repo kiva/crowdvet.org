@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { Field, FieldArray, reduxForm } from "redux-form";
+import { Field, FieldArray, reduxForm, reset } from "redux-form";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import _ from "lodash";
@@ -50,6 +51,11 @@ class Filter extends Component {
     });
   }
 
+  onHandleResetClick(e) {
+    e.preventDefault()
+    this.props.dispatch(reset('filterForm'));
+  }
+
   renderCheckBox = field => (
     <div className="row">
       <div className="col s12 left-align">
@@ -87,6 +93,9 @@ class Filter extends Component {
             <div className="collapsible-body">
               <div className="row">{this.renderCountries(countries)}</div>
             </div>
+          </li>
+          <li>
+            <a href="" onClick={this.onHandleResetClick.bind(this)} > Reset all filters</a>
           </li>
         </ul>
       </form>
