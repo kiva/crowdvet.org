@@ -138,10 +138,7 @@ class VettingHistory extends Component {
   }
 
   getAverage(data) {
-    let r = _.map(_.compact(data), n => parseInt(n, 10))
-
-    console.log(r)
-    console.log(r.length)
+    const r = _.map(_.compact(data), n => parseInt(n, 10))
     return _.round(_.sum(r) / r.length, 4)
   }
   getValues(data, value) {
