@@ -23,7 +23,7 @@ class Header extends Component {
             <Dropdown
               trigger={
                 <div>
-                  <i className="material-icons right">arrow_drop_down</i>
+                  <a><i className="material-icons right">arrow_drop_down</i></a>
                 </div>
               }
             >
