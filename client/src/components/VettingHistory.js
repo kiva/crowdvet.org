@@ -56,7 +56,7 @@ class VettingHistory extends Component {
       userEvaluations[evaluation.enterprise_id].impact, userEvaluations[evaluation.enterprise_id].prioritization]
 
       let officialAnswer = "";
-      if (officialEvaluations) {
+      if (officialEvaluations[evaluation.enterprise_id]) {
         officialAnswer = [officialEvaluations[evaluation.enterprise_id].model,
         officialEvaluations[evaluation.enterprise_id].impact, officialEvaluations[evaluation.enterprise_id].prioritization]
       }
@@ -116,21 +116,21 @@ class VettingHistory extends Component {
           <div className="col s2">Impact</div>
           <div className="col s2">{evaluation.impact}</div>
           <div className="col s2">First</div>
-          <div className="col s2">{officialEvaluation.impact}</div>
+          <div className="col s2">{officialEvaluation ? officialEvaluation.impact : ""}</div>
           <div className="col s2"></div>
         </div>
         <div className="row">
           <div className="col s2">Model</div>
-          <div className="col s2">{evaluation.model}</div>
+          <div className="col s2">{officialEvaluation ? evaluation.model : ""}</div>
           <div className="col s2">First</div>
-          <div className="col s2">{officialEvaluation.model}</div>
+          <div className="col s2">{officialEvaluation ? officialEvaluation.model : ""}</div>
           <div className="col s2"></div>
         </div>
         <div className="row">
           <div className="col s2">Prioritization</div>
           <div className="col s2">{evaluation.prioritization}</div>
           <div className="col s2">First</div>
-          <div className="col s2">{officialEvaluation.prioritization}</div>
+          <div className="col s2">{officialEvaluation ? officialEvaluation.prioritization : ""}</div>
           <div className="col s2"></div>
         </div>
         </div>
