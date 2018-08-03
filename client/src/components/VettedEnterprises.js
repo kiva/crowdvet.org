@@ -17,9 +17,6 @@ class VettedEnterpisesList extends Component {
   renderEnterprises(evaluations) {
 
     const enterprisesItems = _.map(evaluations, evaluation => {
-
-      console.log(this.props.enterprises, "EN ENTER VETTED")
-
       const enterprise = this.props.enterprises[evaluation.enterprise_id];
       const officialEvaluation = this.props.officialEvaluations[
         evaluation.enterprise_id

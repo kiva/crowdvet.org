@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import "./Vetted.css";
 import _ from "lodash";
 import Carousel from "./Carousel-mz";
+import idgen from './idgen';
 
 class EnterpriseItem extends Component {
 
   renderImages(images) {
     const content = _.map(images, image => image.url)
-    return <Carousel className="vetted" carouselId={this.props.enterprise.id} options={{ fullWidth: true, indicators:true}} images={content} />;
+    return <Carousel className="vetted" carouselId={`carousel${idgen()}`} options={{ fullWidth: true, indicators:true}} images={content} />;
   }
 
   render() {
