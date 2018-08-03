@@ -25,12 +25,17 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./routes/auth')(app);
-require('./routes/enterprises')(app);
-require('./routes/questions')(app);
 require('./routes/evaluations')(app);
 require('./routes/sectors')(app);
 require('./routes/countries')(app);
 require('./routes/users')(app);
+require('./routes/comments')(app);
+
+require('./routes/admin/countries')(app);
+require('./routes/admin/enterprises')(app);
+require('./routes/admin/evaluations')(app);
+require('./routes/admin/sectors')(app);
+require('./routes/admin/users')(app);
 
 if (['production'].includes(process.env.NODE_ENV)) {
   app.use(express.static('client/build'));
