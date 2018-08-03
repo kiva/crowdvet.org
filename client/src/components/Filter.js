@@ -53,6 +53,7 @@ class Filter extends Component {
 
   onHandleResetClick(e) {
     e.preventDefault()
+    this.props.fetchEnterprises();
     this.props.dispatch(reset('filterForm'));
   }
 
@@ -103,4 +104,4 @@ class Filter extends Component {
   }
 }
 
-export default connect(null, null)(reduxForm({ form: "filterForm" })(Filter));
+export default connect(null, actions)(reduxForm({ form: "filterForm" })(Filter));

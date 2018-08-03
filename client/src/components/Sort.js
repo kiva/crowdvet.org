@@ -1,22 +1,29 @@
 import React, { Component } from "react";
 
 class Sort extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: "" };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
   componentDidMount() {
     const $ = window.jQuery;
-    $(document).ready(function(){
-    $('select').formSelect();
-  });
-
+    $(document).ready(function() {
+      $("select").formSelect();
+    });
   }
-  onChange() {
 
-    //this.props.sort()
+  handleChange(event) {
+    this.props.sort(event.target.value);
+    this.setState({ value: event.target.value });
   }
+
   render() {
     return (
       <div className="input-field">
-        <select>
-          <option value="" disabled selected>
+        <select value={this.state.value} onChange={this.handleChange}>
+          <option value="" disabled>
             Sort by...
           </option>
           <option value="name">Borrower</option>
@@ -24,7 +31,7 @@ class Sort extends Component {
           <option value="sectors">Primary Sector</option>
           <option value="endDate">End Date</option>
         </select>
-
+        {this.state.value}
       </div>
     );
   }
