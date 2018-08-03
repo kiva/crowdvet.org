@@ -63,14 +63,14 @@ class Landing extends Component {
   renderVideo() {
     return (
       <div className="container">
-        <div className="row valign-wrapper">
+        <div className="row">
                 <div className="col s12 m6">
-                  <div>
+                  <div style={{ marginTop: "40px"}}>
                     <iframe
                       src="https://player.vimeo.com/video/210506986?embedparameter=value"
                       width="440"
                       height="248"
-                      frameborder="0"
+                      frameBorder="0"
                       allowFullScreen
                     />
                   </div>
