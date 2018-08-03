@@ -9,22 +9,20 @@ import KivaMessage from "./KivaMessage";
 import _ from "lodash";
 import moment from "moment";
 import utils from "./utils";
-import {
-  Sparklines,
-  SparklinesLine,
-  SparklinesSpots,
-  SparklinesCurve,
-  SparklinesReferenceLine
-} from "react-sparklines";
 import LineChart from "./Chart";
 import idgen from "./idgen";
 
 class EvaluationResults extends Component {
   constructor(props) {
-    super();
+    super(props);
+    const id = this.props.match.params.id;
     this.state = {
-      menu: { 1: "Review", 2: "Evaluation", 3: "Results" },
-      active: 1
+      menu: {
+        1: { text: "Review", url: `/application/${id}` },
+        2: { text: "Evaluation", url: `/users/evaluations/${id}` },
+        3: { text: "Results", url:"" }
+      },
+      active: 3
     };
   }
 
@@ -32,7 +30,6 @@ class EvaluationResults extends Component {
     window.scrollTo(0, 0);
     this.props.fetchEnterprise(this.props.match.params.id);
     this.props.fetchUserEvaluations();
-    this.props.fetchQuestions();
     this.props.fetchOfficialEvaluations();
     this.props.fetchCrowdVotes();
   }
@@ -121,7 +118,7 @@ class EvaluationResults extends Component {
     return (
       <div>
         <TopMenu onSubMenuChange={this.onSubMenuChange} />
-        <div style={{ marginBottom: "-25px" }}>
+        <div className="image-margin">
           <div className="row">
             <div className="col s12 center img-header">
               <h2 id="title-img" className=" center">
@@ -168,10 +165,12 @@ class EvaluationResults extends Component {
 
   renderRadios(name, choices, question) {
     const content = _.map(choices, choice => {
+      const id = idgen();
       return (
         <div key={idgen()} className="col s12 m2 center">
           <label className="radio-evaluation">
             <input
+              id={id}
               name={name}
               type="radio"
               checked={
@@ -179,7 +178,7 @@ class EvaluationResults extends Component {
               }
               disabled={true}
             />
-            <span id="radio-text">{choice.score}</span>
+            <label htmlFor={id} id="radio-text">{choice.score}</label>
           </label>
         </div>
       );
@@ -210,6 +209,9 @@ class EvaluationResults extends Component {
         </div>
         <div className="row">
           {this.renderRadios("model", modelChoices, modelQuestion)}
+        </div>
+        <div className="row">
+          {this.renderRadios("prioritization", prioritizationChoices, prioritizationQuestion)}
         </div>
       </div>
     );
@@ -310,14 +312,14 @@ function mapStateToProps(
   };
 }
 
-const impactQuestion = {
-  text:
-    "1. Overall, the enterprise has a meaningful impact on low income or excluded communities [strongly disagree - strongly agree] *"
-};
-const modelQuestion = {
-  text:
-    "2. Overall, the enterprise has a viable business model [strongly disagree - strongly agree] *"
-};
+const impactQuestion =
+  {text: "1. Overall, the enterprise has a meaningful impact on low income or excluded communities [strongly disagree - strongly agree] *"}
+const modelQuestion =
+  {text: "2. Overall, the enterprise has a viable business model [strongly disagree - strongly agree] *"}
+  const prioritizationQuestion =
+    {text: "3. Overall, Kiva should move forward with this application and submit this loan for crowdfunding [strongly disagree - strongly agree] *"}
+
+
 const impactChoices = [
   {
     score: 1,
@@ -328,6 +330,26 @@ const impactChoices = [
     score: 2,
     text:
       "This company has no discernable social impact at all. Most for-profit companies fall into this category rating."
+  },
+  {
+    score: 3,
+    text:
+      "This company has one or more of the following: - Questionable social impact; - Social impact based on donations; - Possible social impact that is not integral to the business model."
+  },
+  {
+    score: 4,
+    text:
+      "The social impact model of this company makes sense, but it is not currently being measured clearly and methodically."
+  },
+  {
+    score: 5,
+    text:
+      "The social impact model of this company makes sense, and is being measured clearly and methodically."
+  },
+  {
+    score: 6,
+    text:
+      "The social impact of this company has been documented and tested with a study or similarly rigorous measure, with demonstrated proof. Or, the company is following an established social impact model which has been tested and demonstrated by research."
   }
 ];
 
@@ -341,6 +363,60 @@ const modelChoices = [
     score: 2,
     text:
       "This business has some income, but is mostly dependent on grants and donations, somewhere around a 20:80 ratio."
+  },
+  {
+    score: 3,
+    text:
+      "This company has raised cash capital, but has minimal sales, or questionably low sales volume considering its current lifespan.​"
+  },
+  {
+    score: 4,
+    text:
+      "This company is on the road to profitability - the business model has clear potential, it seems the only barrier is a current lack of working capital."
+  },
+  {
+    score: 5,
+    text:
+      "This business does not display robust profits, as it is reinvestmenting its profit into growth of the company."
+  },
+  {
+    score: 6,
+    text:
+      "This company is already healthily profitable and sustainable, and has the ability to scale.​"
+  },
+
+];
+
+const prioritizationChoices = [
+  {
+    score: 1,
+    text:
+      "I really wouldn’t recommend moving forward with this enterprise."
+  },
+  {
+    score: 2,
+    text:
+      "I don’t like it. It might be profitable, but social impact is questionable; It might have great social impact, but business model has significant holes. I don’t think this is for Kiva."
+  },
+  {
+    score: 3,
+    text:
+      "I’m not sold on this. This isn’t a clear ‘yes’ for Kiva."
+  },
+  {
+    score: 4,
+    text:
+      "This sounds suitable for Kiva. I would recommend considering this."
+  },
+  {
+    score: 5,
+    text:
+      "This sounds mostly great. Only a few minor concerns with business model/social enterprise/other."
+  },
+  {
+    score: 6,
+    text:
+      "This is a definite yes. If everything checks out, let’s send this to crowdfunding right now."
   }
 ];
 export default connect(mapStateToProps, actions)(EvaluationResults);
