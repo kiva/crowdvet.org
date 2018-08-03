@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import _ from "lodash";
+import idgen from "./idgen";
 
 class Filter extends Component {
   componentDidMount() {
@@ -14,19 +15,19 @@ class Filter extends Component {
   }
 
   onHandleSectorChange(e, newValue) {
-    this.props.filter("sector_id", e.target.id, newValue);
+    this.props.filter("sector_id", e.target.attributes.getNamedItem("typeid").value, newValue);
   }
 
   onHandleCountryChange(e, newValue) {
-    this.props.filter("country_id", e.target.id, newValue);
+    this.props.filter("country_id",  e.target.attributes.getNamedItem("typeid").value, newValue);
   }
 
   renderSectors(sectors) {
     return _.map(sectors, sector => {
       return (
         <Field
-          id={sector.id}
           key={sector.id}
+          id={sector.id}
           text={sector.name}
           name={sector.name}
           component={this.renderCheckBox}
@@ -57,21 +58,23 @@ class Filter extends Component {
     this.props.dispatch(reset('filterForm'));
   }
 
-  renderCheckBox = field => (
-    <div className="row">
+  renderCheckBox = field => {
+    const id = idgen();
+    const { input: { value, onChange } } = field
+    return (<div className="row">
       <div className="col s12 left-align">
         <label>
           <input
             {...field.input}
-            id={field.id}
+            id={id}
             type="checkbox"
-            checked={field.input.value ? "checked" : ""}
+            typeid={field.id}
           />
-          <span>{field.text}</span>
+          <label htmlFor={id}>{field.text}</label>
         </label>
       </div>
-    </div>
-  );
+    </div>)
+  };
 
   render() {
 

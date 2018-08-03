@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Input} from "react-materialize"
 
 class Sort extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class Sort extends Component {
   componentDidMount() {
     const $ = window.jQuery;
     $(document).ready(function() {
-      $("select").formSelect();
+      $('select').material_select();
     });
   }
 
@@ -22,19 +23,20 @@ class Sort extends Component {
   render() {
     return (
       <div className="input-field">
-        <select value={this.state.value} onChange={this.handleChange}>
-          <option value="" disabled>
-            Sort by...
-          </option>
-          <option value="name">Borrower</option>
-          <option value="country">Country</option>
-          <option value="sectors">Primary Sector</option>
-          <option value="endDate">End Date</option>
-        </select>
-        {this.state.value}
+        <Input value={this.state.value} s={12} type='select' onChange={this.handleChange} >
+            <option value="" disabled>
+              Sort by...
+            </option>
+            <option value="name">Borrower</option>
+            <option value="country">Country</option>
+            <option value="sectors">Primary Sector</option>
+            <option value="endDate">End Date</option>
+         </Input>
       </div>
     );
   }
 }
+
+
 
 export default Sort;
