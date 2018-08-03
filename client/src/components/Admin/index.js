@@ -6,8 +6,6 @@ import LoginPage from './Login';
 
 import { ApplicationsList } from './ApplicationsList';
 import { EnterprisesList, EnterprisesEdit } from './EnterprisesList';
-import { QuestionsList, QuestionsEdit, QuestionsCreate } from './Questions';
-import { AnswersList, AnswersEdit, AnswersCreate } from './Answers';
 import { EvaluationsList, EvaluationsEdit, EvaluationsCreate } from './Evaluations';
 import { KivaEvaluationsList, KivaEvaluationsEdit, KivaEvaluationsCreate } from './KivaEvaluations';
 import { SectorsList, SectorsEdit, SectorsCreate } from './Sectors';
@@ -26,15 +24,13 @@ const httpClient = (url, options = {}) => {
     return fetchUtils.fetchJson(url, options);
 }
 
-const dataProvider = simpleRestProvider('/api', httpClient);
+const dataProvider = simpleRestProvider('/api/admin', httpClient);
 const uploadCapableDataProvider = addUploadFeature(dataProvider);
 
 const AppAdmin = () => (
-  <Admin loginPage={LoginPage} dataProvider={uploadCapableDataProvider} authProvider={authProvider}>
+  <Admin  title="Crowdvet Admin" loginPage={LoginPage} dataProvider={uploadCapableDataProvider} authProvider={authProvider}>
     <Resource name="applications" list={ApplicationsList} />
     <Resource name="enterprises" list={EnterprisesList} edit={EnterprisesEdit}/>
-    <Resource name="questions" list={QuestionsList} edit={QuestionsEdit} create={QuestionsCreate}/>
-    <Resource name="answers" list={AnswersList} edit={AnswersEdit} create={AnswersCreate}/>
     <Resource options={{ label: 'Users Evaluations' }} name="evaluations" list={EvaluationsList} edit={EvaluationsEdit} create={EvaluationsCreate}/>
     <Resource options={{ label: 'Kiva Evaluations' }} name="kiva/evaluations" list={KivaEvaluationsList} edit={KivaEvaluationsEdit} create={KivaEvaluationsCreate}/>
     <Resource name="sectors" list={SectorsList} edit={SectorsEdit} create={SectorsCreate}/>
