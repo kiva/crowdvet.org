@@ -12,7 +12,7 @@ class EnterpisesList extends Component {
 
   constructor(props) {
     super(props);
-    this.filters = {sector_id:[], country_id:[], sort:""};
+    this.filters = { filters: { sector_id:[], country_id:[] }, sort:""};
   }
   renderEnterprises(enterprises) {
     const enterprisesItems = _.map(enterprises, (enterprise) => {
@@ -23,9 +23,9 @@ class EnterpisesList extends Component {
 
   filter(type, id, value) {
     if(value) {
-      this.filters = {...this.filters, [type]:[...this.filters[type], id] }
+      this.filters = {...this.filters, filters: { ...this.filters.filters, [type]:[...this.filters.filters[type], id] } }
     } else {
-      this.filters = {...this.filters, [type]:[ ..._.filter(this.filters[type], (item => item !== id))] }
+      this.filters = {...this.filters, filters: { ...this.filters.filters, [type]:[ ..._.filter(this.filters.filters[type], (item => item !== id))] } }
     }
     this.props.fetchEnterprises(this.filters);
   }
@@ -40,7 +40,7 @@ class EnterpisesList extends Component {
       <div className="container">
       <div className="row text-flow center">
         <p className="col s12 gray-background font-title">All Enterprises Open For Review</p>
-        <div className="col s12 m3 offset-m9"><Sort filter={this.sort.bind(this)} /></div>
+        <div className="col s12 m3 offset-m9"><Sort sort={this.sort.bind(this)} /></div>
         <div className="col s12 m3 l3"><Filter filter={this.filter.bind(this)} sectors={this.props.sectors} countries={this.props.countries} /></div>
         <div className="col s12 m9 l9">
           {this.renderEnterprises(this.props.enterprises)}
