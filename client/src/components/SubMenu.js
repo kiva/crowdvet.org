@@ -22,9 +22,7 @@ class SubMenu extends Component {
     const menu = _.map(this.props.menu, item => {
       return (
         <div className={`col ${column} center`}>
-        <button className="btn btn-flat btn-large dashboard-item">
-          { item }
-        </button>
+          <Link className="btn btn-flat btn-large dashboard-item" to={`${item.url}`}>{ item.text }</Link>
         </div>
 
       );

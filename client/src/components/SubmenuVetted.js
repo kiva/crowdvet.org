@@ -30,7 +30,7 @@ class SubMenuVetted extends Component {
       const menu = (
         <div>
         <div className='col s6 center'>
-        <button onClick={this.onHandleClickVetted.bind(this)} className="btn btn-flat btn-large dashboard-item">
+        <button autoFocus onClick={this.onHandleClickVetted.bind(this)} className="btn btn-flat btn-large dashboard-item">
           Vetted Enterprises
         </button>
         </div>

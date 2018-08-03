@@ -39,25 +39,27 @@ h3 {
  width: 300px;
  overflow: hidden;
 }
+
 .crop img {
  height: auto;
  width: 300px;
  margin-top: 20px;
 }
 
-/* #card-progress{
-  height:230px;
-  width:300px;
-} */
-
-.carousel.carousel-slider.vetted {
-  height:280px;
+.white-opacity {
+  color: white;
+  opacity: .5;
 }
 
-.inprogress-evaluation {
-  height:200px
+
+#user-title {
+  color: #a8d340;
+  font-size: 28px;
+  margin-top:40px;
 }
 
-.open-enterprises {
-  height:200px
+#user-msg {
+  color: white;
+  margin-bottom: 40px;
+  font-size: 32px;
 }

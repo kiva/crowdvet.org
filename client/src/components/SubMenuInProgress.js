@@ -30,7 +30,7 @@ class SubMenuInprogress extends Component {
       const menu = (
         <div>
         <div className='col s6 center'>
-        <button onClick={this.onHandleClickInProgress.bind(this)} className="btn btn-flat btn-large dashboard-item">
+        <button autoFocus onClick={this.onHandleClickInProgress.bind(this)} className="btn btn-flat btn-large dashboard-item">
           Reviews In Progress
         </button>
         </div>
