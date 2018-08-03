@@ -66,7 +66,8 @@ class Profile extends Component {
               userEvaluations={this.props.evaluations}
               officialEvaluations={this.props.officialEvaluations}
             />
-            <UserMessage />
+            <UserMessage initialValues={{message: this.props.auth.message}}
+            message={ this.props.auth.message}/>
             <CommentHistory />
             <PersonalForm sectors={this.props.sectors}/>
           </div>
@@ -79,7 +80,8 @@ class Profile extends Component {
               userEvaluations={this.props.evaluations}
               officialEvaluations={this.props.officialEvaluations}
             />
-            <UserMessage />
+            <UserMessage initialValues={{message: this.props.auth.message}}
+            message={ this.props.auth.message}/>
           </div>
         );
       default:
