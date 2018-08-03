@@ -46,7 +46,7 @@ module.exports = (sequelize, DataType) => {
         type: DataType.STRING,
         allowNull: true,
         validate: {
-          notEmpty: true
+          notEmpty: false
         }
       },
       admin: {
