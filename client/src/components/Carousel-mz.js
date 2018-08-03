@@ -10,7 +10,7 @@ class Carousel extends React.Component {
   }
 
   componentDidMount() {
-    const $ = window.jQuery;
+    const $ = window.$;
     const { options = {}, carouselId } = this.props;
 
     if (typeof $ !== "undefined") {
