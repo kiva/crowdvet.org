@@ -10,7 +10,7 @@ import { Button, NavItem } from "react-materialize";
 class Header extends Component {
   componentDidMount() {
     window.jQuery(document).ready(function() {
-      window.jQuery(".sidenav").sidenav();
+      window.jQuery(".button-collapse").sideNav();
     });
   }
   renderSingIn() {
@@ -48,7 +48,7 @@ class Header extends Component {
             <Link to={"/"} className="left brand-logo">
               Crowdvetting at <img src={logo} className="App-logo" alt="logo" />
             </Link>
-            <a href="#" data-target="mobile-demo" className="sidenav-trigger">
+            <a href="#" data-activates="mobile-demo" className="button-collapse">
               <i className="material-icons">menu</i>
             </a>
             <ul className="right hide-on-med-and-down">
@@ -61,9 +61,8 @@ class Header extends Component {
               {this.renderSingIn()}
             </ul>
           </div>
-        </nav>
 
-        <ul className="sidenav" id="mobile-demo">
+        <ul className="side-nav" id="mobile-demo">
           <li>
             <Link to={"sass.html"}>Learn about Crowdvetting</Link>
           </li>
@@ -72,6 +71,7 @@ class Header extends Component {
           </li>
           {this.renderSingIn()}
         </ul>
+        </nav>
       </div>
     );
   }
