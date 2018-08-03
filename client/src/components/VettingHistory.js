@@ -121,7 +121,7 @@ class VettingHistory extends Component {
         </div>
         <div className="row">
           <div className="col s2">Model</div>
-          <div className="col s2">{officialEvaluation ? evaluation.model : ""}</div>
+          <div className="col s2">{evaluation.model}</div>
           <div className="col s2">First</div>
           <div className="col s2">{officialEvaluation ? officialEvaluation.model : ""}</div>
           <div className="col s2"></div>
