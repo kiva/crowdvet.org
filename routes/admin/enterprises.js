@@ -68,7 +68,7 @@ module.exports = app => {
 
   app.post(
     "/api/admin/enterprises",
-    passport.authenticate("jwt"),
+    
     async (req, res) => {
       try {
         const { ids } = req.body;
