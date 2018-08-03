@@ -41,12 +41,23 @@ export const fetchOfficialEvaluations = () => async dispatch => {
   dispatch({ type: FETCH_OFFICIAL_EVALUATIONS, payload: res.data });
 };
 
-export const fetchEnterprises = filters => async dispatch => {
-  console.log(filters, "con fil");
+export const fetchEnterprises = (values) => async dispatch => {
+
+  //  sort=['title','ASC']
   const uri = "/api/users/enterprises";
-  if (!_.isEmpty(filters)) {
-    const filter = `?filter=${JSON.stringify(filters)}`;
-    const res = await axios.get(`${uri}/${filter}`);
+  console.log(values, "ACA")
+  if (!_.isEmpty(values)) {
+    const { filters, sort} = values
+    let sortBy = "";
+    let filterBy = "";
+
+    if (!_.isEmpty(sort)) {
+      sortBy = `&sort=${sort}`
+    }
+    if (!_.isEmpty(filters)) {
+      filterBy = `?filter=${JSON.stringify(filters)}`;
+    }
+    const res = await axios.get(`${uri}/${filterBy}${sortBy}`);
     dispatch({ type: FETCH_ENTERPRISES, payload: res.data });
   } else {
     const res = await axios.get(`${uri}`);
@@ -59,10 +70,6 @@ export const fetchEnterprise = id => async dispatch => {
   dispatch({ type: FETCH_ENTERPRISE, payload: res.data });
 };
 
-export const fetchQuestions = id => async dispatch => {
-  const res = await axios.get(`/api/questions`);
-  dispatch({ type: FETCH_QUESTIONS, payload: res.data });
-};
 
 export const signUpUser = (
   { email, password, name },
@@ -140,6 +147,11 @@ export const fetchSectors = () => async dispatch => {
 
 export const updateUserSettings = values => async dispatch => {
   const res = await axios.put(`/api/users/settings`, { ...values });
+  dispatch({ type: FETCH_USER, payload: res.data });
+};
+
+export const updateUser = values => async dispatch => {
+  const res = await axios.patch(`/api/users`, { attributes:{...values} });
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 

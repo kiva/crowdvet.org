@@ -6,17 +6,18 @@ import * as actions from '../actions';
 import logoGreen from './logo-green.svg';
 import Google from './Google.svg';
 import './Modal.css';
+import _ from "lodash";
 
 class SignUp extends Component {
   componentDidMount() {
-    window.jQuery(document).ready(function() {
-      window.jQuery('.modal').modal();
+    window.$(document).ready(function() {
+      window.$('.modal').modal();
     })
   }
   componentWillUnmount() {
-    window.jQuery(".modal").modal('close');
+    window.$(".modal").modal('close');
   }
-  
+
   handleFormSubmit(values) {
     this.props.signUpUser(values, this.props.history);
   }
@@ -24,7 +25,7 @@ class SignUp extends Component {
   renderAlert() {
     if (this.props.errorMessage) {
       return (
-        <div className="alert alert-danger">
+        <div className="red-color">
           <strong>Oops!</strong> {this.props.errorMessage}
         </div>
       );
@@ -70,6 +71,7 @@ class SignUp extends Component {
                 component={this.renderField}
               />
             </div>
+            {this.renderAlert()}
           </div>
           <button className="btn" id="signup">
             <div>Sign Up</div>
@@ -126,7 +128,7 @@ function validate(formProps) {
 }
 
 function mapStateToProps(state) {
-  return { errorMessage: state.auth };
+  return { errorMessage: _.get(state.auth, "error")};
 }
 
 export default reduxForm({
