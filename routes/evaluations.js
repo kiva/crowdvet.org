@@ -1,4 +1,5 @@
 const passport = require("passport");
+const requireLogin = require("../middlewares/requireLogin");
 const _ = require("lodash");
 
 module.exports = app => {
@@ -6,25 +7,14 @@ module.exports = app => {
     Evaluations,
     Votes,
     Answers,
-    Questions
+    Questions,
+    Enterprises,
+    Sectors,
+    Images,
+    Comments
   } = app.datasource.models.Enterprises.model;
 
-  app.get("/api/votes", async (req, res) => {
-    try {
-      const { evaluation_id } = req.query;
-      const result = await Votes.findAll({
-        where: { evaluation_id }
-      });
-      return res
-        .status(200)
-        .set("x-Total-Count", result.length)
-        .send(result);
-    } catch (e) {
-      console.log(e);
-    }
-  });
-
-  app.get("/api/evaluations", async (req, res) => {
+  app.get("/api/evaluations",requireLogin,  async (req, res) => {
     try {
       const { official } = req.query;
       const OficialVote = official ? true : false;
@@ -43,7 +33,7 @@ module.exports = app => {
     }
   });
 
-  app.post("/api/evaluations", async (req, res) => {
+  app.post("/api/evaluations", requireLogin, async (req, res) => {
     try {
       const user_id = req.user.id;
       const { enterprise_id, votes, inProgress } = req.body;
@@ -79,148 +69,16 @@ module.exports = app => {
     }
   });
 
-  app.delete(
-    "/api/evaluations/:id",
-    passport.authenticate("jwt"),
-    async (req, res) => {
-      try {
-        const { id } = req.params;
-        await Evaluations.destroy({ where: { id } });
-        res.status(200).send({ data: true });
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  );
-
-  /*
-  * Kiva Evaluations
-  */
-
-  app.get(
-    "/api/kiva/evaluations",
-    passport.authenticate("jwt"),
-    async (req, res) => {
-      try {
-        const result = await Evaluations.findAll({
-          where: { OficialVote: true },
-          include: [{ model: Votes }]
-        });
-
-        return res
-          .status(200)
-          .set("x-Total-Count", result.length)
-          .send(result);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  );
-
-  // kiva use
-  app.get("/api/evaluations/:id", async (req, res) => {
+  app.get("/api/enterprises/:id", requireLogin, async (req, res) => {
     try {
       const { id } = req.params;
-      const result = await Evaluations.findOne({
+      const result = await Enterprises.findOne({
         where: { id },
-        include: [{ model: Votes }]
+        include: [{ model: Sectors }, { model: Images }, { model: Comments, attributes: ["id"] }]
       });
       return res.status(200).send(result);
     } catch (e) {
       console.log(e);
     }
   });
-
-  app.get("/api/kiva/evaluations/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
-      const result = await Evaluations.findOne({
-        where: { id },
-        include: [{ model: Votes }]
-      });
-      return res.status(200).send(result);
-    } catch (e) {
-      console.log(e);
-    }
-  });
-
-  app.post(
-    "/api/kiva/evaluations",
-    passport.authenticate("jwt"),
-    async (req, res) => {
-      try {
-        const { enterprise_id, status, model, impact, prioritization } = req.body;
-        const user_id = req.user.id;
-
-        Evaluations.destroy({
-          where: { user_id, enterprise_id, OficialVote: true }
-        });
-        const evaluation = await Evaluations.create({
-          user_id,
-          enterprise_id,
-          OficialVote: true,
-          status,
-          impact,
-          model,
-          prioritization
-        });
-        console.log(evaluation)
-        return res.status(200).send(evaluation);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  );
-
-  app.put(
-    "/api/kiva/evaluations/:id",
-    passport.authenticate("jwt"),
-    async (req, res) => {
-      try {
-        const { enterprise_id, status,
-        model, impact, prioritization, comment } = req.body;
-        const { id } = req.params;
-        const user_id = req.user.id;
-
-        const result =  await Evaluations.update({ enterprise_id, status,
-          model, impact, prioritization, comment}, { where: { id } });
-
-        return res.status(200).send(result);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  );
-
-  app.put(
-    "/api/evaluations/:id",
-    passport.authenticate("jwt"),
-    async (req, res) => {
-      try {
-        const { enterprise_id, status,
-        model, impact, prioritization, comment } = req.body;
-        const { id } = req.params;
-        const result =  await Evaluations.update({ enterprise_id, status,
-          model, impact, prioritization}, { where: { id } });
-
-        return res.status(200).send(result);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  );
-
-  app.delete(
-    "/api/kiva/evaluations/:id",
-    passport.authenticate("jwt"),
-    async (req, res) => {
-      try {
-        const { id } = req.params;
-        await Evaluations.destroy({ where: { id } });
-        res.status(200).send({ data: true });
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  );
 };
