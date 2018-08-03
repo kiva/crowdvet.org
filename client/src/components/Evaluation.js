@@ -15,17 +15,21 @@ import moment from "moment";
 
 class ApplicationEvaluate extends Component {
   constructor(props) {
-    super();
+    super(props);
+    const id = this.props.match.params.id;
     this.state = {
-      menu: { 1: "Review", 2: "Evaluation", 3: "Results" },
-      active: 1
+      menu: {
+        1: { text: "Review", url: `/application/${id}` },
+        2: { text: "Evaluation", url: `/users/evaluations/${id}` },
+        3: { text: "Results", url:"" }
+      },
+      active: 2
     };
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
     this.props.fetchEnterprise(this.props.match.params.id);
-    this.props.fetchQuestions();
     this.props.fetchUserEvaluation(this.props.match.params.id);
   }
 
@@ -59,7 +63,7 @@ class ApplicationEvaluate extends Component {
     return (
       <div>
         <TopMenu onSubMenuChange={this.onSubMenuChange} />
-        <div style={{ marginBottom: "-25px" }}>
+        <div className="image-margin">
           <div className="row">
             <div className="col s12 center img-header">
               <h2 id="title-img" className=" center">{enterprise.name}

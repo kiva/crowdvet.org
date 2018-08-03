@@ -40,7 +40,7 @@
   }
 }
 
-.radio-evaluation [type="radio"]:checked+span:after  {
+.radio-evaluation [type="radio"]:checked+label:after  {
   background-color: #61a63a;
   border-color: #61a63a;
 }
@@ -69,8 +69,8 @@
   margin-top: -1px;
 }
 
-.radio-evaluation [type="radio"] + span:before,
-.radio-evaluation [type="radio"] + span:after {
+.radio-evaluation [type="radio"] + label:before,
+.radio-evaluation [type="radio"] + label:after {
   width: 32px;
   height: 32px;
   padding-left: 14px;
@@ -82,11 +82,11 @@
   border-color: #61a63a;
 } */
 
-.radio-evaluation [type="radio"]:disabled+span {
+.radio-evaluation [type="radio"]:disabled+label {
     color: #61a63a;
 }
 
-.radio-evaluation [type="radio"]:disabled:checked+span:after {
+.radio-evaluation [type="radio"]:disabled:checked+label:after {
     background-color: #61a63a;
     border-color: #61a63a;
 }
@@ -125,4 +125,8 @@
 .answer-result {
   margin-top: 25px;
   font-size: 16px;
+}
+
+.image-margin{
+  margin-bottom:-26px;
 }
