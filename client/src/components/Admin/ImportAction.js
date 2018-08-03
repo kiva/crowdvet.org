@@ -13,7 +13,7 @@ class ImportAction extends Component {
 
   importEnterprises(ids) {
     axios
-      .post('/api/enterprises', { ids })
+      .post('/api/admin/enterprises', { ids })
       .then(res => {
         this.props.showNotificationAction('Applications imported');
       })
