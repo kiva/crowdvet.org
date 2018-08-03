@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Field, reduxForm } from 'redux-form'
 import { connect } from "react-redux";
 import * as actions from "../actions";
+import idgen from './idgen';
 import _ from "lodash";
 import "./Settings.css"
 
@@ -24,16 +25,15 @@ class PersonalForm extends Component {
     })
   }
 
-  renderCheckBox = (field) => (
-    <div className="col s12 m4">
+  renderCheckBox = (field) => {
+    const id = idgen();
+    return (<div className="col s12 m4">
       <label>
-      <input {...field.input} type="checkbox" checked={field.input.value ? "checked": ""}/>
-      <span>{field.text}</span>
-      {field.meta.touched && field.meta.error &&
-       <span className="error">{field.meta.error}</span>}
+      <input {...field.input} id={id} type="checkbox" checked={field.input.value ? "checked": ""}/>
+      <label htmlFor={id}>{field.text}</label>
        </label>
-    </div>
-  )
+    </div>)
+  }
 
   render() {
     const { handleSubmit, sectors } = this.props;
