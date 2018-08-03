@@ -17,9 +17,14 @@ import moment from "moment";
 
 class ApplicationShow extends Component {
   constructor(props) {
-    super();
+    super(props);
+    const id = this.props.match.params.id;
     this.state = {
-      menu: { 1: "Review", 2: "Evaluation", 3: "Results" },
+      menu: {
+        1: { text: "Review", url: `/application/${id}` },
+        2: { text: "Evaluation", url: `/users/evaluations/${id}` },
+        3: { text: "Results", url:"" }
+      },
       active: 1
     };
     let sector = "";
@@ -223,7 +228,13 @@ class ApplicationShow extends Component {
   }
 
   render() {
-    const { enterprise, officialEvaluation, evaluation, comments, auth } = this.props;
+    const {
+      enterprise,
+      officialEvaluation,
+      evaluation,
+      comments,
+      auth
+    } = this.props;
 
     if (!enterprise) return null;
     this.sector = enterprise.Sector ? enterprise.Sector.name : "Water";
@@ -233,7 +244,7 @@ class ApplicationShow extends Component {
     return (
       <div>
         <TopMenu onSubMenuChange={this.onSubMenuChange} />
-        <div style={{ marginBottom: "-25px" }}>
+        <div className="image-margin">
           <div className="row">
             <div className="col s12 center img-header">
               <h2 id="title-img" className=" center">
@@ -256,24 +267,27 @@ class ApplicationShow extends Component {
           {this.renderCards()}
           {this.renderContent()}
           {this.renderTable()}
-
           <div className="row">
             <div className="col s12 center">
               <h4>Discussion</h4>
             </div>
           </div>
-            <div className="row">
-              <CommentList user={auth} enterprise_id={enterprise.id} comments={comments} />
-            </div>
-            <div className="row">
-            <CommentForm enterprise_id={enterprise.id} />
-            </div>
-            <div className="center-align">
-              <Link className="btn" to={toPage} id="evaluate">
-                Continue to Evaluation
-              </Link>
-            </div>
+          <div className="row">
+            <CommentList
+              user={auth}
+              enterprise_id={enterprise.id}
+              comments={comments}
+            />
           </div>
+          <div className="row">
+            <CommentForm enterprise_id={enterprise.id} />
+          </div>
+          <div className="center-align">
+            <Link className="btn" to={toPage} id="evaluate">
+              Continue to Evaluation
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
