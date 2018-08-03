@@ -13,7 +13,7 @@ module.exports = app => {
   });
 
   passport.deserializeUser((id, done) => {
-    Users.findOne({ where: { id },  attributes:["id", "name", "email", "image"], include:[{model: UsersSectors}] }).then(user => {
+    Users.findOne({ where: { id },  attributes:["id", "name", "email", "image", "message"], include:[{model: UsersSectors}] }).then(user => {
       done(null, user);
     });
   });
