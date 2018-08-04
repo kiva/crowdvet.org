@@ -163,7 +163,8 @@ class EvaluationResults extends Component {
     );
   }
 
-  renderRadios(name, choices, question) {
+  renderRadios(name, evaluation, choices, question, official) {
+    const inputName = official ? `official-${name}` : name;
     const content = _.map(choices, choice => {
       const id = idgen();
       return (
@@ -171,10 +172,10 @@ class EvaluationResults extends Component {
           <label className="radio-evaluation">
             <input
               id={id}
-              name={name}
+              name={inputName}
               type="radio"
               checked={
-                this.props.evaluation[name] == choice.score ? true : false
+                evaluation[name] == choice.score ? true : false
               }
               disabled={true}
             />
@@ -192,26 +193,69 @@ class EvaluationResults extends Component {
         <div className="row">
           {content}
         </div>
-        <div className="row">
-          <div className="col s12">
-            <LineChart />
-          </div>
-        </div>
       </div>
     );
   }
 
   renderResults() {
+    const { evaluation, officialEvaluation } = this.props;
     return (
       <div className="row">
         <div className="row">
-          {this.renderRadios("impact", impactChoices, impactQuestion)}
+          {this.renderRadios("impact", evaluation, impactChoices, impactQuestion, false)}
         </div>
         <div className="row">
-          {this.renderRadios("model", modelChoices, modelQuestion)}
+          <div className="col s10 offset-m1">
+            <p>{evaluation.impact}: {_.mapKeys(impactChoices, "score")[evaluation.impact].text}</p>
+          </div>
         </div>
         <div className="row">
-          {this.renderRadios("prioritization", prioritizationChoices, prioritizationQuestion)}
+          {this.renderRadios("impact", officialEvaluation, impactChoices, "", true)}
+        </div>
+        <div className="row">
+          <div className="col s10 offset-m1">
+            <p>{officialEvaluation.impact}: {_.mapKeys(impactChoices, "score")[evaluation.impact].text}</p>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col s12">
+            <LineChart />
+          </div>
+        </div>
+
+        <div className="row">
+          {this.renderRadios("model", evaluation, modelChoices, modelQuestion, false)}
+        </div>
+        <div className="col s10 offset-m1">
+          <p>{evaluation.model}: {_.mapKeys(modelChoices, "score")[evaluation.model].text}</p>
+        </div>
+        <div className="row">
+          {this.renderRadios("model", officialEvaluation, modelChoices, "", true)}
+        </div>
+        <div className="col s10 offset-m1">
+          <p>{officialEvaluation.model}: {_.mapKeys(modelChoices, "score")[evaluation.model].text}</p>
+        </div>
+        <div className="row">
+          <div className="col s12">
+            <LineChart />
+          </div>
+        </div>
+        <div className="row">
+          {this.renderRadios("prioritization", evaluation, prioritizationChoices, prioritizationQuestion, false)}
+        </div>
+        <div className="col s10 offset-m1">
+        <p>{evaluation.prioritization}: {_.mapKeys(prioritizationChoices, "score")[evaluation.prioritization].text}</p>
+        </div>
+        <div className="row">
+          {this.renderRadios("prioritization", officialEvaluation, prioritizationChoices, "", true)}
+        </div>
+        <div className="col s10 offset-m1">
+        <p>{officialEvaluation.prioritization}: {_.mapKeys(prioritizationChoices, "score")[evaluation.prioritization].text}</p>
+        </div>
+        <div className="row">
+          <div className="col s12">
+            <LineChart />
+          </div>
         </div>
       </div>
     );
@@ -271,8 +315,7 @@ function mapStateToProps(
   },
   ownProps
 ) {
-  console.log(questions, "con q");
-  console.log(crowdVotes, "en votes");
+
   const initial = _.reduce(
     questions,
     (result, q) => {
