@@ -81,7 +81,7 @@ class ApplicationEvaluate extends Component {
             <h3 className="col s12">Loan Evaluation</h3>
           </div>
           <div className="row">
-            <EvaluationForm enableReinitialize={true} initialValues={{...this.props.evaluation}} enterprise_id={this.props.match.params.id} history={this.props.history}/>
+            <EvaluationForm initialValues={{...this.props.evaluation}} enterprise_id={this.props.match.params.id} history={this.props.history}/>
           </div>
         </div>
       </div>
