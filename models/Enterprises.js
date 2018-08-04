@@ -286,32 +286,32 @@ module.exports = (sequelize, DataType) => {
       type: DataType.STRING,
       allowNull: true,
     },
-    impactComent: {
+    impactComment: {
       type: DataType.STRING,
       allowNull: true,
       validate: {
-        notEmpty: true
+        notEmpty: false
       }
     },
-    modelComent: {
+    modelComment: {
       type: DataType.STRING,
       allowNull: true,
       validate: {
-        notEmpty: true
+        notEmpty: false
       }
     },
-    prioritizationComent: {
+    prioritizationComment: {
       type: DataType.STRING,
       allowNull: true,
       validate: {
-        notEmpty: true
+        notEmpty: false
       }
     },
     comment: {
       type: DataType.STRING,
       allowNull: true,
       validate: {
-        notEmpty: true
+        notEmpty: false
       }
     }
   });
