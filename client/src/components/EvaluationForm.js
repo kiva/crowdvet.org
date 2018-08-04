@@ -14,15 +14,15 @@ class EvaluationForm extends Component {
       <div>
         <textarea
           className="materialize-textarea"
-          name={field.name}
-          placeholder={field.placeholder}
+          placeholder="type your comment here"
+            type="text"
           {...field.input}
-          type="text"
         />
         <label htmlFor={field.id} />
       </div>
     );
   };
+
   componentDidMount() {
     this.props.fetchUserEvaluation(this.props.enterprise_id);
   }
@@ -90,8 +90,15 @@ class EvaluationForm extends Component {
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
       >
         {this.renderRadios("impact", impactChoices, impactQuestion)}
+        <Field name="impactComment" component={this.renderTextArea} />
         {this.renderRadios("model", modelChoices, modelQuestion)}
+        <Field name="modelComment" component={this.renderTextArea} />
         {this.renderRadios("prioritization", prioritizationChoices, prioritizationQuestion)}
+        <Field name="prioritizationComment" component={this.renderTextArea} />
+        <div className="row">
+            <div className="question">4. What else should Kiva know about this enterprise?</div>
+        </div>
+        <Field name="comment" component={this.renderTextArea} />
         <div className="col s12 m6 offset-m3">
           <button className="btn button-large">Submit Evaluation</button>
         </div>
@@ -209,10 +216,6 @@ const prioritizationChoices = [
 ];
 
 function mapStateToProps({ questions, enterprises, evaluations }, ownProps) {
-  const evaluation = evaluations[ownProps.enterprise_id]
-
-  const initialValues = evaluation ?  {impact: evaluation.impact, model: evaluation.model} : {}
-
   return {
     questions,
     enterprise: enterprises[ownProps.enterprise_id],
