@@ -13,7 +13,17 @@ class EnterpisesList extends Component {
   constructor(props) {
     super(props);
     this.filters = { filters: { sector_id:[], country_id:[] }, sort:""};
+    this.state = { show: 2, limit: 2 };
+    this.onHandleClick = this.onHandleClick.bind(this);
   }
+
+  onHandleClick(e) {
+    console.log(e)
+    e.preventDefault();
+    const show = this.state.show + this.state.limit;
+    this.setState({ show });
+  }
+
   renderEnterprises(enterprises) {
     const enterprisesItems = _.map(enterprises, (enterprise) => {
       return <EnterpriseItem key={ enterprise.id } userId={this.props.userId} enterprise={ enterprise } />
@@ -36,6 +46,16 @@ class EnterpisesList extends Component {
   }
 
   render() {
+    let hide = "";
+
+    if (this.props.enterprises.length == 0) hide = "hide";
+
+    if (Object.keys(this.props.enterprises).length <= this.state.show) {
+      hide = "hide";
+    }
+
+    const enterprises = _.slice(_.values(this.props.enterprises),0, this.state.show);
+
     return (
       <div className="container">
       <div className="row text-flow center">
@@ -43,8 +63,9 @@ class EnterpisesList extends Component {
         <div className="col s12 m3 offset-m9"><Sort sort={this.sort.bind(this)} /></div>
         <div className="col s12 m3 l3"><Filter filter={this.filter.bind(this)} sectors={this.props.sectors} countries={this.props.countries} /></div>
         <div className="col s12 m9 l9">
-          {this.renderEnterprises(this.props.enterprises)}
+          {this.renderEnterprises(enterprises)}
         </div>
+        <div className={`col s12 m9 offset-m3 gray-background center ${hide}`}><a onClick={this.onHandleClick}className="btn-flat">Load More</a></div>
       </div>
       </div>
     );
