@@ -9,17 +9,17 @@ class TopMenu extends Component {
     return (
       <div className="row center-align dashboard">
         <div className="col s4 top-menu">
-          <Link to={'/user'} className="btn btn-flat btn-large" >
+          <Link to={'/user'} className="btn flat btn-flat btn-large" >
             Profile
           </Link>
         </div>
         <div className="col s4 top-menu">
-          <Link to={"/vet/enterprises"} className="btn btn-flat btn-large">
+          <Link to={"/vet/enterprises"} className="btn flat btn-flat btn-large">
             Vet Enterprises
           </Link>
         </div>
         <div className="col s4 top-menu">
-          <button className="btn btn-flat btn-large">Training</button>
+          <button className="btn flat btn-flat btn-large">Training</button>
         </div>
       </div>
     );
