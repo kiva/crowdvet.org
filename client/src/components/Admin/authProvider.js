@@ -12,7 +12,6 @@ export default (type, params) => {
     return fetch(request)
       .then(response => {
         if (response.status < 200 || response.status >= 300) {
-          console.log(response.json);
           throw new Error(response.statusText);
         }
 

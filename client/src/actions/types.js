@@ -14,5 +14,6 @@ export const FETCH_COMMENT_REPLY  = 'fetch_comment_reply';
 export const FETCH_USER_COMMENT_VOTES = 'fetch_user_comment_votes';
 export const FETCH_SECTORS = 'fetch_sectors';
 export const FETCH_COUNTRIES = 'fetch_countries';
+export const FETCH_SUGGESTED = 'fetch_suggested';
 export const AUTH_USER = 'auth_user';
 export const AUTH_ERROR = 'auth_error';

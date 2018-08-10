@@ -5,7 +5,8 @@ import TopMenu from "./TopMenu";
 import SubMenuInProgress from "./SubMenuInProgress";
 import Enterprises from "./Enterprises";
 import InProgress from "./InProgress";
-import _ from 'lodash';
+import Suggested from "./Suggested";
+import _ from "lodash";
 
 import * as actions from "../actions";
 
@@ -39,8 +40,10 @@ class VetEnterprises extends Component {
     return (
       <div>
         <TopMenu onSubMenuChange={this.onSubMenuChange} />
-        <ProfileHeader userEvaluations={this.props.evaluations}
-        officialEvaluations={this.props.officialEvaluations} />
+        <ProfileHeader
+          userEvaluations={this.props.evaluations}
+          officialEvaluations={this.props.officialEvaluations}
+        />
         <div>
           <div className="row flow-text dashboard">
             <SubMenuInProgress onSubMenuChange={this.onSubMenuChange} />
@@ -56,12 +59,30 @@ class VetEnterprises extends Component {
       case 1:
         return (
           <div>
-            <InProgress userEvaluations={_.filter(this.props.evaluations, {'inProgress': true})} enterprises={this.props.enterprises} />
-            <Enterprises enterprises={this.props.enterprises} sectors={this.props.sectors} countries={this.props.countries} />
+            <InProgress
+              userEvaluations={_.filter(this.props.evaluations, {
+                inProgress: true
+              })}
+              enterprises={this.props.enterprises}
+            />
+            <Enterprises
+              enterprises={this.props.enterprises}
+              sectors={this.props.sectors}
+              countries={this.props.countries}
+            />
           </div>
         );
       case 2:
-        return <div>Suggested</div>;
+        return (
+          <div>
+            <Suggested />
+            <Enterprises
+              enterprises={this.props.enterprises}
+              sectors={this.props.sectors}
+              countries={this.props.countries}
+            />
+          </div>
+        );
       default:
     }
   }
@@ -75,7 +96,14 @@ function mapStateToProps({
   sectors,
   countries
 }) {
-  return { auth, enterprises, evaluations, officialEvaluations, sectors, countries };
+  return {
+    auth,
+    enterprises,
+    evaluations,
+    officialEvaluations,
+    sectors,
+    countries
+  };
 }
 
 export default connect(mapStateToProps, actions)(VetEnterprises);

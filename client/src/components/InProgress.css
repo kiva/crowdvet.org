@@ -39,3 +39,15 @@
 .remove-btn > a{
   color:white;
 }
+
+.card-review-btn {
+  background-color: #13B5EA;
+  height:40px;
+}
+
+#card-suggested {
+  padding-bottom: 0px;
+}
+.no-text-transform{
+  text-transform: none;
+}

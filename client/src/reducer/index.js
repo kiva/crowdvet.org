@@ -7,6 +7,7 @@ import officialEvaluationsReducer from './officialEvaluationsReducer';
 import crowdVotes from './crowdEvaluationsReducer';
 import commentsReducer from './commentsReducer';
 import sectorsReducer from './sectorsReducer';
+import suggestedReducer from './suggestedReducer';
 import countriesReducer from './countriesReducer';
 
 export default combineReducers({
@@ -18,5 +19,6 @@ export default combineReducers({
   crowdVotes: crowdVotes,
   comments: commentsReducer,
   sectors: sectorsReducer,
-  countries: countriesReducer
+  countries: countriesReducer,
+  suggested: suggestedReducer
 });

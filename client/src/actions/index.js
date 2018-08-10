@@ -19,7 +19,8 @@ import {
   FETCH_COMMENT_REPLY,
   FETCH_USER_COMMENT_VOTES,
   FETCH_SECTORS,
-  FETCH_COUNTRIES
+  FETCH_COUNTRIES,
+  FETCH_SUGGESTED
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -42,10 +43,7 @@ export const fetchOfficialEvaluations = () => async dispatch => {
 };
 
 export const fetchEnterprises = (values) => async dispatch => {
-
-  //  sort=['title','ASC']
   const uri = "/api/users/enterprises";
-  console.log(values, "ACA")
   if (!_.isEmpty(values)) {
     const { filters, sort} = values
     let sortBy = "";
@@ -65,11 +63,26 @@ export const fetchEnterprises = (values) => async dispatch => {
   }
 };
 
+export const fetchSuggested = (values) => async dispatch => {
+  const uri = "/api/users/enterprises";
+  console.log(values, "ACA")
+  if (!_.isEmpty(values)) {
+    let filterBy = "";
+    const { filters, sort} = values
+
+    if (!_.isEmpty(filters)) {
+      filterBy = `?filter=${JSON.stringify(filters)}`;
+    }
+    const res = await axios.get(`${uri}/${filterBy}`);
+    dispatch({ type: FETCH_SUGGESTED, payload: res.data });
+  }
+};
+
+
 export const fetchEnterprise = id => async dispatch => {
   const res = await axios.get(`/api/enterprises/${id}`);
   dispatch({ type: FETCH_ENTERPRISE, payload: res.data });
 };
-
 
 export const signUpUser = (
   { email, password, name },
