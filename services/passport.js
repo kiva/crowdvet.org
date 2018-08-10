@@ -6,14 +6,14 @@ const { Strategy, ExtractJwt } = require('passport-jwt');
 const localOptions = { usernameField: 'email' };
 
 module.exports = app => {
-  const {Users, UsersSectors} = app.datasource.models.Enterprises.model;
+  const {Users, UsersSectors, Comments} = app.datasource.models.Enterprises.model;
 
   passport.serializeUser((user, done) => {
     done(null, user.id);
   });
 
   passport.deserializeUser((id, done) => {
-    Users.findOne({ where: { id },  attributes:["id", "name", "email", "image", "message"], include:[{model: UsersSectors}] }).then(user => {
+    Users.findOne({ where: { id },  attributes:["id", "name", "email", "image", "message"], include:[{model: UsersSectors}, {model:Comments}] }).then(user => {
       done(null, user);
     });
   });
@@ -41,7 +41,7 @@ module.exports = app => {
   passport.use(
     'local-login',
     new LocalStrategy(localOptions, function(email, password, done) {
-      Users.findOne({ where: { email }, include:[{model: UsersSectors}] })
+      Users.findOne({ where: { email }, include:[{model: UsersSectors}, {model:Comments}] })
         .then(user => {
           if (!user) {
             return done(null, false, { message: 'Incorrect username.' });
