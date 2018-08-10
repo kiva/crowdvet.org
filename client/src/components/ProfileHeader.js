@@ -5,6 +5,7 @@ import Enterprises from "./Enterprises";
 import VettedEnterprises from "./VettedEnterprises";
 import _ from "lodash";
 import utils from './utils';
+import moment from 'moment';
 
 class ProfileHeader extends Component {
 
@@ -31,7 +32,7 @@ class ProfileHeader extends Component {
               {auth.name}
               <div className="score">Score: {result ? result.GeneralScore : ""} | Accuracy: {result ? result.GeneralAccuracy : ""}%</div>
               <div className="community">
-                Community Member Since January 12, 2017 | Vetted {result ? result.count : ""} Social
+                Community Member Since {moment(auth.created_at).format("MMMM DD, YYYY")} | Vetted {result ? result.count : ""} Social
                 Enterprises
               </div>
               <div className="community">Badge Showcase</div>
