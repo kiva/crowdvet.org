@@ -8,7 +8,9 @@ import _ from 'lodash';
 class Suggested extends Component {
   componentDidMount() {
     const sectors = _.map(this.props.sectors, "sector_id");
-    this.props.fetchSuggested({filters: {sector_id: sectors}});
+    if (!_.isEmpty(sectors)) {
+        this.props.fetchSuggested({filters: {sector_id: sectors}});
+    }
   }
 
   render() {
