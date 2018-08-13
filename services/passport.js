@@ -41,11 +41,13 @@ module.exports = app => {
   passport.use(
     'local-login',
     new LocalStrategy(localOptions, function(email, password, done) {
+
       Users.findOne({ where: { email }, include:[{model: UsersSectors}, {model:Comments}] })
         .then(user => {
-          if (!user) {
+          if (!user || !user.password) {
             return done(null, false, { message: 'Incorrect username.' });
           }
+
           if (!Users.isPassword(user.password, password)) {
             return done(null, false, { message: 'Incorrect password.' });
           }

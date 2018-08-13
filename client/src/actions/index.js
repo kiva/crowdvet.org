@@ -20,7 +20,8 @@ import {
   FETCH_USER_COMMENT_VOTES,
   FETCH_SECTORS,
   FETCH_COUNTRIES,
-  FETCH_SUGGESTED
+  FETCH_SUGGESTED,
+  SIGNIN_ERROR
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -96,6 +97,21 @@ export const signUpUser = (
     })
     .catch(error => {
       dispatch(authError(error.response.data));
+    });
+};
+
+export const signInUser = (
+  { email, password },
+  history
+) => async dispatch => {
+  axios
+    .post(`/auth/login`, { email, password })
+    .then(response => {
+      dispatch({ type: FETCH_USER, payload: response.data });
+      history.push("/user");
+    })
+    .catch(error => {
+      dispatch(signInError(error.response.data));
     });
 };
 
@@ -176,6 +192,13 @@ export const fetchCountries = () => async dispatch => {
 export function authError({ error }) {
   return {
     type: AUTH_ERROR,
+    payload: error
+  };
+}
+
+export function signInError({ error }) {
+  return {
+    type: SIGNIN_ERROR,
     payload: error
   };
 }

@@ -1,21 +1,22 @@
-import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import * as actions from '../actions';
-import logoGreen from './logo-green.svg';
-import Google from './Google.svg';
-import './Modal.css';
+import React, { Component } from "react";
+import { Field, reduxForm } from "redux-form";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actions from "../actions";
+import logoGreen from "./logo-green.svg";
+import Google from "./Google.svg";
+import "./Modal.css";
 import _ from "lodash";
+import SignIn from "./SignIn";
 
 class SignUp extends Component {
   componentDidMount() {
     window.$(document).ready(function() {
-      window.$('.modal').modal();
-    })
+      window.$(".modal").modal();
+    });
   }
   componentWillUnmount() {
-    window.$(".modal").modal('close');
+    window.$(".modal").modal("close");
   }
 
   handleFormSubmit(values) {
@@ -34,12 +35,12 @@ class SignUp extends Component {
 
   renderField(field) {
     const { type, meta: { touched, error } } = field;
-    const className = `form-group ${touched && error ? 'invalid' : ''}`;
+    const className = `form-group ${touched && error ? "invalid" : ""}`;
     return (
       <div>
         <label>{field.label}</label>
-        <input className={className} type={type || 'text'} {...field.input} />
-        <div className="text-help">{touched ? error : ''}</div>
+        <input className={className} type={type || "text"} {...field.input} />
+        <div className="text-help">{touched ? error : ""}</div>
       </div>
     );
   }
@@ -48,6 +49,7 @@ class SignUp extends Component {
     const { handleSubmit } = this.props;
     return (
       <div className="row">
+        <div className="col s12"><span>Sign Up with Us</span></div>
         <form
           className="col s12"
           onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
@@ -67,6 +69,16 @@ class SignUp extends Component {
               <Field
                 label="Password"
                 name="password"
+                type="password"
+                component={this.renderField}
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="input-field col s12">
+              <Field
+                label="Confirm Password"
+                name="confirmPassword"
                 type="password"
                 component={this.renderField}
               />
@@ -91,20 +103,21 @@ class SignUp extends Component {
             <small>Enabling Dreams All Around the world</small>
             <div className="row">
               <div className="grid col s12 m6">
-                <span className="flow-text small">Sign Up with Us</span>
-                {this.renderForm()}
+                <span className="flow-text small">Welcome Back, please Sign In</span>
+                {<SignIn history={this.props.history}/>}
               </div>
               <div className="grid col s12 m6">
                 <span className="flow-text small">
                   Connect a Social Media Account
                 </span>
                 <span className="flow-text">
-                  <a href={'/auth/google'} className="btn signup">
+                  <a href={"/auth/google"} className="btn signup">
                     <img src={Google} id="google" alt="logo" />
                     <div>Sign Up with Google</div>
                   </a>
                 </span>
               </div>
+                <div className="col s12 m6"><p>{this.renderForm()}</p></div>
             </div>
           </div>
           <div className="modal-footer" />
@@ -116,23 +129,33 @@ class SignUp extends Component {
 function validate(formProps) {
   const errors = {};
   if (!formProps.name) {
-    errors.name = 'Please enter a name';
+    errors.name = "Please enter a name";
   }
   if (!formProps.email) {
-    errors.email = 'Please enter an email';
+    errors.email = "Please enter an email";
   }
+
   if (!formProps.password) {
-    errors.password = 'Please enter a password';
+    errors.password = "Please enter a password";
   }
+
+  if (!formProps.confirmPassword) {
+    errors.confirmPassword = "Please enter a password";
+  }
+
+  if (formProps.password && formProps.password != formProps.confirmPassword) {
+    errors.confirmPassword = "Passwords must match";
+  }
+
   return errors;
 }
 
 function mapStateToProps(state) {
-  return { errorMessage: _.get(state.auth, "error")};
+  return { errorMessage: _.get(state.auth, "error") };
 }
 
 export default reduxForm({
-  form: 'signup',
-  fields: ['email', 'password', 'name'],
+  form: "signup",
+  fields: ["email", "password", "name", "confirmPassword"],
   validate
 })(connect(mapStateToProps, actions)(withRouter(SignUp)));
