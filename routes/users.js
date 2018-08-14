@@ -92,7 +92,6 @@ module.exports = app => {
     }
   });
 
-
   app.delete("/api/users/evaluations/:id", requireLogin, async (req, res) => {
     try {
       const { id } = req.params;
@@ -137,7 +136,7 @@ module.exports = app => {
       const id = req.user.id;
       const { attributes } = req.body;
       await Users.update({ ...attributes }, { where: { id } });
-      const result = await Users.findOne({ where: { id } });
+      const result = await Users.findOne({ where: { id }, include: [{ model: UsersSectors }, { model: Comments }] });
       return res.status(200).send(result);
     } catch (e) {
       console.log(e)
