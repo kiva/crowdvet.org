@@ -8,6 +8,7 @@ import SubMenu from "./SubMenu";
 import TopMenu from "./TopMenu";
 import Card from "./Card";
 import PDF from "./PDF.svg";
+import Excel from "./Excel.svg";
 import Countdown from "react-countdown-now";
 import CommentForm from "./Comment";
 import CommentList from "./CommentList";
@@ -57,8 +58,8 @@ class ApplicationShow extends Component {
           />
           <Card
             name="GEOGRAPHICAL LOCATION"
-            mainText="Kenya"
-            description="WEST AFRICA"
+            mainText={this.props.enterprise.Country.name}
+
           />
         </div>
       </div>
@@ -139,6 +140,15 @@ class ApplicationShow extends Component {
           <tbody>
             <tr>
               <td>
+                <img src={Excel} />
+                <a href={this.props.enterprise.zeroTool}>
+                  {this.props.enterprise.zeroTool
+                    ? " Zero Tool"
+                    : " Zero Tool: N/A"}
+                </a>
+              </td>
+              <td>
+                <img src={PDF} />
                 <a href={this.props.enterprise.historicalFinancial}>
                   {this.props.enterprise.historicalFinancial
                     ? "Historical Financial Statements"
@@ -146,6 +156,7 @@ class ApplicationShow extends Component {
                 </a>
               </td>
               <td>
+                <img src={PDF} />
                 <a href={this.props.enterprise.YDTFinancial}>
                   {this.props.enterprise.YDTFinancial
                     ? "YTD Financial Statements"
@@ -235,7 +246,7 @@ class ApplicationShow extends Component {
       comments,
       auth
     } = this.props;
-
+    console.log(this.props.enterprise, "ACA")
     if (!enterprise) return null;
     this.sector = enterprise.Sector ? enterprise.Sector.name : "Water";
     const imgName = `/sectors/${this.sector}.jpg`;
