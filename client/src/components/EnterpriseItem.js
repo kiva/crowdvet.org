@@ -23,13 +23,13 @@ class EnterpriseItem extends Component {
       <div className="card horizontal gray-background">
         <div className="card-stacked">
           <div className="card-content item-name left-align">
-            {renderName(enterprise.name)}
+            {enterprise.name}
           </div>
           <div className="item-date left-align">
             Ends on {moment(enterprise.endDate).format("MM-DD-YYYY")}
           </div>
-          <div className="card-content item-description">
-            {enterprise.description.substring(0, 130)}...
+          <div className="card-content item-description left-align">
+            {enterprise.shortDescription}
           </div>
           <div className="right-align">
             <Link to={`/application/${enterprise.id}`} className="btn">
