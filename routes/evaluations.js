@@ -11,7 +11,8 @@ module.exports = app => {
     Enterprises,
     Sectors,
     Images,
-    Comments
+    Comments,
+    Countries
   } = app.datasource.models.Enterprises.model;
 
   app.get("/api/evaluations",requireLogin,  async (req, res) => {
@@ -75,7 +76,7 @@ module.exports = app => {
       const { id } = req.params;
       const result = await Enterprises.findOne({
         where: { id },
-        include: [{ model: Sectors }, { model: Images }, { model: Comments, attributes: ["id"] }]
+        include: [{ model: Sectors }, { model: Images }, { model: Comments, attributes: ["id"] }, { model: Countries }]
       });
       return res.status(200).send(result);
     } catch (e) {
