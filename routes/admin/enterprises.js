@@ -69,7 +69,6 @@ module.exports = app => {
           if (err) {
             reject(err);
           }
-          console.log(data);
           resolve(data);
         });
       });
@@ -153,7 +152,8 @@ module.exports = app => {
         salesRevenue,
         sector_id,
         pictures,
-        country_id
+        country_id,
+        shortDescription
       } = req.body;
 
       if (_.isEmpty(req.body.Images)) {
@@ -200,7 +200,8 @@ module.exports = app => {
           asset,
           salesRevenue,
           sector_id,
-          country_id
+          country_id,
+          shortDescription
         },
         { where: { id } }
       );
