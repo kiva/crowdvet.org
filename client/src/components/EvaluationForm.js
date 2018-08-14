@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm , SubmissionError} from "redux-form";
 import QuestionList from "./QuestionList";
 import * as actions from "../actions";
 import _ from "lodash";
@@ -27,6 +27,21 @@ class EvaluationForm extends Component {
     this.props.fetchUserEvaluation(this.props.enterprise_id);
   }
   handleFormSubmit(votes) {
+    if (!votes.terms) {
+       throw new SubmissionError({ terms: 'Please, accept Kivas volunteer agreement'})
+    }
+
+    if (!votes.model) {
+       throw new SubmissionError({ model: 'Please, select an option',_error: 'Please, select an impact option.' })
+    }
+
+    if (!votes.impact) {
+       throw new SubmissionError({ impact: 'Please, select an option', _error: 'Please, select a business model option.' })
+    }
+
+    if (!votes.prioritization) {
+       throw new SubmissionError({ prioritization: 'Please, select an option', _error: 'Please, select a prioritization option.' })
+    }
     const data = {
       votes,
       enterprise_id: this.props.enterprise_id,
@@ -42,6 +57,23 @@ class EvaluationForm extends Component {
       inProgress: true
     };
     this.props.Evaluate(data);
+  }
+
+  renderCheckBox = (field) => {
+    const { meta: { touched, error } } = field;
+    const className = `${touched && error ? 'red-text' : ''}`;
+    return (
+      <div>
+      <label className="col s12 m1">
+      <input {...field.input} id={field.input.name} type="checkbox" checked={field.input.value ? "checked": ""}/>
+      <label htmlFor={field.input.name} />
+      </label>
+      <div className="col s12 m11">{field.text}</div>
+      <div className="col s12 m11 offset-m1">
+        <div className={`text-help ${className}`}>{touched ? error : ''}</div>
+      </div>
+    </div>
+    )
   }
 
   renderRadios(name, choices, question) {
@@ -78,8 +110,7 @@ class EvaluationForm extends Component {
   }
 
   render() {
-    const { handleSubmit } = this.props;
-
+    const { handleSubmit, error } = this.props;
     return (
       <form
         onChange={() =>
@@ -99,6 +130,13 @@ class EvaluationForm extends Component {
             <div className="question">4. What else should Kiva know about this enterprise?</div>
         </div>
         <Field name="comment" component={this.renderTextArea} />
+        <div className="row">
+          <Field name="terms" text="I agree to the terms of Kiva''s volunteer agreement.​ Terms of Agreement *" component={this.renderCheckBox} />
+        </div>
+        <div className="row">
+          <Field name="exclude" text="Check here if you want to EXCLUDE your score on this application in your overall score calculation." component={this.renderCheckBox} />
+        </div>
+        {error && <div className="red-text">{error}</div>}
         <div className="col s12 m6 offset-m3">
           <button className="btn button-large">Submit Evaluation</button>
         </div>
