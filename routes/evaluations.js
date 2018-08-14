@@ -56,7 +56,8 @@ module.exports = app => {
         prioritizationComment: votes.prioritizationComment,
         comment: votes.comment,
         OficialVote: false,
-        inProgress
+        inProgress,
+        exclude: votes.exclude
       });
 
       const result = await Evaluations.findOne({
