@@ -157,9 +157,6 @@ module.exports = (sequelize, DataType) => {
     ownershipStatus: {
       type: DataType.STRING,
       allowNull: true,
-      validate: {
-        notEmpty: true
-      }
     },
     asset: {
       type: DataType.INTEGER,
@@ -313,6 +310,11 @@ module.exports = (sequelize, DataType) => {
       validate: {
         notEmpty: false
       }
+    },
+    exclude: {
+      type: DataType.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
   });
 
