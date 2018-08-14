@@ -38,11 +38,15 @@ export const EnterprisesTitle = ({ record }) => {
 const required = (message = 'Required') =>
     value => value ? undefined : message;
 
+const length = (message = 'Should have less than 150 characters') =>
+    value => value && value.length <= 150 ? undefined : message;
+
+
 export const EnterprisesEdit = props => (
   <Edit title={<EnterprisesTitle />} {...props}>
     <SimpleForm>
       <DisabledInput source="id" />
-      <TextInput source="name" />
+      <TextInput label="Name" source="name" />
       <TextInput label="Email Address" source="email" type="email" />
       <TextInput label="Loan Size" source="loan" validate={required()} />
       <ReferenceInput label="Sectors" source="sector_id" reference="sectors" validate={required()}>
@@ -57,6 +61,9 @@ export const EnterprisesEdit = props => (
       <LongTextInput label="Previous Year Sales Revenue" source="salesRevenue" />
       <LongTextInput label="Ownerhip Status" source="ownershipStatus" />
       <LongTextInput label="Number of Paid Employees" source="paidEmployees" />
+      <LongTextInput label="Zero Tool link" source="zeroTool"  />
+      <LongTextInput label="Short Description max 150 characters"  validate={ [required(), length()]} source="shortDescription"  />
+      <LongTextInput label="Description" source="description"  />
       <DateInput label="Began Operating" source="beganOperating" />
       <DateInput label="End Date" source="endDate" validate={required()} />
 
