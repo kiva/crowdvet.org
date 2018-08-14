@@ -100,6 +100,13 @@ module.exports = (sequelize, DataType) => {
         notEmpty: true
       }
     },
+    shortDescription: {
+      type: DataType.STRING,
+      allowNull: true,
+      validate: {
+        notEmpty: true
+      }
+    },
     sector: {
       type: DataType.STRING,
       allowNull: true,
@@ -229,6 +236,21 @@ module.exports = (sequelize, DataType) => {
       }
     },
     Region: {
+      type: DataType.STRING,
+      allowNull: true,
+      validate: {
+        notEmpty: true
+      }
+    },
+    loanInquiry: {
+      type: DataType.STRING,
+      allowNull: true
+    },
+    boardAndManagement: {
+      type: DataType.STRING,
+      allowNull: true
+    },
+    zeroTool: {
       type: DataType.STRING,
       allowNull: true,
       validate: {
