@@ -40,6 +40,16 @@ module.exports = app => {
     }
   );
 
+    app.delete("/api/admin/enterprises/:id", passport.authenticate("jwt"), async (req, res) => {
+      try {
+        const { id } = req.params;
+        await Enterprises.destroy({ where: { id } });
+        res.status(200).send({ data: true });
+      } catch (e) {
+        console.log(e);
+      }
+    });
+
   function uploadToS3(file, id) {
     return new Promise((resolve, reject) => {
       const buff = new Buffer(
@@ -68,7 +78,7 @@ module.exports = app => {
 
   app.post(
     "/api/admin/enterprises",
-    
+
     async (req, res) => {
       try {
         const { ids } = req.body;
