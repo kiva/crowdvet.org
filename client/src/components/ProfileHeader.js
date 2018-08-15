@@ -35,7 +35,6 @@ class ProfileHeader extends Component {
                 Community Member Since {moment(auth.created_at).format("MMMM DD, YYYY")} | Vetted {result ? result.count : ""} Social
                 Enterprises
               </div>
-              <div className="community">Badge Showcase</div>
             </div>
           </div>
         </div>
