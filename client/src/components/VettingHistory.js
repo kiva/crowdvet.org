@@ -50,12 +50,14 @@ class VettingHistory extends Component {
     );
   }
   renderHistoryContent() {
-    const { userEvaluations, officialEvaluations, enterprises } = this.props;
+    const { userEvaluations, officialEvaluations, enterprises, crowdVotes } = this.props;
+
     const content = _.map(userEvaluations, evaluation => {
       const answer = [userEvaluations[evaluation.enterprise_id].model,
       userEvaluations[evaluation.enterprise_id].impact, userEvaluations[evaluation.enterprise_id].prioritization]
 
       let officialAnswer = "";
+
       if (officialEvaluations[evaluation.enterprise_id]) {
         officialAnswer = [officialEvaluations[evaluation.enterprise_id].model,
         officialEvaluations[evaluation.enterprise_id].impact, officialEvaluations[evaluation.enterprise_id].prioritization]
@@ -76,6 +78,7 @@ class VettingHistory extends Component {
           stateColor = "yellow-text";
       }
       const EvaluationResult = utils.getScoreAndAccuracy(answer, officialAnswer)
+      const crowdResults = this.getCrowdVotes(crowdVotes, evaluation.enterprise_id)
 
       return (
         <li>
@@ -87,7 +90,9 @@ class VettingHistory extends Component {
               {this.getAverage(answer)}
             </div>
 
-            <div className="col s2" />
+            <div className="col s2" >
+              {this.getAverage( _.concat(crowdResults.impact, crowdResults.model, crowdResults.prioritization))}
+            </div>
             <div className="col s2">
               {!_.isEmpty(officialAnswer) ? this.getAverage(officialAnswer) : ""}
             </div>
@@ -100,7 +105,7 @@ class VettingHistory extends Component {
             <div className="col s1">{EvaluationResult ? EvaluationResult.Accuracy + "%" : ""}</div>
           </div>
           <div className="collapsible-body">
-            {this.renderAnswers(userEvaluations[evaluation.enterprise_id], officialEvaluations[evaluation.enterprise_id])}
+            {this.renderAnswers(userEvaluations[evaluation.enterprise_id], officialEvaluations[evaluation.enterprise_id], crowdResults)}
           </div>
         </li>
       );
@@ -108,33 +113,45 @@ class VettingHistory extends Component {
     return content;
   }
 
-  renderAnswers(evaluation, officialEvaluation) {
+  renderAnswers(evaluation, officialEvaluation, crowdResults) {
 
       return (
         < div>
         <div className="row">
           <div className="col s2">Impact</div>
           <div className="col s2">{evaluation.impact}</div>
-          <div className="col s2">First</div>
+          <div className="col s2">{this.getAverage(crowdResults.impact)}</div>
           <div className="col s2">{officialEvaluation ? officialEvaluation.impact : ""}</div>
           <div className="col s2"></div>
         </div>
         <div className="row">
           <div className="col s2">Model</div>
           <div className="col s2">{evaluation.model}</div>
-          <div className="col s2">First</div>
+          <div className="col s2">{this.getAverage(crowdResults.model)}</div>
           <div className="col s2">{officialEvaluation ? officialEvaluation.model : ""}</div>
           <div className="col s2"></div>
         </div>
         <div className="row">
           <div className="col s2">Prioritization</div>
           <div className="col s2">{evaluation.prioritization}</div>
-          <div className="col s2">First</div>
+          <div className="col s2">{this.getAverage(crowdResults.prioritization)}</div>
           <div className="col s2">{officialEvaluation ? officialEvaluation.prioritization : ""}</div>
           <div className="col s2"></div>
         </div>
         </div>
       )
+  }
+
+  getCrowdVotes(crowdVotes, id) {
+      const votes = _.filter(crowdVotes, item => item.enterprise_id == id)
+      const impact = this.getValues(votes, "impact");
+      const model = this.getValues(votes, "model");
+      const prioritization = this.getValues(votes, "prioritization");
+      return {
+        impact,
+        model,
+        prioritization
+      }
   }
 
   getAverage(data) {
