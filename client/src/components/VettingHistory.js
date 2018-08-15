@@ -79,7 +79,7 @@ class VettingHistory extends Component {
 
       return (
         <li>
-          <div className="row margin-zero collapsible-header">
+          <div className="row margin-zero collapsible-header" style={{marginLeft:"0px",marginRight:"0px"}}>
             <div className="col s2">
               {enterprises[evaluation.enterprise_id].name}
             </div>
