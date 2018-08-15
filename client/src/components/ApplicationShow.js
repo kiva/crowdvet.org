@@ -127,12 +127,38 @@ class ApplicationShow extends Component {
                 </a>
               </td>
             </tr>
+            <tr>
+              <td>
+                <img src={PDF} />
+                <a href={this.props.enterprise.loanInquiry}>
+                  {this.props.enterprise.loanInquiry
+                    ? "Initial Loan Inquiry"
+                    : "Initial Loan Inquiry: N/A"}
+                </a>
+              </td>
+              <td>
+                <img src={PDF} />
+                <a href={this.props.enterprise.loanApplication}>
+                  {this.props.enterprise.loanApplication
+                    ? "Loan Application"
+                    : "Loan Application: N/A"}
+                </a>
+              </td>
+              <td>
+                <img src={PDF} />
+                <a href={this.props.enterprise.boardAndManagement}>
+                  {this.props.enterprise.boardAndManagement
+                    ? "Board and Management Team"
+                    : "Board and Management Team: N/A"}
+                </a>
+              </td>
+            </tr>
           </tbody>
         </table>
         <table className="centered">
           <thead>
             <tr>
-              <th colSpan="3" className="table-name">
+              <th colSpan="4" className="table-name">
                 View Financial Materials
               </th>
             </tr>
@@ -161,6 +187,14 @@ class ApplicationShow extends Component {
                   {this.props.enterprise.YDTFinancial
                     ? "YTD Financial Statements"
                     : "YTD Financial Statements: N/A"}
+                </a>
+              </td>
+              <td>
+                <img src={PDF} />
+                <a href={this.props.enterprise.latestFinancial}>
+                  {this.props.enterprise.latestFinancial
+                    ? "Latest Financial Statements"
+                    : "Latest Financial Statements: N/A"}
                 </a>
               </td>
             </tr>
@@ -278,6 +312,7 @@ class ApplicationShow extends Component {
           {this.renderCards()}
           {this.renderContent()}
           {this.renderTable()}
+          <div className="row" />
           <div className="row">
             <div className="col s12 center">
               <h4>Discussion</h4>
