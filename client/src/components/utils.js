@@ -250,6 +250,19 @@ function timeRenderer({ days, hours, minutes, seconds }) {
   return <span> {renderText} left</span>;
 }
 
+const initialValues = { 1 :{ score:1, count:0}, 2:{ score:2, count:0},
+  3:{ score:3, count:0}, 4: { score:4, count:0}, 5:{ score:5, count:0},
+  6:{ score:6, count:0} }
+
+function getCrowdVotes(data, name) {
+    const reducedValues = _.reduce(data, (result, item) => {
+      result[item[name]].count = result[item[name]].count + 1;
+      return result;
+    },  _.cloneDeep(initialValues) )
+
+  return _.map(reducedValues, (item, v) => item)
+}
+
 export default {
   getScoreAndAccuracy,
   getOverallResults,
@@ -257,5 +270,6 @@ export default {
   getPage,
   getMessage,
   isOpen,
-  timeRenderer
+  timeRenderer,
+  getCrowdVotes
 };
