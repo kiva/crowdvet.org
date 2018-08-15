@@ -246,11 +246,22 @@ module.exports = (sequelize, DataType) => {
       type: DataType.STRING,
       allowNull: true
     },
+    loanApplication: {
+      type: DataType.STRING,
+      allowNull: true
+    },
     boardAndManagement: {
       type: DataType.STRING,
       allowNull: true
     },
     zeroTool: {
+      type: DataType.STRING,
+      allowNull: true,
+      validate: {
+        notEmpty: true
+      }
+    },
+    latestFinancial: {
       type: DataType.STRING,
       allowNull: true,
       validate: {
