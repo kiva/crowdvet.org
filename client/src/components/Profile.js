@@ -28,11 +28,11 @@ class Profile extends Component {
   };
 
   componentDidMount() {
-    this.props.fetchUser();
     this.props.fetchEnterprises();
     this.props.fetchUserEvaluations();
     this.props.fetchOfficialEvaluations();
     this.props.fetchSectors();
+    this.props.fetchCrowdVotes();
   }
 
   render() {
@@ -79,6 +79,7 @@ class Profile extends Component {
               enterprises={this.props.enterprises}
               userEvaluations={this.props.evaluations}
               officialEvaluations={this.props.officialEvaluations}
+              crowdVotes={this.props.crowdVotes}
             />
             <UserMessage initialValues={{message: this.props.auth.message}}
             message={ this.props.auth.message}/>
@@ -94,9 +95,10 @@ function mapStateToProps({
   enterprises,
   evaluations,
   officialEvaluations,
-  sectors
+  sectors,
+  crowdVotes
 }) {
-  return { auth, enterprises, evaluations, officialEvaluations, sectors };
+  return { auth, enterprises, evaluations, officialEvaluations, sectors, crowdVotes };
 }
 
 export default connect(mapStateToProps, actions)(Profile);
