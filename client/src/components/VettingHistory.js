@@ -91,7 +91,7 @@ class VettingHistory extends Component {
             </div>
 
             <div className="col s2" >
-              {this.getAverage( _.concat(crowdResults.impact, crowdResults.model, crowdResults.prioritization))}
+              {!_.isEmpty(officialAnswer) ? this.getAverage( _.concat(crowdResults.impact, crowdResults.model, crowdResults.prioritization)) : ""}
             </div>
             <div className="col s2">
               {!_.isEmpty(officialAnswer) ? this.getAverage(officialAnswer) : ""}
@@ -120,21 +120,21 @@ class VettingHistory extends Component {
         <div className="row">
           <div className="col s2">Impact</div>
           <div className="col s2">{evaluation.impact}</div>
-          <div className="col s2">{this.getAverage(crowdResults.impact)}</div>
+          <div className="col s2">{officialEvaluation ? this.getAverage(crowdResults.impact) : ""}</div>
           <div className="col s2">{officialEvaluation ? officialEvaluation.impact : ""}</div>
           <div className="col s2"></div>
         </div>
         <div className="row">
           <div className="col s2">Model</div>
           <div className="col s2">{evaluation.model}</div>
-          <div className="col s2">{this.getAverage(crowdResults.model)}</div>
+          <div className="col s2">{officialEvaluation ? this.getAverage(crowdResults.model) : ""}</div>
           <div className="col s2">{officialEvaluation ? officialEvaluation.model : ""}</div>
           <div className="col s2"></div>
         </div>
         <div className="row">
           <div className="col s2">Prioritization</div>
           <div className="col s2">{evaluation.prioritization}</div>
-          <div className="col s2">{this.getAverage(crowdResults.prioritization)}</div>
+          <div className="col s2">{officialEvaluation ? this.getAverage(crowdResults.prioritization) : ""}</div>
           <div className="col s2">{officialEvaluation ? officialEvaluation.prioritization : ""}</div>
           <div className="col s2"></div>
         </div>
