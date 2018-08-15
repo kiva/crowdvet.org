@@ -198,7 +198,8 @@ class EvaluationResults extends Component {
   }
 
   renderResults() {
-    const { evaluation, officialEvaluation } = this.props;
+    const { evaluation, officialEvaluation, crowdVotes } = this.props;
+
     return (
       <div className="row">
         <div className="row">
@@ -214,12 +215,12 @@ class EvaluationResults extends Component {
         </div>
         <div className="row">
           <div className="col s10 offset-m1">
-            <p>{officialEvaluation.impact}: {_.mapKeys(impactChoices, "score")[evaluation.impact].text}</p>
+            <p>{officialEvaluation.impact}: {_.mapKeys(impactChoices, "score")[officialEvaluation.impact].text}</p>
           </div>
         </div>
         <div className="row">
           <div className="col s12">
-            <LineChart />
+            <LineChart data={utils.getCrowdVotes(crowdVotes, "impact")} max={crowdVotes.length} chartId={idgen()} />
           </div>
         </div>
 
@@ -233,11 +234,11 @@ class EvaluationResults extends Component {
           {this.renderRadios("model", officialEvaluation, modelChoices, "", true)}
         </div>
         <div className="col s10 offset-m1">
-          <p>{officialEvaluation.model}: {_.mapKeys(modelChoices, "score")[evaluation.model].text}</p>
+          <p>{officialEvaluation.model}: {_.mapKeys(modelChoices, "score")[officialEvaluation.model].text}</p>
         </div>
         <div className="row">
           <div className="col s12">
-            <LineChart />
+            <LineChart data={utils.getCrowdVotes(crowdVotes, "model")} max={crowdVotes.length} chartId={idgen()} />
           </div>
         </div>
         <div className="row">
@@ -250,54 +251,12 @@ class EvaluationResults extends Component {
           {this.renderRadios("prioritization", officialEvaluation, prioritizationChoices, "", true)}
         </div>
         <div className="col s10 offset-m1">
-        <p>{officialEvaluation.prioritization}: {_.mapKeys(prioritizationChoices, "score")[evaluation.prioritization].text}</p>
+        <p>{officialEvaluation.prioritization}: {_.mapKeys(prioritizationChoices, "score")[officialEvaluation.prioritization].text}</p>
         </div>
         <div className="row">
           <div className="col s12">
-            <LineChart />
+            <LineChart data={utils.getCrowdVotes(crowdVotes, "prioritization")} max={crowdVotes.length} chartId={idgen()}/>
           </div>
-        </div>
-      </div>
-    );
-  }
-
-  renderAnswers(question, answers) {
-    const { evaluation } = this.props;
-    const votes = _.get(evaluation, "Votes");
-    let text = "";
-    const content = _.map(answers, answer => {
-      const v = _.mapKeys(votes, "question_id");
-      const checked =
-        answer.id == _.get(v[question.id], "answer_id") ? true : false;
-      answer.id == _.get(v[question.id], "answer_id")
-        ? (text = answer.text)
-        : null;
-      return (
-        <div>
-          <div className="col s2">
-            <p>
-              <label>
-                <input
-                  name={question.id.toString()}
-                  type="radio"
-                  checked={checked}
-                  disabled={true}
-                />
-                <span id="radio-text">{answer.score}</span>
-              </label>
-            </p>
-          </div>
-        </div>
-      );
-    });
-    return (
-      <div>
-        {content}
-        <div className="col s12 answer-result">
-          <p>{text}</p>
-        </div>
-        <div className="col s12">
-          <LineChart />
         </div>
       </div>
     );
@@ -316,33 +275,8 @@ function mapStateToProps(
   ownProps
 ) {
 
-  const initial = _.reduce(
-    questions,
-    (result, q) => {
-      const withCount = _.map(q.Answers, answer => {
-        return { ...answer, count: 0 };
-      });
-      const answers = _.mapKeys(withCount, "id");
-      return { ...result, [q.id]: answers };
-    },
-    {}
-  );
+  const votes = _.filter(crowdVotes, item => item.enterprise_id == ownProps.match.params.id)
 
-  const r = _.reduce(
-    crowdVotes,
-    (result, evaluation) => {
-      if (evaluation.enterprise_id === ownProps.match.params.id) {
-        _.map(evaluation.Votes, vote => {
-          result[vote.question_id][vote.answer_id].count =
-            result[vote.question_id][vote.answer_id].count + 1;
-        });
-      }
-      return result;
-    },
-    initial
-  );
-
-  console.log(r, "en result");
   return {
     auth,
     enterprise: enterprises[ownProps.match.params.id],
@@ -351,7 +285,7 @@ function mapStateToProps(
     evaluations,
     officialEvaluations,
     officialEvaluation: officialEvaluations[ownProps.match.params.id],
-    crowdVotes: crowdVotes[ownProps.match.params.id]
+    crowdVotes: votes
   };
 }
 
