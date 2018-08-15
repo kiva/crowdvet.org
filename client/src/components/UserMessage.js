@@ -31,7 +31,7 @@ class UserMessage extends Component {
     return (
       <div className="row center-align" id="user-container">
         <div className="col s10 l6 offset-s1 offset-l3" id="user-title">
-          Im here to help enable dreams because...
+          I'm here to help enable dreams because...
         </div>
         <div className="row">
           <div className="col s10 l8 offset-s1 offset-l2">
