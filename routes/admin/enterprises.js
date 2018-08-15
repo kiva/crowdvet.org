@@ -153,7 +153,13 @@ module.exports = app => {
         sector_id,
         pictures,
         country_id,
-        shortDescription
+        shortDescription,
+        latestFinancial,
+        loanInquiry,
+        loanApplication,
+        managementTeam,
+        boardAndManagement,
+        zeroTool
       } = req.body;
 
       if (_.isEmpty(req.body.Images)) {
