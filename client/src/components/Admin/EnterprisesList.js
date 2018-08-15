@@ -61,7 +61,14 @@ export const EnterprisesEdit = props => (
       <LongTextInput label="Previous Year Sales Revenue" source="salesRevenue" />
       <LongTextInput label="Ownerhip Status" source="ownershipStatus" />
       <LongTextInput label="Number of Paid Employees" source="paidEmployees" />
+
+      <LongTextInput label="Initial Loan Inquiry" source="loanInquiry"  />
+      <LongTextInput label="Loan Application" source="loanApplication"  />
+      <LongTextInput label="Management Team Profile" source="managementTeam" />
+      <LongTextInput label="Board and Management Team" source="boardAndManagement"  />
       <LongTextInput label="Zero Tool link" source="zeroTool"  />
+      <LongTextInput label="Latest Financial Statement" source="latestFinancial" />
+
       <LongTextInput label="Short Description max 150 characters"  validate={ [required(), length()]} source="shortDescription"  />
       <LongTextInput label="Description" source="description"  />
       <DateInput label="Began Operating" source="beganOperating" />
