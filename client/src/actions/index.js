@@ -135,7 +135,7 @@ export const removeUserEvaluation = evaluation => async dispatch => {
 };
 
 export const fetchCrowdVotes = () => async dispatch => {
-  const res = await axios.get(`/api/users/votes`);
+  const res = await axios.get(`/api/evaluations`);
 
   dispatch({ type: FETCH_CROWD_EVALUATIONS, payload: res.data });
 };
