@@ -25,6 +25,16 @@ module.exports = app => {
     }
   });
 
+  app.delete("/api/admin/countries/:id", passport.authenticate("jwt"), async (req, res) => {
+    try {
+      const { id } = req.params;
+      await Countries.destroy({ where: { id } });
+      res.status(200).send({ data: true });
+    } catch (e) {
+      console.log(e);
+    }
+  });
+  
   app.post("/api/admin/countries", passport.authenticate("jwt"), async (req, res) => {
     try {
       const { name } = req.body;
