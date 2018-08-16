@@ -37,6 +37,12 @@ class Carousel extends React.Component {
       fixedItem && <div className="carousel-fixed-item center">{fixedItem}</div>
     );
   }
+  renderFixedText() {
+    const { fixedText } = this.props;
+    return (
+      fixedText && <div className="center">{fixedText}</div>
+    );
+  }
 
   render() {
     const {
@@ -62,6 +68,7 @@ class Carousel extends React.Component {
           )}
         >
           {this.renderFixedItem()}
+          {this.renderFixedText()}
           {React.Children.map(elemsToRender, this.renderItems)}
         </div>
       )
