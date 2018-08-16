@@ -35,7 +35,7 @@ class Header extends Component {
     return (
       <li>
         <Link className="modal-trigger" to={"#modal1"}>
-          Sign Up or Sing In
+          Sign Up or Sign In
         </Link>
       </li>
     );

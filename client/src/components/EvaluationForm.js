@@ -131,7 +131,7 @@ class EvaluationForm extends Component {
         </div>
         <Field name="comment" component={this.renderTextArea} />
         <div className="row">
-          <Field name="terms" text="I agree to the terms of Kiva''s volunteer agreement.​ Terms of Agreement *" component={this.renderCheckBox} />
+          <Field name="terms" text={<div>I agree to the terms of Kiva''s volunteer agreement.​ <Link to={"/terms"} className="green-text"> Terms of Agreement * </Link></div>} component={this.renderCheckBox} />
         </div>
         <div className="row">
           <Field name="exclude" text="Check here if you want to EXCLUDE your score on this application in your overall score calculation." component={this.renderCheckBox} />

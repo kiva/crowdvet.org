@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import logoGreen from "./logo-green.svg";
@@ -8,6 +9,7 @@ import Google from "./Google.svg";
 import "./Modal.css";
 import _ from "lodash";
 import SignIn from "./SignIn";
+import idgen from "./idgen";
 
 class SignUp extends Component {
   componentDidMount() {
@@ -45,11 +47,32 @@ class SignUp extends Component {
     );
   }
 
+  renderCheckBox = field => {
+    const { meta: { touched, error } } = field;
+    return (
+      <div>
+        <input
+          id={field.id}
+          {...field.input}
+          type="checkbox"
+          checked={field.input.value ? "checked" : ""}
+        />
+        <label htmlFor={field.id}>
+        I agree to the terms of Kivas volunteer agreement.
+        <Link to={"/terms"} className="green-text"> Terms of Agreement * </Link>
+        </label>
+        <div className="text-help">{touched ? error : ""}</div>
+      </div>
+    );
+  };
+
   renderForm() {
     const { handleSubmit } = this.props;
     return (
       <div className="row">
-        <div className="col s12"><span>Sign Up with Us</span></div>
+        <div className="col s12">
+          <span>Sign Up with Us</span>
+        </div>
         <form
           className="col s12"
           onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
@@ -83,11 +106,22 @@ class SignUp extends Component {
                 component={this.renderField}
               />
             </div>
+          </div>
+          <p>
+          <Field
+            name="terms"
+            id="terms"
+            component={this.renderCheckBox}
+          />
+        </p>
+          <div className="row">
             {this.renderAlert()}
           </div>
-          <button className="btn" id="signup">
-            <div>Sign Up</div>
-          </button>
+          <div className="row">
+            <button className="btn" id="signup">
+              <div>Sign Up</div>
+            </button>
+          </div>
         </form>
       </div>
     );
@@ -95,7 +129,7 @@ class SignUp extends Component {
   render() {
     return (
       <div className="center-align">
-        <div id="modal1" className="modal modal-fixed-footer">
+        <div id="modal1" className="modal">
           <div className="modal-content">
             <div>
               <img src={logoGreen} alt="logo" />
@@ -103,8 +137,10 @@ class SignUp extends Component {
             <small>Enabling Dreams All Around the world</small>
             <div className="row">
               <div className="grid col s12 m6">
-                <span className="flow-text small">Welcome Back, please Sign In</span>
-                {<SignIn history={this.props.history}/>}
+                <span className="flow-text small">
+                  Welcome Back, please Sign In
+                </span>
+                {<SignIn history={this.props.history} />}
               </div>
               <div className="grid col s12 m6">
                 <span className="flow-text small">
@@ -117,7 +153,9 @@ class SignUp extends Component {
                   </a>
                 </span>
               </div>
-                <div className="col s12 m6"><p>{this.renderForm()}</p></div>
+              <div className="col s12 m6">
+                <p>{this.renderForm()}</p>
+              </div>
             </div>
           </div>
           <div className="modal-footer" />
@@ -145,6 +183,10 @@ function validate(formProps) {
 
   if (formProps.password && formProps.password != formProps.confirmPassword) {
     errors.confirmPassword = "Passwords must match";
+  }
+
+  if (!formProps.terms) {
+    errors.terms = "Please, accept Kiva's volunteer agreement";
   }
 
   return errors;
