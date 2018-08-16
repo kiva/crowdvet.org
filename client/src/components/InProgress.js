@@ -54,8 +54,8 @@ class InProgress extends Component {
 
   render() {
     const {userEvaluations , enterprises} = this.props;
-    if (!userEvaluations) return null
-    if (!enterprises) return null
+    if (_.isEmpty(userEvaluations)) return null
+    if (_.isEmpty(enterprises)) return null
     return (
       <div className="">
       <div className="row center">
