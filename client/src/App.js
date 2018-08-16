@@ -12,8 +12,9 @@ import VetEnterprises from "./components/VetEnterprises";
 import EvaluationResults from "./components/EvaluationResults";
 import EvaluationResultsViz from "./components/EvaluationResultsViz";
 import LineChart from "./components/Chart";
+import LearnAbout from "./components/LearnAbout";
 import * as actions from "./actions";
-
+import HowWorks from "./components/HowWorks"
 import "./App.css";
 
 class App extends Component {
@@ -33,6 +34,8 @@ class App extends Component {
           />
           <Route path="/users/evaluations/:id" component={ApplicationEvaluate}
           />
+          <Route exact path="/learn" component={LearnAbout} />
+          <Route exact path="/how-works" component={HowWorks} />
           <Route path="/" component={Landing} />
         </Switch>
         <Footer />
