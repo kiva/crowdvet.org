@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Carousel from "./Carousel";
 import SignUpModal from "./SignUpModal";
+import { Link } from "react-router-dom";
 import "./Landing.css";
 import world from "./world.svg";
 
@@ -84,7 +85,7 @@ class Landing extends Component {
                         Crowdvet.org aims to harness the knowledge of the crowd to
                         give social enterprises the capital they need to scale.
                       </p>
-                      <a className="btn">Learn About CrowdVetting</a>
+                      <Link to={"/learn"} className="btn">Learn About CrowdVetting</Link>
                     </div>
                   </div>
           </div>
