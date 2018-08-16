@@ -53,10 +53,10 @@ class Header extends Component {
             </a>
             <ul className="right hide-on-med-and-down">
               <li>
-                <Link to={"sass.html"}>Learn about Crowdvetting</Link>
+                <Link to={"/learn"}>Learn about Crowdvetting</Link>
               </li>
               <li>
-                <Link to={"badges.html"}>Take Action</Link>
+                <Link to={"/badges"}>Start Vetting</Link>
               </li>
               {this.renderSingIn()}
             </ul>
@@ -64,10 +64,10 @@ class Header extends Component {
 
         <ul className="side-nav" id="mobile-demo">
           <li>
-            <Link to={"sass.html"}>Learn about Crowdvetting</Link>
+            <Link to={"/learn"}>Learn about Crowdvetting</Link>
           </li>
           <li>
-            <Link to={"badges.html"}>Take Action</Link>
+            <Link to={"/badges"}>Take Action</Link>
           </li>
           {this.renderSingIn()}
         </ul>

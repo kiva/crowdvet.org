@@ -1,0 +1,45 @@
+.learn-about {
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  width:80%;
+  z-index: 1000;
+}
+
+.center-element {
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top:50%
+}
+
+.green-color {
+  color:#49953F
+}
+
+.font-26 {
+  font-size: 26px;
+}
+
+.font-40 {
+  font-size: 40px;
+}
+
+.start-vetting-btn {
+  color: #13B5EA;
+  border-color: #13B5EA;
+  border: solid 1px;
+  height: 60px;
+  max-width: 195px;
+  width: 100%;
+  padding-top: 12px;
+}
+
+#learn-more-btn {
+  color: white;
+  height: 60px;
+  background-color: #13B5EA;
+  width: 100%;
+  max-width: 195px;
+  padding-top:12px;
+}
