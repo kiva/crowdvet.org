@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import Carousel from "./Carousel-mz";
 import carousel from './caroussel-1.png';
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import idgen from "./idgen";
 import "./HowWorks.css";
 import arrow from "./Arrow.svg";
 import howWorks from "./HowWorks.svg";
-
+import SignUpModal from "./SignUpModal";
 
 class HowWorks extends Component {
 
@@ -19,6 +20,7 @@ class HowWorks extends Component {
       options={{ fullWidth: true, indicators: true }} carouselId={idgen().toString()}
        fixedText={header}
       />
+      <SignUpModal />
       <div className="container">
         {this.renderContent()}
       </div>
@@ -27,6 +29,7 @@ class HowWorks extends Component {
   }
 
   renderContent() {
+    const startVetting = this.props.auth ? <Link className="btn-flat start-vetting-btn" to={"/user"}>Start Vetting</Link> : <Link className="btn-flat start-vetting-btn modal-trigger" to={"#modal1"}>Start Vetting</Link>
     return (
       <div className="row">
         <div className="row" />
@@ -44,7 +47,7 @@ class HowWorks extends Component {
           <div className="col s12 center font-26 green-text">Step 3 </div>
           <div className="col s12 center font-26">Receive feedback, scores, and badges</div>
           <p className="col s12 center">
-            <Link className="btn-flat start-vetting-btn" to={""}>Start Vetting</Link>
+            {startVetting}
           </p>
       </div>
 
@@ -52,4 +55,8 @@ class HowWorks extends Component {
   }
 }
 
-export default HowWorks;
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+export default connect(mapStateToProps)(HowWorks);

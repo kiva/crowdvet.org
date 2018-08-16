@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import Carousel from "./Carousel-mz";
 import carousel from './caroussel-1.png';
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import idgen from "./idgen";
 import "./learnAbout.css";
 import missingMiddle from "./missing-middle.svg";
 import financial from "./financial-maturity.svg";
 import dseGlance from "./DSE-glance.svg";
+import SignUpModal from "./SignUpModal";
 
 class LearnAbout extends Component {
 
@@ -19,6 +21,7 @@ class LearnAbout extends Component {
       options={{ fullWidth: true, indicators: true }} carouselId={idgen()}
        fixedText={header}
       />
+      <SignUpModal />
       <div className="container">
         {this.renderContent()}
       </div>
@@ -27,6 +30,8 @@ class LearnAbout extends Component {
   }
 
   renderContent() {
+    const startVetting = this.props.auth ?  <Link className="btn-flat start-vetting-btn" to={"/user"}>Start Vetting</Link> : <Link className="btn-flat start-vetting-btn modal-trigger" to={"#modal1"}>Start Vetting</Link>
+
     return (
         <div className="row">
           <div className="row" />
@@ -45,7 +50,8 @@ class LearnAbout extends Component {
           <p className="col s12 font-40 green-color center">DSE Program at a Glance</p>
           <p className="center"><img src={dseGlance} /></p>
           <div className="col s6 center">
-            <Link className="btn-flat start-vetting-btn" to={""}>Start Vetting</Link>
+              {startVetting}
+
           </div>
           <div className="col s6 center">
             <Link className="btn-flat" id="learn-more-btn" to={"/how-works"} >Learn More</Link>
@@ -55,4 +61,8 @@ class LearnAbout extends Component {
   }
 }
 
-export default LearnAbout;
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+export default connect(mapStateToProps)(LearnAbout);
