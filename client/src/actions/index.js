@@ -43,15 +43,15 @@ export const fetchOfficialEvaluations = () => async dispatch => {
   dispatch({ type: FETCH_OFFICIAL_EVALUATIONS, payload: res.data });
 };
 
-export const fetchEnterprises = (values) => async dispatch => {
+export const fetchEnterprises = values => async dispatch => {
   const uri = "/api/users/enterprises";
   if (!_.isEmpty(values)) {
-    const { filters, sort} = values
+    const { filters, sort } = values;
     let sortBy = "";
     let filterBy = "";
 
     if (!_.isEmpty(sort)) {
-      sortBy = `&sort=${sort}`
+      sortBy = `&sort=${sort}`;
     }
     if (!_.isEmpty(filters)) {
       filterBy = `?filter=${JSON.stringify(filters)}`;
@@ -64,21 +64,16 @@ export const fetchEnterprises = (values) => async dispatch => {
   }
 };
 
-export const fetchSuggested = (values) => async dispatch => {
+export const fetchSuggested = ({ filters }) => async dispatch => {
   const uri = "/api/users/enterprises";
-  console.log(values, "ACA")
-  if (!_.isEmpty(values)) {
-    let filterBy = "";
-    const { filters, sort} = values
-
-    if (!_.isEmpty(filters)) {
-      filterBy = `?filter=${JSON.stringify(filters)}`;
-    }
+  if (!_.isEmpty(filters.sector_id)) {
+    const filterBy = `?filter=${JSON.stringify(filters)}`;
     const res = await axios.get(`${uri}/${filterBy}`);
     dispatch({ type: FETCH_SUGGESTED, payload: res.data });
+  } else {
+    dispatch({ type: FETCH_SUGGESTED, payload: {} });
   }
 };
-
 
 export const fetchEnterprise = id => async dispatch => {
   const res = await axios.get(`/api/enterprises/${id}`);
@@ -100,10 +95,7 @@ export const signUpUser = (
     });
 };
 
-export const signInUser = (
-  { email, password },
-  history
-) => async dispatch => {
+export const signInUser = ({ email, password }, history) => async dispatch => {
   axios
     .post(`/auth/login`, { email, password })
     .then(response => {
@@ -180,7 +172,7 @@ export const updateUserSettings = values => async dispatch => {
 };
 
 export const updateUser = values => async dispatch => {
-  const res = await axios.patch(`/api/users`, { attributes:{...values} });
+  const res = await axios.patch(`/api/users`, { attributes: { ...values } });
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 
