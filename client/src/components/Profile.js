@@ -83,6 +83,8 @@ class Profile extends Component {
             />
             <UserMessage initialValues={{message: this.props.auth.message}}
             message={ this.props.auth.message}/>
+            <CommentHistory comments={this.props.auth.Comments} enterprises={this.props.enterprises}/>
+            <PersonalForm sectors={this.props.sectors}/>
           </div>
         );
       default:
