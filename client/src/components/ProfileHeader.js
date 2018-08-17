@@ -6,6 +6,7 @@ import VettedEnterprises from "./VettedEnterprises";
 import _ from "lodash";
 import utils from './utils';
 import moment from 'moment';
+import camera from "./Camera.svg"
 
 class ProfileHeader extends Component {
 
@@ -27,6 +28,10 @@ class ProfileHeader extends Component {
           <div className="row">
             <div className="col s12 m4 l4">
               <img src={image} alt="" className="circle responsive-img" />
+              <p className="valign-wrapper">
+                <span><img src={camera} /></span>
+                <span className="small valign-wrapper" style={{marginLeft:"5px"}}>Upload New Image</span>
+                </p>
             </div>
             <div className="col s12 m8 l8 name">
               {auth.name}
