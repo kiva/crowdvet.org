@@ -207,7 +207,13 @@ module.exports = app => {
           salesRevenue,
           sector_id,
           country_id,
-          shortDescription
+          shortDescription,
+          latestFinancial,
+          loanInquiry,
+          loanApplication,
+          managementTeam,
+          boardAndManagement,
+          zeroTool
         },
         { where: { id } }
       );
