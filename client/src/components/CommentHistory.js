@@ -18,7 +18,7 @@ export default props => {
 
 function renderComments(comments, enterprises) {
   if (_.isEmpty(comments) || _.isEmpty(enterprises)) {
-    return <h4 className="center">There are no comments.</h4>
+    return <h5 className="center">There are no comments.</h5>
   }
 
   return _.map(comments, comment => {
