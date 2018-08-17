@@ -50,10 +50,12 @@ class UserMessage extends Component {
                 />
               </form>
             </p>
-            <a className="white-opacity" href="" onClick={this.handleEdit}>
+            <div className="col m4 offset-m4">
+              <a className="white-opacity" href="" onClick={this.handleEdit}>
               <i className="material-icons ">edit</i>
-              <p className="white-opacity">EDIT MESSAGE</p>
+              <span>EDIT MESSAGE</span>
             </a>
+            </div>
           </div>
         </div>
       </div>
