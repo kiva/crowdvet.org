@@ -16,7 +16,8 @@ class PersonalForm extends Component {
   }
 
   submitForm(values) {
-    this.props.updateUserSettings(values)
+    this.props.updateUserSettings(values);
+    window.scrollTo(0, 0);
   }
 
   renderSectors(sectors) {
