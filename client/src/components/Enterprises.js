@@ -18,7 +18,6 @@ class EnterpisesList extends Component {
   }
 
   onHandleClick(e) {
-    console.log(e)
     e.preventDefault();
     const show = this.state.show + this.state.limit;
     this.setState({ show });
