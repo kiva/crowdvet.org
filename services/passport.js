@@ -120,7 +120,7 @@ module.exports = app => {
             email: profile.emails[0].value,
             googleId: profile.id,
             name: profile.displayName,
-            image: profile.photos[0].value,
+            image: `${profile.photos[0].value.slice(0, -2)}200`,
           });
 
           done(null, user);
