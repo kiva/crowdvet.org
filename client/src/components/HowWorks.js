@@ -8,6 +8,7 @@ import "./HowWorks.css";
 import arrow from "./Arrow.svg";
 import howWorks from "./HowWorks.svg";
 import SignUpModal from "./SignUpModal";
+import SubMenu from "./SubMenuLearn";
 
 class HowWorks extends Component {
 
@@ -16,6 +17,7 @@ class HowWorks extends Component {
     a better place, even if you can’t make a loan?</div>
     return (
       <div>
+      <SubMenu />
       <Carousel images={[carousel, carousel]}
       options={{ fullWidth: true, indicators: true }} carouselId={idgen().toString()}
        fixedText={header}
@@ -46,8 +48,11 @@ class HowWorks extends Component {
           <p className="center"><img src={arrow} /></p>
           <div className="col s12 center font-26 green-text">Step 3 </div>
           <div className="col s12 center font-26">Receive feedback, scores, and badges</div>
-          <p className="col s12 center">
+          <p className="col s6 center">
             {startVetting}
+          </p>
+          <p className="col s6 center">
+            <Link className="btn-flat learn-more-btn" to={"/further-reading"} >Learn More</Link>
           </p>
       </div>
 

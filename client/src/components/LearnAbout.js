@@ -9,6 +9,7 @@ import missingMiddle from "./missing-middle.svg";
 import financial from "./financial-maturity.svg";
 import dseGlance from "./DSE-glance.svg";
 import SignUpModal from "./SignUpModal";
+import SubMenu from "./SubMenuLearn";
 
 class LearnAbout extends Component {
 
@@ -17,6 +18,7 @@ class LearnAbout extends Component {
     a better place, even if you can’t make a loan?</div>
     return (
       <div>
+      <SubMenu />
       <Carousel images={[carousel, carousel]}
       options={{ fullWidth: true, indicators: true }} carouselId={idgen()}
        fixedText={header}
@@ -54,7 +56,7 @@ class LearnAbout extends Component {
 
           </div>
           <div className="col s6 center">
-            <Link className="btn-flat" id="learn-more-btn" to={"/how-works"} >Learn More</Link>
+            <Link className="btn-flat learn-more-btn" to={"/how-works"} >Learn More</Link>
           </div>
         </div>
     )
