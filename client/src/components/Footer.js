@@ -3,7 +3,7 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-    <footer className="page-footer">
+    <footer className="page-footer" style={{fontSize:".875rem"}}>
       <div className="container">
         <div className="row">
           <div className="col l3 s12">
