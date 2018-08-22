@@ -41,6 +41,7 @@ class Header extends Component {
     );
   }
   render() {
+    const startVetting = this.props.auth && <Link to={"/vet/enterprises"}>Start Vetting</Link> || <Link className="modal-trigger" to={"#modal1"}>Start Vetting</Link>
     return (
       <div>
         <nav>
@@ -56,7 +57,7 @@ class Header extends Component {
                 <Link to={"/learn"}>Learn about Crowdvetting</Link>
               </li>
               <li>
-                <Link to={"/badges"}>Start Vetting</Link>
+                {startVetting}
               </li>
               {this.renderSingIn()}
             </ul>
