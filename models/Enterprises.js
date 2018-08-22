@@ -127,7 +127,7 @@ module.exports = (sequelize, DataType) => {
       defaultValue: false
     },
     loan: {
-      type: DataType.INTEGER,
+      type: DataType.FLOAT,
       allowNull: true,
       validate: {
         notEmpty: true
@@ -235,13 +235,6 @@ module.exports = (sequelize, DataType) => {
         notEmpty: true
       }
     },
-    Region: {
-      type: DataType.STRING,
-      allowNull: true,
-      validate: {
-        notEmpty: true
-      }
-    },
     loanInquiry: {
       type: DataType.STRING,
       allowNull: true
@@ -270,10 +263,7 @@ module.exports = (sequelize, DataType) => {
     },
     image1: {
       type: DataType.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
+      allowNull: true
     }
   });
 
@@ -481,6 +471,50 @@ module.exports = (sequelize, DataType) => {
     },
   });
 
+  const Recomendations = sequelize.define("Recomendations", {
+    id: {
+      type: DataType.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    title: {
+      type: DataType.STRING,
+      allowNull: true,
+      validate: {
+        notEmpty: true
+      }
+    },
+    description: {
+      type: DataType.STRING,
+      allowNull: true,
+      validate: {
+        notEmpty: true
+      }
+    },
+    author: {
+      type: DataType.STRING,
+      allowNull: true,
+      validate: {
+        notEmpty: true
+      }
+    },
+    link: {
+      type: DataType.STRING,
+      allowNull: true,
+      validate: {
+        notEmpty: true
+      },
+    },
+    order: {
+      type: DataType.INTEGER,
+      allowNull: true,
+      unique: true,
+      validate: {
+        notEmpty: true
+      },
+    }
+  });
+
   Questions.hasMany(Answers, { as: "Answers" });
   Votes.belongsTo(Questions);
   Votes.belongsTo(Answers);
@@ -512,7 +546,8 @@ module.exports = (sequelize, DataType) => {
       Images,
       CommentVotes,
       UsersSectors,
-      Countries
+      Countries,
+      Recomendations
     }
   };
 };
