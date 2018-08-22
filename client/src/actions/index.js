@@ -181,6 +181,19 @@ export const fetchCountries = () => async dispatch => {
   dispatch({ type: FETCH_COUNTRIES, payload: res.data });
 };
 
+export const uploadProfileImage = (file) => async dispatch => {
+  const uploadConfig = await axios.get('/api/users/image/upload');
+
+  const upload = await axios.put(uploadConfig.data.url, file, {
+  headers: {
+    'Content-Type': file.type
+  }
+  });
+  console.log(upload)
+  const res = await axios.patch(`/api/users`, { attributes: { image: uploadConfig.data.bucketUrl + uploadConfig.data.key } });
+  dispatch({ type: FETCH_USER, payload: res.data });
+}
+
 export function authError({ error }) {
   return {
     type: AUTH_ERROR,
