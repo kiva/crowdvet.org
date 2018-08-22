@@ -24,7 +24,7 @@ class ApplicationShow extends Component {
       menu: {
         1: { text: "Review", url: `/application/${id}` },
         2: { text: "Evaluation", url: `/users/evaluations/${id}` },
-        3: { text: "Results", url:"" }
+        3: { text: "Results", url: "" }
       },
       active: 1
     };
@@ -53,13 +53,12 @@ class ApplicationShow extends Component {
           <Card name="COMPANY SECTOR" mainText={this.sector} />
           <Card
             name="AMOUNT REQUESTED"
-            mainText={`$${this.props.enterprise.loan}`}
+            mainText={`$${this.props.enterprise.loan.toLocaleString()}`}
             description="USD"
           />
           <Card
             name="GEOGRAPHICAL LOCATION"
             mainText={this.props.enterprise.Country.name}
-
           />
         </div>
       </div>
@@ -77,6 +76,32 @@ class ApplicationShow extends Component {
             </tr>
           </thead>
           <tbody>
+          <tr>
+            <td>
+              <img src={PDF} />
+              <a href={this.props.enterprise.loanInquiry}>
+                {this.props.enterprise.loanInquiry
+                  ? "Initial Loan Inquiry"
+                  : "Initial Loan Inquiry: N/A"}
+              </a>
+            </td>
+            <td>
+              <img src={PDF} />
+              <a href={this.props.enterprise.loanApplication}>
+                {this.props.enterprise.loanApplication
+                  ? "Loan Application"
+                  : "Loan Application: N/A"}
+              </a>
+            </td>
+            <td>
+              <img src={PDF} />
+              <a href={this.props.enterprise.boardAndManagement}>
+                {this.props.enterprise.boardAndManagement
+                  ? "Board and Management Team"
+                  : "Board and Management Team: N/A"}
+              </a>
+            </td>
+          </tr>
             <tr>
               <td>
                 <img src={PDF} />
@@ -124,32 +149,6 @@ class ApplicationShow extends Component {
                   {this.props.enterprise.anualReport
                     ? "Annual Report"
                     : "Annual Report: N/A"}
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <img src={PDF} />
-                <a href={this.props.enterprise.loanInquiry}>
-                  {this.props.enterprise.loanInquiry
-                    ? "Initial Loan Inquiry"
-                    : "Initial Loan Inquiry: N/A"}
-                </a>
-              </td>
-              <td>
-                <img src={PDF} />
-                <a href={this.props.enterprise.loanApplication}>
-                  {this.props.enterprise.loanApplication
-                    ? "Loan Application"
-                    : "Loan Application: N/A"}
-                </a>
-              </td>
-              <td>
-                <img src={PDF} />
-                <a href={this.props.enterprise.boardAndManagement}>
-                  {this.props.enterprise.boardAndManagement
-                    ? "Board and Management Team"
-                    : "Board and Management Team: N/A"}
                 </a>
               </td>
             </tr>
@@ -230,27 +229,27 @@ class ApplicationShow extends Component {
 
           <div className="col s12 m6 l6">
             <h5>Selected Metrics</h5>
-          </div>
-          <div className="col s4 push-s2 left-align">
-            <div className="flow-text card-text">
-              <ul id="selected-metrics">
-                <li>
-                  Began operating starting:
-                  {this.props.enterprise.beganOperating}
-                </li>
-                <li>
-                  Number of paid employees:
-                  {this.props.enterprise.paidEmployees}
-                </li>
-                <li>
-                  Ownerhip status: {this.props.enterprise.ownershipStatus}
-                </li>
-                <li>Asset size: {this.props.enterprise.asset}</li>
-                <li>
-                  Previous Year Sales Revenue:
-                  {this.props.enterprise.salesReveneu}
-                </li>
-              </ul>
+            <div className="col s10 offset-s2 left-align">
+              <div className="flow-text card-text">
+                <ul id="selected-metrics">
+                  <li>
+                    Began operating starting:
+                    {this.props.enterprise.beganOperating}
+                  </li>
+                  <li>
+                    Number of paid employees:
+                    {this.props.enterprise.paidEmployees}
+                  </li>
+                  <li>
+                    Ownerhip status: {this.props.enterprise.ownershipStatus}
+                  </li>
+                  <li>Asset size: {this.props.enterprise.asset}</li>
+                  <li>
+                    Previous Year Sales Revenue:
+                    {this.props.enterprise.salesReveneu}
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -280,7 +279,7 @@ class ApplicationShow extends Component {
       comments,
       auth
     } = this.props;
-    console.log(this.props.enterprise, "ACA")
+
     if (!enterprise) return null;
     this.sector = enterprise.Sector ? enterprise.Sector.name : "Water";
     const imgName = `/sectors/${this.sector}.jpg`;
