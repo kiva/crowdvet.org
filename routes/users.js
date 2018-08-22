@@ -1,9 +1,12 @@
 const requireLogin = require("../middlewares/requireLogin");
 const passport = require("passport");
 const _ = require("lodash");
+const uuid = require("uuid/v1");
+const AWS = require("aws-sdk");
+const keys = require("../config/keys");
+const BUCKET_NAME = "data-store-blog";
 
 module.exports = app => {
-
   const {
     Enterprises,
     Evaluations,
@@ -18,10 +21,15 @@ module.exports = app => {
     Comments
   } = app.datasource.models.Enterprises.model;
 
+  const s3 = new AWS.S3({
+    accessKeyId: keys.accessKeyId,
+    secretAccessKey: keys.secretAccessKey
+  });
+
   app.get("/api/users", async (req, res) => {
     try {
       const { admin } = req.query;
-      const result = await Users.findAll({where: {admin: admin || false}});
+      const result = await Users.findAll({ where: { admin: admin || false } });
       return res
         .status(200)
         .set("x-Total-Count", result.length)
@@ -34,30 +42,34 @@ module.exports = app => {
   app.get("/api/users/enterprises", requireLogin, async (req, res) => {
     try {
       const { filter, sort } = req.query;
-      let filters = { published: true }
+      let filters = { published: true };
       let order = ["name"];
 
       if (filter) {
-         const { sector_id, country_id}  = JSON.parse(filter)
-         filters = !_.isEmpty(sector_id) ? { ...filters, sector_id} : { ...filters }
-         filters = !_.isEmpty(country_id) ? { ...filters, country_id} : { ...filters }
+        const { sector_id, country_id } = JSON.parse(filter);
+        filters = !_.isEmpty(sector_id)
+          ? { ...filters, sector_id }
+          : { ...filters };
+        filters = !_.isEmpty(country_id)
+          ? { ...filters, country_id }
+          : { ...filters };
       }
 
       if (sort === "country") {
-         order = [Countries,  "name", "ASC"]
+        order = [Countries, "name", "ASC"];
       }
       if (sort === "sectors") {
-         order = [Sectors,  "name", "ASC"]
+        order = [Sectors, "name", "ASC"];
       }
       if (sort === "sectors") {
-         order = [Sectors,  "name", "ASC"]
+        order = [Sectors, "name", "ASC"];
       }
       if (sort === "endDate") {
-         order = ["endDate", "DESC"]
+        order = ["endDate", "DESC"];
       }
 
       const result = await Enterprises.findAll({
-        where: {...filters},
+        where: { ...filters },
         order: [[...order]],
         include: [
           { model: Evaluations, as: "Evaluations" },
@@ -102,7 +114,6 @@ module.exports = app => {
     }
   });
 
-
   app.get("/api/users/:id", async (req, res) => {
     try {
       const { id } = req.params;
@@ -113,19 +124,40 @@ module.exports = app => {
     }
   });
 
-  app.get("/api/users/evaluations/:enterprise_id", requireLogin,async (req, res) => {
+  app.get(
+    "/api/users/evaluations/:enterprise_id",
+    requireLogin,
+    async (req, res) => {
+      try {
+        const user_id = req.user.id;
+        const { enterprise_id } = req.params;
+        const result = await Evaluations.findOne({
+          where: {
+            user_id,
+            enterprise_id,
+            OficialVote: false
+          },
+          include: [{ model: Votes }]
+        });
+        return res.status(200).send(result);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  );
+
+  app.get("/api/users/image/upload", requireLogin, async (req, res) => {
     try {
-      const user_id = req.user.id;
-      const { enterprise_id } = req.params;
-      const result = await Evaluations.findOne({
-        where: {
-          user_id,
-          enterprise_id,
-          OficialVote: false
+      const key = `${req.user.id}/${uuid()}.jpg`;
+      s3.getSignedUrl(
+        "putObject",
+        {
+          Bucket: BUCKET_NAME,
+          ContentType: "image/jpeg",
+          Key: key
         },
-        include: [{ model: Votes }]
-      });
-      return res.status(200).send(result);
+        (err, url) => res.send({ key, url, bucketUrl: "https://s3-sa-east-1.amazonaws.com/" + BUCKET_NAME + "/" })
+      );
     } catch (e) {
       console.log(e);
     }
@@ -136,12 +168,15 @@ module.exports = app => {
       const id = req.user.id;
       const { attributes } = req.body;
       await Users.update({ ...attributes }, { where: { id } });
-      const result = await Users.findOne({ where: { id }, include: [{ model: UsersSectors }, { model: Comments }] });
+      const result = await Users.findOne({
+        where: { id },
+        include: [{ model: UsersSectors }, { model: Comments }]
+      });
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  })
+  });
 
   app.put("/api/users/settings", requireLogin, async (req, res) => {
     try {
@@ -150,14 +185,14 @@ module.exports = app => {
 
       await Users.update({ name, email }, { where: { id } });
 
-        await UsersSectors.destroy({ where: {user_id: id}});
-        const promises = _.map(sectors, (value, sector_id)=> {
-          if (value) {
-              return UsersSectors.create({user_id: id, sector_id})
-          }
-        });
-        await Promise.all(promises)
-     const result = await Users.findOne({
+      await UsersSectors.destroy({ where: { user_id: id } });
+      const promises = _.map(sectors, (value, sector_id) => {
+        if (value) {
+          return UsersSectors.create({ user_id: id, sector_id });
+        }
+      });
+      await Promise.all(promises);
+      const result = await Users.findOne({
         where: { id },
         include: [{ model: UsersSectors }]
       });
