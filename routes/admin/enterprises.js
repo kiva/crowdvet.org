@@ -3,7 +3,6 @@ const jotFormAPI = require("../../services/jotForm");
 const uuid = require("uuid/v1");
 const AWS = require("aws-sdk");
 const keys = require("../../config/keys");
-const Busboy = require("busboy");
 const BUCKET_NAME = "data-store-blog";
 const _ = require("lodash");
 
@@ -134,33 +133,7 @@ module.exports = app => {
 
   app.put("/api/admin/enterprises/:id", passport.authenticate("jwt"), async (req, res) => {
     try {
-      const {
-        id,
-        name,
-        email,
-        published,
-        sector,
-        endDate,
-        image1,
-        loan,
-        loanPurpose,
-        business,
-        paidEmployees,
-        ownershipStatus,
-        beganOperating,
-        asset,
-        salesRevenue,
-        sector_id,
-        pictures,
-        country_id,
-        shortDescription,
-        latestFinancial,
-        loanInquiry,
-        loanApplication,
-        managementTeam,
-        boardAndManagement,
-        zeroTool
-      } = req.body;
+      const { id, pictures }  = req.body
 
       if (_.isEmpty(req.body.Images)) {
         await Images.destroy({ where: { enterprise_id: id } });
@@ -190,30 +163,7 @@ module.exports = app => {
       }
       const result = await Enterprises.update(
         {
-          id,
-          name,
-          email,
-          published,
-          sector,
-          endDate,
-          image1,
-          loan,
-          loanPurpose,
-          business,
-          paidEmployees,
-          ownershipStatus,
-          beganOperating,
-          asset,
-          salesRevenue,
-          sector_id,
-          country_id,
-          shortDescription,
-          latestFinancial,
-          loanInquiry,
-          loanApplication,
-          managementTeam,
-          boardAndManagement,
-          zeroTool
+          ...req.body
         },
         { where: { id } }
       );
