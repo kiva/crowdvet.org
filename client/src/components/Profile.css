@@ -42,3 +42,16 @@
 .red-color {
   color:red;
 }
+
+
+.thumb {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+}
+
+.thumb img {
+    width: auto;
+    height: auto;
+
+}
