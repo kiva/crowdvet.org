@@ -42,13 +42,16 @@ const length = (message = 'Should have less than 150 characters') =>
     value => value && value.length <= 150 ? undefined : message;
 
 
+const number = (message = 'Must be a number') =>
+    value => value && isNaN(Number(value)) ? message : undefined;
+
 export const EnterprisesEdit = props => (
   <Edit title={<EnterprisesTitle />} {...props}>
     <SimpleForm>
       <DisabledInput source="id" />
       <TextInput label="Name" source="name" />
       <TextInput label="Email Address" source="email" type="email" />
-      <TextInput label="Loan Size" source="loan" validate={required()} />
+      <TextInput label="Loan Size" source="loan" validate={ [required(), number()] } />
       <ReferenceInput label="Sectors" source="sector_id" reference="sectors" validate={required()}>
         <SelectInput optionText="name" />
       </ReferenceInput>
@@ -68,6 +71,15 @@ export const EnterprisesEdit = props => (
       <LongTextInput label="Board and Management Team" source="boardAndManagement"  />
       <LongTextInput label="Zero Tool link" source="zeroTool"  />
       <LongTextInput label="Latest Financial Statement" source="latestFinancial" />
+
+      <LongTextInput label="Anual Report" source="anualReport"  />
+      <LongTextInput label="Board of Directors" source="boardOfDirectors"  />
+      <LongTextInput label="Management Team" source="managementTeam"  />
+      <LongTextInput label="Impact Study" source="impactStudy"  />
+      <LongTextInput label="Business Plan" source="businessPlan"  />
+      <LongTextInput label="Certificate of Incorporation" source="certificateIncorporation"  />
+      <LongTextInput label="Historical Financial Statements" source="historicalFinancial"  />
+      <LongTextInput label="YTD Financial Statements" source="YDTFinancial"  />
 
       <LongTextInput label="Short Description max 150 characters"  validate={ [required(), length()]} source="shortDescription"  />
       <LongTextInput label="Description" source="description"  />
