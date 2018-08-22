@@ -35,6 +35,7 @@ class Landing extends Component {
       </div>
     );
   }
+
   renderPrefooter() {
     return (
       <div className="flow-text" id="prefooter">
