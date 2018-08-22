@@ -18,3 +18,4 @@ export const FETCH_SUGGESTED = 'fetch_suggested';
 export const AUTH_USER = 'auth_user';
 export const SIGNIN_ERROR = 'signin_error';
 export const AUTH_ERROR = 'auth_error';
+export const FETCH_RECOMENDATIONS = 'fetch_recomendations';

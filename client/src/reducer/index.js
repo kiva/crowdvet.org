@@ -9,6 +9,7 @@ import commentsReducer from './commentsReducer';
 import sectorsReducer from './sectorsReducer';
 import suggestedReducer from './suggestedReducer';
 import countriesReducer from './countriesReducer';
+import recomendationsReducer from './recomendationsReducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -20,5 +21,6 @@ export default combineReducers({
   comments: commentsReducer,
   sectors: sectorsReducer,
   countries: countriesReducer,
-  suggested: suggestedReducer
+  suggested: suggestedReducer,
+  recomendations: recomendationsReducer
 });

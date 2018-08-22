@@ -30,6 +30,7 @@ require('./routes/sectors')(app);
 require('./routes/countries')(app);
 require('./routes/users')(app);
 require('./routes/comments')(app);
+require('./routes/recomendations')(app);
 
 require('./routes/admin/countries')(app);
 require('./routes/admin/enterprises')(app);
