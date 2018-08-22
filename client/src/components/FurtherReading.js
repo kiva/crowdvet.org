@@ -7,8 +7,13 @@ import idgen from "./idgen";
 import "./learnAbout.css";
 import SignUpModal from "./SignUpModal";
 import SubMenu from "./SubMenuLearn";
+import * as actions from "../actions";
+import _ from 'lodash';
 
 class FurtherReading extends Component {
+  componentDidMount() {
+    this.props.fetchRecomendations();
+  }
   render() {
     const header = (
       <div className="white-text flow-text center-element learn-about">
@@ -35,24 +40,28 @@ class FurtherReading extends Component {
     return (
       <div className="row">
         <h3 className="col s12 center bold">Staff Recomendations</h3>
-          {this.renderRecomendation()}
-          {this.renderRecomendation()}
-          {this.renderRecomendation()}
-          {this.renderRecomendation()}
+          {this.renderRecomendations()}
       </div>
     );
   }
 
-  renderRecomendation() {
-    return (
-      <div className="row">
-        <div className="col s10 offset-s1 grey-background center">
-          <p style={{fontSize:"20px"}}><span className="bold" >“The Questions That Matter,”</span> Tim Hanson</p>
-          <p className="green-text " style={{fontSize:"18px"}}> A primer on how to ask good questions</p>
+  renderRecomendations() {
+    const content = _.map(this.props.recomendations, recomendation => {
+      return (
+        <div className="row">
+          <div className="col s10 offset-s1 grey-background center">
+            <p style={{fontSize:"20px"}}><a className="black-text" href={recomendation.link}> <span className="bold" >{recomendation.title}</span></a>{recomendation.author}</p>
+            <p className="green-text " style={{fontSize:"18px"}}>{recomendation.description}</p>
+          </div>
         </div>
-      </div>
-    )
+      )
+    })
+    return content
   }
 }
 
-export default FurtherReading;
+function mapStateToProps({ recomendations }) {
+  return { recomendations };
+}
+
+export default connect(mapStateToProps, actions)(FurtherReading);
