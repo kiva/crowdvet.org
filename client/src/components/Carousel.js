@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import carousel from './caroussel-1.png';
+import {Link} from "react-router-dom"
+import { connect } from "react-redux";
 
 class Carousel extends Component {
   componentDidMount() {
@@ -13,12 +15,13 @@ class Carousel extends Component {
   }
 
   renderText() {
+    const joinToday = this.props.auth && <Link className="btn modal-trigger" to={"/vet/enterprises"}>Start Vetting</Link> || <Link className="btn modal-trigger" to={"#modal1"}>Join Today</Link>
     return (
       <div className="carousel-text row">
         <div className="col s12 hide-on-med-and-down">
         <div>Help us enable dreams</div>
         <div>around the world</div>
-        <div className="btn">Join Today</div>
+        { joinToday }
         </div>
       </div>
     );
@@ -45,4 +48,9 @@ class Carousel extends Component {
   }
 }
 
-export default Carousel;
+
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+export default connect(mapStateToProps)(Carousel);
