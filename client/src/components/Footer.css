@@ -1,4 +1,24 @@
 .page-footer {
   background-color: #247037;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
+}
+
+.siteFooter-links.links-list li:first-of-type a {
+    border: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.siteFooter-links.links-list li {
+  display: inline-block;
+}
+
+.siteFooter-links.links-list li a {
+  border-left: white 1px solid;
+  padding-left: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.green-footer {
+  color:#aee15c
 }
