@@ -11,6 +11,7 @@ import { KivaEvaluationsList, KivaEvaluationsEdit, KivaEvaluationsCreate } from 
 import { SectorsList, SectorsEdit, SectorsCreate } from './Sectors';
 import { CountriesList, CountriesEdit, CountriesCreate } from './Country';
 import { UsersList, UsersEdit, UsersCreate } from './Users';
+import { RecomendationsList, RecomendationsEdit, RecomendationsCreate } from './Recomendations';
 import { AdminsList, AdminsEdit, AdminsCreate } from './Admins';
 
 import addUploadFeature from "./addUploadFeature"
@@ -35,6 +36,7 @@ const AppAdmin = () => (
     <Resource options={{ label: 'Kiva Evaluations' }} name="kiva/evaluations" list={KivaEvaluationsList} edit={KivaEvaluationsEdit} create={KivaEvaluationsCreate}/>
     <Resource name="sectors" list={SectorsList} edit={SectorsEdit} create={SectorsCreate}/>
     <Resource name="countries" list={CountriesList} edit={CountriesEdit} create={CountriesCreate}/>
+    <Resource name="recomendations" list={RecomendationsList} edit={RecomendationsEdit} create={RecomendationsCreate}/>
     <Resource name="users" list={UsersList}/>
     <Resource name="admins" list={AdminsList} edit={AdminsEdit} create={AdminsCreate}/>
   </Admin>
