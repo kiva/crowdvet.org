@@ -11,7 +11,7 @@ class VettingHistory extends Component {
     const content = !_.isEmpty(this.props.userEvaluations)
       ? this.renderHistory()
       : this.renderMessage();
-    return <div className="container">{content}</div>;
+    return <div className="container"><br />{content}</div>;
   }
 
   renderMessage() {
