@@ -207,6 +207,7 @@ class EvaluationResults extends Component {
         </div>
         <div className="row">
           <div className="col s10 offset-m1">
+            <p>Your Vote:</p>
             <p>{evaluation.impact}: {_.mapKeys(impactChoices, "score")[evaluation.impact].text}</p>
           </div>
         </div>
@@ -215,6 +216,7 @@ class EvaluationResults extends Component {
         </div>
         <div className="row">
           <div className="col s10 offset-m1">
+            <p>Kiva's Vote:</p>
             <p>{officialEvaluation.impact}: {_.mapKeys(impactChoices, "score")[officialEvaluation.impact].text}</p>
           </div>
         </div>
@@ -228,12 +230,14 @@ class EvaluationResults extends Component {
           {this.renderRadios("model", evaluation, modelChoices, modelQuestion, false)}
         </div>
         <div className="col s10 offset-m1">
+          <p>Your Vote:</p>
           <p>{evaluation.model}: {_.mapKeys(modelChoices, "score")[evaluation.model].text}</p>
         </div>
         <div className="row">
           {this.renderRadios("model", officialEvaluation, modelChoices, "", true)}
         </div>
         <div className="col s10 offset-m1">
+          <p>Kiva's Vote:</p>
           <p>{officialEvaluation.model}: {_.mapKeys(modelChoices, "score")[officialEvaluation.model].text}</p>
         </div>
         <div className="row">
@@ -245,12 +249,14 @@ class EvaluationResults extends Component {
           {this.renderRadios("prioritization", evaluation, prioritizationChoices, prioritizationQuestion, false)}
         </div>
         <div className="col s10 offset-m1">
+        <p>Your Vote:</p>
         <p>{evaluation.prioritization}: {_.mapKeys(prioritizationChoices, "score")[evaluation.prioritization].text}</p>
         </div>
         <div className="row">
           {this.renderRadios("prioritization", officialEvaluation, prioritizationChoices, "", true)}
         </div>
         <div className="col s10 offset-m1">
+        <p>Kiva's Vote:</p>
         <p>{officialEvaluation.prioritization}: {_.mapKeys(prioritizationChoices, "score")[officialEvaluation.prioritization].text}</p>
         </div>
         <div className="row">
