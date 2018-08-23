@@ -29,4 +29,14 @@ class TopMenu extends Component {
   }
 }
 
+// Specifies the default values for props:
+TopMenu.defaultProps = {
+  menu : {
+    profile: { active: true },
+    vet: { active: false },
+    training: { active: false }
+  }
+};
+
+
 export default TopMenu;
