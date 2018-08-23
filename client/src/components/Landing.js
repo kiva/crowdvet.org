@@ -9,12 +9,12 @@ class Landing extends Component {
   renderText() {
     return (
       <div className="text row flow-text">
-        <p className="col s12" id="kiva-message">Here at Kiva we are constanly asking</p>
+        <p className="col s12" id="kiva-message">Here at Kiva, we're constanly asking</p>
         <div className="flow-text col s12">
-          How can you make social enterprices make the world
+          How can you help social enterprises make the world
         </div>
         <div className="flow-text col s12">
-          a better place, even if you cant make a loan?
+          a better place, even if you can't make a loan?
         </div>
       </div>
     );
