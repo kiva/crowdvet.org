@@ -18,7 +18,7 @@ import {
 export const RecomendationsList = props => (
   <List {...props}>
     <Datagrid>
-      <TextField source="id" />
+      <TextField source="order" />
       <TextField label="Title" source="title"/>
       <EditButton />
     </Datagrid>
