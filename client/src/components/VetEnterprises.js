@@ -7,6 +7,7 @@ import Enterprises from "./Enterprises";
 import InProgress from "./InProgress";
 import Suggested from "./Suggested";
 import _ from "lodash";
+import moment from "moment";
 
 import * as actions from "../actions";
 
@@ -24,7 +25,6 @@ class VetEnterprises extends Component {
   };
 
   componentDidMount() {
-    this.props.fetchUser();
     this.props.fetchEnterprises();
     this.props.fetchUserEvaluations();
     this.props.fetchOfficialEvaluations();
@@ -60,13 +60,11 @@ class VetEnterprises extends Component {
         return (
           <div>
             <InProgress
-              userEvaluations={_.filter(this.props.evaluations, {
-                inProgress: true
-              })}
+              userEvaluations={_.filter(this.props.evaluations, e => e.inProgress)}
               enterprises={this.props.enterprises}
             />
             <Enterprises
-              enterprises={this.props.enterprises}
+              enterprises={_.filter(this.props.enterprises, e => moment().isBefore(e.endDate))}
               sectors={this.props.sectors}
               countries={this.props.countries}
             />
@@ -77,7 +75,7 @@ class VetEnterprises extends Component {
           <div>
             <Suggested />
             <Enterprises
-              enterprises={this.props.enterprises}
+              enterprises={_.filter(this.props.enterprises, e => moment().isBefore(e.endDate))}
               sectors={this.props.sectors}
               countries={this.props.countries}
             />

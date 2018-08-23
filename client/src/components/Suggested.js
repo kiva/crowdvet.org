@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import * as actions from '../actions';
 import List from "./SuggestedList"
 import _ from 'lodash';
+import moment from "moment";
 
 class Suggested extends Component {
   componentDidMount() {
@@ -20,7 +21,7 @@ class Suggested extends Component {
 function mapStateToProps({suggested, auth}) {
   return {
     sectors: auth.UsersSectors,
-    suggested
+    suggested: _.filter(suggested, e => moment().isBefore(e.endDate))
   }
 }
 
