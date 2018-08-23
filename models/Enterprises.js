@@ -148,7 +148,7 @@ module.exports = (sequelize, DataType) => {
       }
     },
     beganOperating: {
-      type: DataType.DATEONLY,
+      type: DataType.INTEGER,
       allowNull: true,
       validate: {
         notEmpty: true
@@ -166,14 +166,14 @@ module.exports = (sequelize, DataType) => {
       allowNull: true,
     },
     asset: {
-      type: DataType.INTEGER,
+      type: DataType.FLOAT,
       allowNull: true,
       validate: {
         notEmpty: true
       }
     },
     salesRevenue: {
-      type: DataType.INTEGER,
+      type: DataType.FLOAT,
       allowNull: true,
       validate: {
         notEmpty: true
@@ -508,7 +508,6 @@ module.exports = (sequelize, DataType) => {
     order: {
       type: DataType.INTEGER,
       allowNull: true,
-      unique: true,
       validate: {
         notEmpty: true
       },
