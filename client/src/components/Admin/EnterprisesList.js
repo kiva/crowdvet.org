@@ -60,10 +60,10 @@ export const EnterprisesEdit = props => (
       </ReferenceInput>
       <LongTextInput source="loanPurpose" />
       <LongTextInput label="Business Model" source="business" />
-      <LongTextInput label="Asset Size" source="asset" />
-      <LongTextInput label="Previous Year Sales Revenue" source="salesRevenue" />
-      <LongTextInput label="Ownerhip Status" source="ownershipStatus" />
-      <LongTextInput label="Number of Paid Employees" source="paidEmployees" />
+      <TextInput label="Asset Size" source="asset" validate={ number() } />
+      <TextInput label="Previous Year Sales Revenue" source="salesRevenue" validate={ number() } />
+      <TextInput label="Ownerhip Status" source="ownershipStatus" />
+      <TextInput label="Number of Paid Employees" source="paidEmployees" />
 
       <LongTextInput label="Initial Loan Inquiry" source="loanInquiry"  />
       <LongTextInput label="Loan Application" source="loanApplication"  />
@@ -83,7 +83,7 @@ export const EnterprisesEdit = props => (
 
       <LongTextInput label="Short Description max 150 characters"  validate={ [required(), length()]} source="shortDescription"  />
       <LongTextInput label="Description" source="description"  />
-      <DateInput label="Began Operating" source="beganOperating" />
+      <TextInput label="Began Operating" source="beganOperating" validate={ number() } />
       <DateInput label="End Date" source="endDate" validate={required()} />
 
       <ImageField source="Images" src="url" title="Picture" />
