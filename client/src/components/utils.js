@@ -60,7 +60,8 @@ function getScoreAndAccuracy(votes, officialVotes) {
 
 function scoreAccuracyConversion(data) {
   let result = { Score: 0, Accuracy: 0 };
-  if (data["y"].count === 3) {
+
+  if (data["z"].count === 3) {
     result.Score = 0;
     result.Accuracy = -100;
   } else if (
@@ -97,7 +98,7 @@ function scoreAccuracyConversion(data) {
     data["z"].count === 1
   ) {
     result.Score = 5;
-    result.Accuracy = "0";
+    result.Accuracy = 0;
   } else if (
     data["x"].count === 1 &&
     data["y"].count === 2 &&
