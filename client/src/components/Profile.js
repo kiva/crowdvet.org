@@ -19,7 +19,12 @@ class Profile extends Component {
     super();
     this.state = {
       menu: { 1: "Vetted Enterprises", 2: "Vetting History" },
-      active: 1
+      active: 1,
+      topMenu: {
+        profile: { active: true },
+        vet: { active: false },
+        training: { active: false }
+      }
     };
   }
 
@@ -41,7 +46,7 @@ class Profile extends Component {
 
     return (
       <div>
-        <TopMenu onSubMenuChange={this.onSubMenuChange} />
+        <TopMenu menu={this.state.topMenu} />
         <ProfileHeader
           userEvaluations={this.props.evaluations}
           officialEvaluations={this.props.officialEvaluations}
