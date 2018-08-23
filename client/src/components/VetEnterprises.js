@@ -25,13 +25,11 @@ class VetEnterprises extends Component {
     };
   }
 
-   onHandleProfileClick = () => {
-    this.setState({
-      profile: { active: true },
-      vet: { active: false },
-      training: { active: false }
-    })
-  }
+
+  onSubMenuChange = (menu, active) => {
+    this.setState({ menu: menu, active });
+  };
+
 
   componentDidMount() {
     this.props.fetchEnterprises();
@@ -48,9 +46,7 @@ class VetEnterprises extends Component {
     if (!enterprises) return null;
     return (
       <div>
-        <TopMenu menu={this.state.topMenu} onHandleProfileClick={this.onHandleProfileClick}
-          onHandleVetClick={this.onHandleVetClick} onHandleTrainingClick={this.onHandleTrainingClick}
-        />
+        <TopMenu menu={this.state.topMenu} />
         <ProfileHeader
           userEvaluations={this.props.evaluations}
           officialEvaluations={this.props.officialEvaluations}
