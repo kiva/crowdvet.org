@@ -233,20 +233,17 @@ class ApplicationShow extends Component {
               <div className="flow-text card-text">
                 <ul id="selected-metrics">
                   <li>
-                    Began operating starting:
-                    {this.props.enterprise.beganOperating}
+                    Began operating starting: {this.props.enterprise.beganOperating}
                   </li>
                   <li>
-                    Number of paid employees:
-                    {this.props.enterprise.paidEmployees}
+                    Number of paid employees: {this.props.enterprise.paidEmployees}
                   </li>
                   <li>
                     Ownerhip status: {this.props.enterprise.ownershipStatus}
                   </li>
                   <li>Asset size: {this.props.enterprise.asset}</li>
                   <li>
-                    Previous Year Sales Revenue:
-                    {this.props.enterprise.salesReveneu}
+                    Previous Year Sales Revenue: {this.props.enterprise.salesRevenue}
                   </li>
                 </ul>
               </div>
