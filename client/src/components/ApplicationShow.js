@@ -26,7 +26,12 @@ class ApplicationShow extends Component {
         2: { text: "Evaluation", url: `/users/evaluations/${id}` },
         3: { text: "Results", url: "" }
       },
-      active: 1
+      active: 1,
+      topMenu: {
+        profile: { active: true },
+        vet: { active: false },
+        training: { active: false }
+      }
     };
     let sector = "";
   }
@@ -284,7 +289,7 @@ class ApplicationShow extends Component {
     const toPage = utils.getPage(enterprise, officialEvaluation);
     return (
       <div>
-        <TopMenu onSubMenuChange={this.onSubMenuChange} />
+        <TopMenu menu={this.state.topMenu} />
         <div className="image-margin">
           <div className="row">
             <div className="col s12 center img-header">

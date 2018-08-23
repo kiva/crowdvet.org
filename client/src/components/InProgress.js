@@ -10,12 +10,17 @@ import {Carousel} from "react-materialize";
 
 class InProgress extends Component {
 
+  renderMessage() {
+      return <h3 className="center">You currently do not have any enterprises under review...</h3>
+  }
+
   renderImages(images, enterprise) {
     const content = _.map(images, image => image.url)
     return <Carousel className="inprogress-evaluation" carouselId={enterprise.id} options={{ fullWidth: true, indicators:true }} images={content} />;
   }
 
   renderInProgress(userEvaluations, enterprises) {
+
     const enterprisesItems = _.map(userEvaluations, (evaluation) => {
       return this.renderInProgressItems(enterprises[evaluation.enterprise_id], evaluation)
     })
@@ -53,9 +58,9 @@ class InProgress extends Component {
   }
 
   render() {
+
     const {userEvaluations , enterprises} = this.props;
-    if (_.isEmpty(userEvaluations)) return null
-    if (_.isEmpty(enterprises)) return null
+    if (_.isEmpty(userEvaluations) || _.isEmpty(enterprises)) return this.renderMessage();
     return (
       <div className="">
       <div className="row center">
