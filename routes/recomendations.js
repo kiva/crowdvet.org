@@ -6,7 +6,9 @@ module.exports = app => {
 
   app.get("/api/recomendations", requireLogin, async (req, res) => {
     try {
-      const result = await Recomendations.findAll();
+      const result = await Recomendations.findAll({
+        order: [["order", "ASC"]]
+      });
       return res
         .status(200)
         .set("x-Total-Count", result.length)
@@ -15,4 +17,4 @@ module.exports = app => {
       console.log(e);
     }
   });
-}
+};
