@@ -18,13 +18,15 @@ import {
   ImageField,
   ImageInput,
   ArrayInput,
-  SimpleFormIterator
+  SimpleFormIterator,
+  BooleanField
 } from 'react-admin';
 
 export const EnterprisesList = props => (
   <List {...props}>
     <Datagrid>
       <TextField source="id" />
+      <BooleanField source="published" />
       <TextField label="Name" source="name" />
       <EditButton />
     </Datagrid>
