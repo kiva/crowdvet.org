@@ -187,7 +187,7 @@ class EvaluationResults extends Component {
 
     return (
       <div>
-        <div>
+        <div className="row">
           <div className="question">{question.text}</div>
         </div>
         <div className="row">
@@ -206,8 +206,8 @@ class EvaluationResults extends Component {
           {this.renderRadios("impact", evaluation, impactChoices, impactQuestion, false)}
         </div>
         <div className="row">
-          <div className="col s10 offset-m1">
-            <p>Your Vote:</p>
+          <div className="col s12">
+            <strong>Your Vote:</strong>
             <p>{evaluation.impact}: {_.mapKeys(impactChoices, "score")[evaluation.impact].text}</p>
           </div>
         </div>
@@ -215,11 +215,12 @@ class EvaluationResults extends Component {
           {this.renderRadios("impact", officialEvaluation, impactChoices, "", true)}
         </div>
         <div className="row">
-          <div className="col s10 offset-m1">
-            <p>Kiva's Vote:</p>
+          <div className="col s12">
+            <strong>Kiva's Vote:</strong>
             <p>{officialEvaluation.impact}: {_.mapKeys(impactChoices, "score")[officialEvaluation.impact].text}</p>
           </div>
         </div>
+        <br />
         <div className="row">
           <div className="col s12">
             <LineChart data={utils.getCrowdVotes(crowdVotes, "impact")} max={crowdVotes.length} chartId={idgen()} />
@@ -229,15 +230,15 @@ class EvaluationResults extends Component {
         <div className="row">
           {this.renderRadios("model", evaluation, modelChoices, modelQuestion, false)}
         </div>
-        <div className="col s10 offset-m1">
-          <p>Your Vote:</p>
+        <div className="col s12">
+          <strong>Your Vote:</strong>
           <p>{evaluation.model}: {_.mapKeys(modelChoices, "score")[evaluation.model].text}</p>
         </div>
         <div className="row">
           {this.renderRadios("model", officialEvaluation, modelChoices, "", true)}
         </div>
-        <div className="col s10 offset-m1">
-          <p>Kiva's Vote:</p>
+        <div className="col s12">
+          <strong>Kiva's Vote:</strong>
           <p>{officialEvaluation.model}: {_.mapKeys(modelChoices, "score")[officialEvaluation.model].text}</p>
         </div>
         <div className="row">
@@ -245,19 +246,22 @@ class EvaluationResults extends Component {
             <LineChart data={utils.getCrowdVotes(crowdVotes, "model")} max={crowdVotes.length} chartId={idgen()} />
           </div>
         </div>
+        <br />
         <div className="row">
           {this.renderRadios("prioritization", evaluation, prioritizationChoices, prioritizationQuestion, false)}
         </div>
-        <div className="col s10 offset-m1">
-        <p>Your Vote:</p>
+        <div className="col s12">
+        <strong>Your Vote:</strong>
         <p>{evaluation.prioritization}: {_.mapKeys(prioritizationChoices, "score")[evaluation.prioritization].text}</p>
         </div>
         <div className="row">
           {this.renderRadios("prioritization", officialEvaluation, prioritizationChoices, "", true)}
         </div>
-        <div className="col s10 offset-m1">
-        <p>Kiva's Vote:</p>
-        <p>{officialEvaluation.prioritization}: {_.mapKeys(prioritizationChoices, "score")[officialEvaluation.prioritization].text}</p>
+        <div className="row">
+          <div className="col s12">
+            <strong>Kiva's Vote:</strong>
+            <p>{officialEvaluation.prioritization}: {_.mapKeys(prioritizationChoices, "score")[officialEvaluation.prioritization].text}</p>
+          </div>
         </div>
         <div className="row">
           <div className="col s12">
