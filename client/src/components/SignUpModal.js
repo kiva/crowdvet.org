@@ -154,7 +154,8 @@ class SignUp extends Component {
                 </span>
               </div>
               <div className="col s12 m6">
-                <p>{this.renderForm()}</p>
+                <br />
+                <div>{this.renderForm()}</div>
               </div>
             </div>
           </div>
