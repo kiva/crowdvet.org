@@ -31,11 +31,11 @@ class EvaluationForm extends Component {
        throw new SubmissionError({ terms: 'Please, accept Kivas volunteer agreement'})
     }
 
-    if (!votes.model) {
+    if (!votes.impact) {
        throw new SubmissionError({ model: 'Please, select an option',_error: 'Please, select an impact option.' })
     }
 
-    if (!votes.impact) {
+    if (!votes.model) {
        throw new SubmissionError({ impact: 'Please, select an option', _error: 'Please, select a business model option.' })
     }
 
