@@ -62,8 +62,8 @@ class Profile extends Component {
         return (
           <div>
             <VettedEnterprises
-              enterprises={this.props.enterprises}
-              userEvaluations={this.props.evaluations}
+              enterprises={ this.props.enterprises }
+              userEvaluations={_.filter(this.props.evaluations, e => !e.inProgress) }
               officialEvaluations={this.props.officialEvaluations}
             />
             <UserMessage initialValues={{message: this.props.auth.message}}
