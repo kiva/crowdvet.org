@@ -19,3 +19,6 @@ export const AUTH_USER = 'auth_user';
 export const SIGNIN_ERROR = 'signin_error';
 export const AUTH_ERROR = 'auth_error';
 export const FETCH_RECOMENDATIONS = 'fetch_recomendations';
+export const UPDATE_SETTINGS = 'update_settings';
+export const UPDATE_SETTINGS_ERROR = 'update_settings_error';
+export const CLEAR_MESSAGES = 'clear_messages';

@@ -5,7 +5,9 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import idgen from './idgen';
 import _ from "lodash";
-import "./Settings.css"
+import "./Settings.css";
+import FlashMessage from 'react-flash-message';
+
 
 class PersonalForm extends Component {
 
@@ -17,7 +19,6 @@ class PersonalForm extends Component {
 
   submitForm(values) {
     this.props.updateUserSettings(values);
-    window.scrollTo(0, 0);
   }
 
   renderSectors(sectors) {
@@ -36,8 +37,18 @@ class PersonalForm extends Component {
     </div>)
   }
 
+
+  renderMessage = (message, error) => {
+    const className = error ? "red-text" : "green-text"
+    return (
+      <FlashMessage duration={5000} persistOnHover={true}>
+        <div className={`${className} font-26`}>{message}</div>
+      </FlashMessage>
+    )
+  }
+
   render() {
-    const { handleSubmit, sectors } = this.props;
+    const { handleSubmit, sectors, message, error } = this.props;
     return (
       <div className="row">
         <div className="col s12 m10 offset-m1">
@@ -48,6 +59,12 @@ class PersonalForm extends Component {
               </div>
               <div className="collapsible-body">
                 <form onSubmit={handleSubmit(this.submitForm.bind(this))}>
+                  <div className="row">
+                    <div className="col s12">
+                      <p className="center">{!_.isEmpty(message) && this.renderMessage(message,false)}</p>
+                      <p className="center">{!_.isEmpty(error) && this.renderMessage(error,true)}</p>
+                    </div>
+                  </div>
                   <div className="row">
                     <div className="col s12 m6">
                       <div className="row">
@@ -85,12 +102,15 @@ function getInitialValues(auth) {
   } ,{})
 
   return {
-    name:auth.name,
+    name: auth.name,
     email: auth.email,
     ...sectors
   }
 }
-export default connect( ({auth} ) => ({initialValues: getInitialValues(auth)}),
+export default connect( ({auth} ) => ({initialValues: getInitialValues(auth),
+   message: auth.settingsMessage,
+   error: auth.settingsErrorMessage
+ }),
  actions)(
   reduxForm({ form: "personalform"})(PersonalForm)
 );

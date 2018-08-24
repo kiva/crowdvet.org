@@ -22,7 +22,10 @@ import {
   FETCH_COUNTRIES,
   FETCH_SUGGESTED,
   SIGNIN_ERROR,
-  FETCH_RECOMENDATIONS
+  FETCH_RECOMENDATIONS,
+  UPDATE_SETTINGS,
+  UPDATE_SETTINGS_ERROR,
+  CLEAR_MESSAGES,
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -168,8 +171,14 @@ export const fetchSectors = () => async dispatch => {
 };
 
 export const updateUserSettings = values => async dispatch => {
-  const res = await axios.put(`/api/users/settings`, { ...values });
-  dispatch({ type: FETCH_USER, payload: res.data });
+  try {
+    dispatch({ type: CLEAR_MESSAGES });
+    const res = await axios.put(`/api/users/settings`, { ...values });
+    dispatch({ type: UPDATE_SETTINGS, payload: "Settings updated successfully!" });
+  } catch (e) {
+
+    dispatch({ type: UPDATE_SETTINGS_ERROR, payload: "An error accurred, please try again later." });
+  }
 };
 
 export const updateUser = values => async dispatch => {
