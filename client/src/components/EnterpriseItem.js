@@ -33,7 +33,7 @@ class EnterpriseItem extends Component {
           </div>
           <div className="right-align">
             <Link to={`/application/${enterprise.id}`} className="btn">
-              review application
+              Review Application
             </Link>
           </div>
         </div>
