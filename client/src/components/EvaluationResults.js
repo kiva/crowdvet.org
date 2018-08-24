@@ -17,9 +17,9 @@ class EvaluationResults extends Component {
     const id = this.props.match.params.id;
     this.state = {
       menu: {
-        1: { text: "Review", url: `/application/${id}` },
-        2: { text: "Evaluation", url: `/users/evaluations/${id}` },
-        3: { text: "Results", url: "" }
+        review: { text: "Review", url: `/application/${id}`, active: false },
+        evaluation: { text: "Evaluation", url: `/users/evaluations/${id}`, active: false },
+        results: { text: "Results", url: "", active: true }
       },
       active: 3
     };

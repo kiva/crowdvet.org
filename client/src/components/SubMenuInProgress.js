@@ -8,39 +8,34 @@ class SubMenuInprogress extends Component {
 
   onHandleClickInProgress() {
     this.props.onSubMenuChange(
-      {
-        1: 'Reviews In Progress',
-        2: 'Enterprises Suggested for You'
-      },
-      1
+      { inProgress: {active: true}, suggested: {active:false} }
+
     )
   }
 
   onHandleClickSuggested() {
     this.props.onSubMenuChange(
-      {
-        1: 'Reviews In Progress',
-        2: 'Enterprises Suggested for You'
-      },
-      2
-    )
+      { inProgress: {active: false}, suggested: {active:true} })
   }
 
   render() {
-      const menu = (
-        <div>
-        <div className='col s6 center'>
-        <button autoFocus onClick={this.onHandleClickInProgress.bind(this)} className="btn btn-flat btn-large dashboard-item">
-          Reviews In Progress
-        </button>
-        </div>
-        <div className="col s6 center">
-        <button onClick={this.onHandleClickSuggested.bind(this)} className="btn btn-flat btn-large dashboard-item">
-          Enterprises Suggested for You
-        </button>
-        </div>
-        </div>
-      );
+    const activeClass = "SubMenuActive";
+    const inactiveClass = "SubMenuInactive";
+
+    const menu = (
+      <div>
+      <div className={`col s6 center ${this.props.menu.inProgress.active && activeClass || inactiveClass}`}>
+      <a onClick={this.onHandleClickInProgress.bind(this)} className="btn btn-flat btn-large dashboard-item">
+        Reviews In Progress
+      </a>
+      </div>
+      <div className={`col s6 center ${this.props.menu.suggested.active && activeClass || inactiveClass}`}>
+      <a onClick={this.onHandleClickSuggested.bind(this)} className="btn btn-flat btn-large dashboard-item">
+        Enterprises Suggested for You
+      </a>
+      </div>
+      </div>
+    );
 
     return menu;
   }

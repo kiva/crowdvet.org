@@ -17,7 +17,11 @@ class HowWorks extends Component {
     a better place, even if you can’t make a loan?</div>
     return (
       <div>
-      <SubMenu />
+      <SubMenu menu={{
+        about: { active: false },
+        howWorks: { active: true },
+        further: { active: false }
+      }} />
       <Carousel images={[carousel, carousel]}
       options={{ fullWidth: true, indicators: true }} carouselId={idgen().toString()}
        fixedText={header}

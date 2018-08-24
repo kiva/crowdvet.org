@@ -19,9 +19,12 @@ class SubMenu extends Component {
         column = "s3";
         break;
     }
+    const activeClass = "SubMenuActive";
+    const inactiveClass = "SubMenuInactive";
+
     const menu = _.map(this.props.menu, item => {
       return (
-        <div className={`col ${column} center`}>
+        <div className={`col ${column} center ${item.active && activeClass || inactiveClass}`}>
           <Link className="btn btn-flat btn-large dashboard-item" to={`${item.url}`}>{ item.text }</Link>
         </div>
 

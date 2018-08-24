@@ -22,11 +22,10 @@ class ApplicationShow extends Component {
     const id = this.props.match.params.id;
     this.state = {
       menu: {
-        1: { text: "Review", url: `/application/${id}` },
-        2: { text: "Evaluation", url: `/users/evaluations/${id}` },
-        3: { text: "Results", url: "" }
+        review: { text: "Review", url: `/application/${id}`, active: true },
+        evaluation: { text: "Evaluation", url: `/users/evaluations/${id}`, active: false },
+        results: { text: "Results", url: "", active: false }
       },
-      active: 1,
       topMenu: {
         profile: { active: true },
         vet: { active: false },
