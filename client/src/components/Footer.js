@@ -203,6 +203,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <div class="footer-copyright"></div>
     </footer>
   );
 };
