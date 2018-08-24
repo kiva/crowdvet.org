@@ -7,11 +7,11 @@ import _ from "lodash";
 class TopMenu extends Component {
 
   render() {
-    const activeClass = "white-text active-text "
-    const inactiveClass = "inactive-text"
+    const activeClass = "white-text active-text";
+    const inactiveClass = "inactive-text";
     return (
       <div className="row center-align dashboard">
-        <div className={"col s4"} >
+        <div className="col s4 top-menu">
           <Link to={"/user"} className={`btn btn-flat top-menu btn-large ${this.props.menu.profile.active && activeClass || inactiveClass}`}>
             Profile
           </Link>
