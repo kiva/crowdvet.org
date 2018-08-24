@@ -38,7 +38,7 @@ class VettedEnterpisesList extends Component {
   }
 
   renderMessage() {
-      return <h3 className="center">You have not vetted any enterprises yet...</h3>
+      return <div><br /><h3 className="center">You have not vetted any enterprises yet...</h3></div>
   }
 
   render() {

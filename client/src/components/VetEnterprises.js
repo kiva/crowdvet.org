@@ -15,8 +15,7 @@ class VetEnterprises extends Component {
   constructor(props) {
     super();
     this.state = {
-      menu: { 1: "Reviews In Progress", 2: "Enterprises Suggested for You" },
-      active: 1,
+      menu: { inProgress: { active: true }, suggested: { active: false } },
       topMenu: {
         profile: { active: false },
         vet: { active: true },
@@ -25,11 +24,9 @@ class VetEnterprises extends Component {
     };
   }
 
-
-  onSubMenuChange = (menu, active) => {
-    this.setState({ menu: menu, active });
+  onSubMenuChange = menu => {
+    this.setState({ menu });
   };
-
 
   componentDidMount() {
     this.props.fetchEnterprises();
@@ -52,8 +49,11 @@ class VetEnterprises extends Component {
           officialEvaluations={this.props.officialEvaluations}
         />
         <div>
-          <div className="row flow-text dashboard">
-            <SubMenuInProgress onSubMenuChange={this.onSubMenuChange} />
+          <div className="row dashboard">
+            <SubMenuInProgress
+              menu={this.state.menu}
+              onSubMenuChange={this.onSubMenuChange}
+            />
           </div>
           <div>{this.renderContent()}</div>
         </div>
@@ -62,33 +62,39 @@ class VetEnterprises extends Component {
   }
 
   renderContent() {
-    switch (this.state.active) {
-      case 1:
-        return (
-          <div>
-            <InProgress
-              userEvaluations={_.filter(this.props.evaluations, e => e.inProgress)}
-              enterprises={this.props.enterprises}
-            />
-            <Enterprises
-              enterprises={_.filter(this.props.enterprises, e => moment().isBefore(e.endDate))}
-              sectors={this.props.sectors}
-              countries={this.props.countries}
-            />
-          </div>
-        );
-      case 2:
-        return (
-          <div>
-            <Suggested />
-            <Enterprises
-              enterprises={_.filter(this.props.enterprises, e => moment().isBefore(e.endDate))}
-              sectors={this.props.sectors}
-              countries={this.props.countries}
-            />
-          </div>
-        );
-      default:
+    if (this.state.menu.inProgress.active) {
+      return (
+        <div>
+          <InProgress
+            userEvaluations={_.filter(
+              this.props.evaluations,
+              e => e.inProgress
+            )}
+            enterprises={this.props.enterprises}
+          />
+          <Enterprises
+            enterprises={_.filter(this.props.enterprises, e =>
+              moment().isBefore(e.endDate)
+            )}
+            sectors={this.props.sectors}
+            countries={this.props.countries}
+          />
+        </div>
+      );
+    }
+    if (this.state.menu.suggested.active) {
+      return (
+        <div>
+          <Suggested />
+          <Enterprises
+            enterprises={_.filter(this.props.enterprises, e =>
+              moment().isBefore(e.endDate)
+            )}
+            sectors={this.props.sectors}
+            countries={this.props.countries}
+          />
+        </div>
+      );
     }
   }
 }
