@@ -23,7 +23,11 @@ class FurtherReading extends Component {
     );
     return (
       <div>
-        <SubMenu />
+        <SubMenu menu={{
+          about: { active: false },
+          howWorks: { active: false },
+          further: { active: true }
+        }} />
         <Carousel
           images={[carousel, carousel]}
           options={{ fullWidth: true, indicators: true }}
@@ -50,7 +54,7 @@ class FurtherReading extends Component {
       return (
         <div className="row">
           <div className="col s10 offset-s1 grey-background center">
-            <p style={{fontSize:"20px"}}><a className="black-text" href={recomendation.link}> <span className="bold" >{recomendation.title}</span></a>{recomendation.author}</p>
+            <p style={{fontSize:"20px"}}><a className="black-text" href={recomendation.link}> <span className="bold" >{recomendation.title}</span></a>, {recomendation.author}</p>
             <p className="green-text " style={{fontSize:"18px"}}>{recomendation.description}</p>
           </div>
         </div>
