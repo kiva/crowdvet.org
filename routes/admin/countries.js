@@ -5,7 +5,8 @@ module.exports = app => {
 
   app.get("/api/admin/countries", passport.authenticate("jwt"), async (req, res) => {
     try {
-      const result = await Countries.findAll();
+      const { _start, _end } = req.query;
+      const result = await Countries.findAll({offset: _start, limit:_end});
       return res
         .status(200)
         .set("x-Total-Count", result.length)
@@ -34,7 +35,7 @@ module.exports = app => {
       console.log(e);
     }
   });
-  
+
   app.post("/api/admin/countries", passport.authenticate("jwt"), async (req, res) => {
     try {
       const { name } = req.body;

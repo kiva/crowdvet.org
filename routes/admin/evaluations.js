@@ -2,20 +2,12 @@ const passport = require("passport");
 const _ = require("lodash");
 
 module.exports = app => {
-  const {
-    Evaluations,
-    Votes,
-    Answers,
-    Questions
-  } = app.datasource.models.Enterprises.model;
+  const { Evaluations } = app.datasource.models.Enterprises.model;
 
   app.get("/api/admin/evaluations", passport.authenticate("jwt"),  async (req, res) => {
     try {
       const result = await Evaluations.findAll({
-        where: { OficialVote: false},
-        include: [
-          { model: Votes, include: [{ model: Answers }, { model: Questions }] }
-        ]
+        where: { OficialVote: false}
       });
       return res
         .status(200)
@@ -71,8 +63,7 @@ module.exports = app => {
     try {
       const { id } = req.params;
       const result = await Evaluations.findOne({
-        where: { id },
-        include: [{ model: Votes }]
+        where: { id }
       });
       return res.status(200).send(result);
     } catch (e) {
@@ -84,8 +75,7 @@ module.exports = app => {
     try {
       const { id } = req.params;
       const result = await Evaluations.findOne({
-        where: { id },
-        include: [{ model: Votes }]
+        where: { id }
       });
       return res.status(200).send(result);
     } catch (e) {
@@ -96,10 +86,7 @@ module.exports = app => {
   app.get("/api/admin/kiva/evaluations", passport.authenticate("jwt"),  async (req, res) => {
     try {
       const result = await Evaluations.findAll({
-        where: { OficialVote: true},
-        include: [
-          { model: Votes, include: [{ model: Answers }, { model: Questions }] }
-        ]
+        where: { OficialVote: true}
       });
       return res
         .status(200)

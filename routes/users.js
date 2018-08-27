@@ -10,9 +10,6 @@ module.exports = app => {
   const {
     Enterprises,
     Evaluations,
-    Votes,
-    Questions,
-    Answers,
     Sectors,
     Users,
     Images,
@@ -93,10 +90,7 @@ module.exports = app => {
     try {
       const user_id = req.user.id;
       const result = await Evaluations.findAll({
-        where: { user_id, OficialVote: false },
-        include: [
-          { model: Votes, include: [{ model: Answers }, { model: Questions }] }
-        ]
+        where: { user_id, OficialVote: false }
       });
       return res.status(200).send(result);
     } catch (e) {
@@ -136,8 +130,7 @@ module.exports = app => {
             user_id,
             enterprise_id,
             OficialVote: false
-          },
-          include: [{ model: Votes }]
+          }
         });
         return res.status(200).send(result);
       } catch (e) {

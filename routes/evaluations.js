@@ -5,9 +5,6 @@ const _ = require("lodash");
 module.exports = app => {
   const {
     Evaluations,
-    Votes,
-    Answers,
-    Questions,
     Enterprises,
     Sectors,
     Images,
@@ -20,10 +17,7 @@ module.exports = app => {
       const { official } = req.query;
       const OficialVote = official ? true : false;
       const result = await Evaluations.findAll({
-        where: { OficialVote },
-        include: [
-          { model: Votes, include: [{ model: Answers }, { model: Questions }] }
-        ]
+        where: { OficialVote }
       });
       return res
         .status(200)

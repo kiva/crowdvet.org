@@ -6,9 +6,6 @@ module.exports = app => {
   const {
     Enterprises,
     Evaluations,
-    Votes,
-    Questions,
-    Answers,
     Sectors,
     Users,
     Images,

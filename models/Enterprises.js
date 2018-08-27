@@ -385,38 +385,6 @@ module.exports = (sequelize, DataType) => {
     }
   });
 
-  const Votes = sequelize.define("Votes", {
-    id: {
-      type: DataType.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    comment: {
-      type: DataType.STRING,
-      allowNull: true,
-      validate: {
-        notEmpty: true
-      }
-    }
-  });
-
-  const Answers = sequelize.define("Answers", {
-    id: {
-      type: DataType.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    text: {
-      type: DataType.STRING,
-      allowNull: true
-    },
-    score: {
-      type: DataType.INTEGER,
-      allowNull: true
-    }
-  });
-
-
   const Comments = sequelize.define("Comments", {
     id: {
       type: DataType.INTEGER,
@@ -513,7 +481,6 @@ module.exports = (sequelize, DataType) => {
     }
   });
 
-  Evaluations.hasMany(Votes);
   Enterprises.hasMany(Evaluations, { as: "Evaluations" });
   Enterprises.hasMany(Images);
   Enterprises.belongsTo(Sectors);
@@ -533,8 +500,6 @@ module.exports = (sequelize, DataType) => {
       Enterprises,
       Evaluations,
       Sectors,
-      Votes,
-      Answers,
       Comments,
       Users,
       Images,
