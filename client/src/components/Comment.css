@@ -29,7 +29,7 @@
 }
 
 #comment-icons{
-  margin-top: -45px;
+  border-top: 1px solid #999999;
 }
 
 #comments-table .collapsible {
