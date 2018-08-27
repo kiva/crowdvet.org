@@ -13,7 +13,7 @@ class EnterpisesList extends Component {
   constructor(props) {
     super(props);
     this.filters = { filters: { sector_id:[], country_id:[] }, sort:""};
-    this.state = { show: 2, limit: 2 };
+    this.state = { show: 4, limit: 4 };
     this.onHandleClick = this.onHandleClick.bind(this);
   }
 
