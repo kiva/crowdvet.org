@@ -353,6 +353,20 @@ module.exports = (sequelize, DataType) => {
       validate: {
         notEmpty: true
       }
+    },
+    image: {
+      type: DataType.STRING,
+      allowNull: true,
+      validate: {
+        notEmpty: true
+      }
+    },
+    link: {
+      type: DataType.STRING,
+      allowNull: true,
+      validate: {
+        notEmpty: true
+      }
     }
   });
 
@@ -528,6 +542,7 @@ module.exports = (sequelize, DataType) => {
   Users.hasMany(Evaluations);
   Comments.hasMany(Comments, { as: "Replies" });
   Comments.hasMany(CommentVotes);
+  Comments.belongsTo(Users);
   Users.hasMany(CommentVotes);
   Users.hasMany(UsersSectors);
 
