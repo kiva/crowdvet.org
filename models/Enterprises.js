@@ -416,21 +416,6 @@ module.exports = (sequelize, DataType) => {
     }
   });
 
-  const Questions = sequelize.define("Questions", {
-    id: {
-      type: DataType.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    text: {
-      type: DataType.STRING,
-      allowNull: true
-    },
-    name: {
-      type: DataType.STRING,
-      allowNull: true
-    }
-  });
 
   const Comments = sequelize.define("Comments", {
     id: {
@@ -528,10 +513,6 @@ module.exports = (sequelize, DataType) => {
     }
   });
 
-  Questions.hasMany(Answers, { as: "Answers" });
-  Votes.belongsTo(Questions);
-  Votes.belongsTo(Answers);
-  Votes.belongsTo(Evaluations);
   Evaluations.hasMany(Votes);
   Enterprises.hasMany(Evaluations, { as: "Evaluations" });
   Enterprises.hasMany(Images);
@@ -553,7 +534,6 @@ module.exports = (sequelize, DataType) => {
       Evaluations,
       Sectors,
       Votes,
-      Questions,
       Answers,
       Comments,
       Users,
