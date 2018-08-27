@@ -52,7 +52,7 @@ class ApplicationEvaluate extends Component {
   }
 
   render() {
-    const { auth, questions, enterprise } = this.props;
+    const { auth, enterprise } = this.props;
     // redirect user if not logged
     if (!auth) return null;
     if (!enterprise) return null;
@@ -89,7 +89,7 @@ class ApplicationEvaluate extends Component {
   }
 }
 
-function mapStateToProps({ auth, enterprises, questions, evaluations }, ownProps) {
+function mapStateToProps({ auth, enterprises, evaluations }, ownProps) {
   return {
     auth,
     enterprise: enterprises[ownProps.match.params.id],
