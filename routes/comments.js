@@ -6,7 +6,8 @@ module.exports = app => {
     Evaluations,
     Sectors,
     Comments,
-    CommentVotes
+    CommentVotes,
+    Users
   } = app.datasource.models.Enterprises.model;
 
   app.get("/api/enterprises/:id/comments", requireLogin, async (req, res) => {
@@ -14,7 +15,7 @@ module.exports = app => {
       const { id } = req.params;
       const result = await Comments.findAll({
         where: { enterprise_id: id, comment_id: null },
-        include: [{ model: Comments, as: "Replies" }, { model: CommentVotes }]
+        include: [{ model: Comments, as: "Replies", include: [ { model: Users } ] }, { model: CommentVotes }]
       });
 
       return res.status(200).send(result);
@@ -54,7 +55,12 @@ module.exports = app => {
         enterprise_id
       });
 
-      return res.status(200).send(comment);
+      const result = await Comments.findOne({
+        where: { id: comment.id },
+        include: [{model: Users}]
+      });
+
+      return res.status(200).send(result);
     } catch (e) {
       console.log(e);
     }
@@ -73,14 +79,14 @@ module.exports = app => {
         CommentVotes.destroy({ where: { user_id, comment_id: id } });
         const comment = await Comments.findOne({
           where: { id },
-          include: [{ model: Comments, as: "Replies" }, { model: CommentVotes }]
+          include: [{ model: Comments, as: "Replies", include: [ { model: Users } ] }, { model: CommentVotes }]
         });
         return res.status(200).send(comment);
       }
       const newVote = await CommentVotes.create({ user_id, comment_id: id });
       const comment = await Comments.findOne({
         where: { id },
-        include: [{ model: Comments, as: "Replies" }, { model: CommentVotes }]
+        include: [{ model: Comments, as: "Replies", include: [ { model: Users } ] }, { model: CommentVotes }]
       });
 
       return res.status(200).send(comment);
