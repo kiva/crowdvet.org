@@ -282,8 +282,9 @@ class ApplicationShow extends Component {
     } = this.props;
 
     if (!enterprise) return null;
-    this.sector = enterprise.Sector ? enterprise.Sector.name : "Water";
-    const imgName = `/sectors/${this.sector}.jpg`;
+    this.sector = enterprise.Sector.name;
+
+    const imgName = enterprise.Sector.image && `/sectors/${enterprise.Sector.image}` || enterprise.Sector.link;
 
     const toPage = utils.getPage(enterprise, officialEvaluation);
     return (
