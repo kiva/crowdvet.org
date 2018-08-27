@@ -37,9 +37,8 @@ module.exports = app => {
 
   app.post("/api/admin/sectors", passport.authenticate("jwt"), async (req, res) => {
     try {
-      const { name } = req.body;
       const result = await Sectors.create({
-        name
+      ...req.body
       });
       return res.status(200).send(result);
     } catch (e) {
