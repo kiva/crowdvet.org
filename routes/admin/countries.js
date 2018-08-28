@@ -6,11 +6,11 @@ module.exports = app => {
   app.get("/api/admin/countries", passport.authenticate("jwt"), async (req, res) => {
     try {
       const { _start, _end } = req.query;
-      const result = await Countries.findAll({offset: _start, limit:_end});
+      const result = await Countries.findAndCountAll({offset: _start, limit:_end});
       return res
         .status(200)
-        .set("x-Total-Count", result.length)
-        .send(result);
+        .set("x-Total-Count", result.count)
+        .send(result.rows);
     } catch (e) {
       console.log(e);
     }
