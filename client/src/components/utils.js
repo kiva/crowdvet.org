@@ -275,5 +275,4 @@ export default {
   isOpen,
   timeRenderer,
   getCrowdVotes,
-  showResults
 };
