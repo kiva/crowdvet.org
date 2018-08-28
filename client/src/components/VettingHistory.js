@@ -61,7 +61,7 @@ class VettingHistory extends Component {
 
     const content = _.map(userEvaluations, evaluation => {
 
-      if(evaluation.inProgress) {
+      if(evaluation.inProgress || evaluation.exclude) {
         return null
       }
 
@@ -92,6 +92,7 @@ class VettingHistory extends Component {
         default:
           stateColor = "yellow-text";
       }
+
       const EvaluationResult = utils.getScoreAndAccuracy(
         answer,
         officialAnswer

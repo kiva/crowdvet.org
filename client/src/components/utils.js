@@ -137,6 +137,8 @@ function getOverallResults(userEvaluations, officialEvaluations) {
   const result = _.reduce(
     userEvaluations,
     (results, evaluation) => {
+      if(evaluation.exclude) return results;
+
       if (officialEvaluations[evaluation.enterprise_id]) {
         const answer = [evaluation.model, evaluation.prioritization, evaluation.impact];
         const officialAnswer = [officialEvaluations[evaluation.enterprise_id].model, officialEvaluations[evaluation.enterprise_id].prioritization,
@@ -272,5 +274,6 @@ export default {
   getMessage,
   isOpen,
   timeRenderer,
-  getCrowdVotes
+  getCrowdVotes,
+  showResults
 };
