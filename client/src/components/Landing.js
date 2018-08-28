@@ -4,6 +4,7 @@ import SignUpModal from "./SignUpModal";
 import { Link } from "react-router-dom";
 import "./Landing.css";
 import world from "./world.svg";
+import HowWorks from "./HowItWorks"
 
 class Landing extends Component {
   renderText() {
@@ -100,6 +101,9 @@ class Landing extends Component {
         <SignUpModal />
         {this.renderVideo()}
         {this.renderText()}
+        <div className="container">
+          <HowWorks auth={this.props.auth}/>
+        </div>
         {this.renderWorld()}
         {this.renderRecent()}
         {this.renderPrefooter()}
