@@ -11,6 +11,7 @@ class CommentHistory extends Component {
 
   render() {
     let hide = "";
+    if(_.isEmpty(this.props.comments)) return null
     if (this.props.comments.length == 0) hide = "hide";
     if (Object.keys(this.props.comments).length <= this.state.show) {
       hide = "hide";
