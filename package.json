@@ -45,6 +45,7 @@
     "jotform": "^0.1.4",
     "jwt-simple": "^0.5.1",
     "lodash": "^4.17.10",
+    "nodemailer": "^4.6.8",
     "nodemon": "^1.17.4",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
