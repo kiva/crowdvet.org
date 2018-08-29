@@ -31,7 +31,7 @@ class Reply extends Component {
           <textarea
             id="textarea1"
             value={this.state.text}
-            placeholder="Type your replay here..."
+            placeholder="Type your reply here..."
             onChange={this.onInputChange}
             className="materialize-textarea"
             style={{ minHeight: "100px" }}
