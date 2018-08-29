@@ -9,5 +9,6 @@ module.exports = {
   accessKeyId: process.env.ACCESS_KEY,
   secretAccessKey: process.env.SECRET_KEY,
   API_KEY : process.env.API_KEY,
-  SMTP_URL : process.env.SMTP_URL
+  SMTP_URL : process.env.SMTP_URL,
+  APP_URL_BASE : process.env.APP_URL_BASE
 };

@@ -5,7 +5,7 @@ const jwt = require("jwt-simple");
 const keys = require("../config/keys");
 const {sendEmail} = require('../services/emailer');
 const uuid = require("uuid/v4");
-const APP_URL_BASE = process.env.APP_URL_BASE || 'http://localhost:3000';
+const APP_URL_BASE = keys.APP_URL_BASE;
 
 module.exports = app => {
   const { Users } = app.datasource.models.Enterprises.model;
