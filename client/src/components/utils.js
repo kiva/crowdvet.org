@@ -192,6 +192,21 @@ function getPage(enterprise, officialEvaluation) {
   }
 }
 
+function showResults(enterprise, officialEvaluation) {
+  if (isOpen(enterprise)) {
+    const page = `/users/evaluations/${enterprise.id}`;
+    return false;
+  }
+  if (!isOpen(enterprise) && isPending(officialEvaluation)) {
+    const page = `/users/evaluations/results/${enterprise.id}`;
+    return true;
+  }
+  if (!isOpen(enterprise) && !isPending(officialEvaluation)) {
+    const page = `/users/evaluations/results/${enterprise.id}`;
+    return true;
+  }
+}
+
 function getMessage(enterprise, evaluation, officialEvaluation) {
   if (
     isOpen(enterprise) &&
@@ -201,7 +216,8 @@ function getMessage(enterprise, evaluation, officialEvaluation) {
     return {
       message: "BELOW ARE THE RESULTS YOU SUBMITTED",
       page: "/user",
-      text: "EXit"
+      text: "Exit",
+      description:"*Once the vetting period ends, see how your score compares to the crowd and Kiva's scores"
     };
   }
 
@@ -213,7 +229,8 @@ function getMessage(enterprise, evaluation, officialEvaluation) {
     return {
       message: "BELOW ARE THE RESULTS YOU SUBMITTED",
       page: "/user",
-      text: "Exit"
+      text: "Exit",
+      description:"*Once the vetting period ends, see how your score compares to the crowd and Kiva's scores"
     };
   }
 
@@ -225,7 +242,8 @@ function getMessage(enterprise, evaluation, officialEvaluation) {
     return {
       message: "KIVA WILL POST A DECISION SOON",
       page: "/user",
-      text: "EXit"
+      text: "Exit",
+      description:"*Once the vetting period ends, see how your score compares to the crowd and Kiva's scores"
     }
   }
   if (
@@ -275,4 +293,5 @@ export default {
   isOpen,
   timeRenderer,
   getCrowdVotes,
+  showResults
 };
