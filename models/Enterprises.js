@@ -56,7 +56,14 @@ module.exports = (sequelize, DataType) => {
         validate: {
           notEmpty: true
         }
-      }
+      },
+      resetPassLink: {
+        type: DataType.STRING,
+        allowNull: true,
+        validate: {
+          notEmpty: true
+        }
+      },
     },
     {
       hooks: {
@@ -72,6 +79,11 @@ module.exports = (sequelize, DataType) => {
 
   Users.isPassword = (encodedPassword, password) =>
     bcrypt.compareSync(password, encodedPassword);
+
+  Users.hash =  password => {
+      const salt = bcrypt.genSaltSync();
+      return bcrypt.hashSync(password, salt);
+    }
 
   const Enterprises = sequelize.define("Enterprises", {
     id: {
