@@ -39,7 +39,7 @@ class CommentItem extends Component {
     const heartImg = userVotes[user.id] ? heart : heartGrey;
 
     const hide = this.state.hidden ? "hide" : "";
-
+    console.log(comment, "con com")
     return (
       <li>
         <div className="row collapsible-header grey-background comment-height">
@@ -57,11 +57,11 @@ class CommentItem extends Component {
               <p>
                 <img
                   className="circle responsive-img"
-                  src={user.image}
+                  src={comment.User.image}
                   style={{ maxWidth: "50px" }}
                 />
               </p>
-              <p className="comment-height">{user.name}</p>
+              <p className="comment-height">{comment.User.name}</p>
             </div>
             <div className="col s8 grey-background">
               <p className="comment-height">{comment.text}</p>
