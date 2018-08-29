@@ -19,7 +19,7 @@ class EvaluationResults extends Component {
       menu: {
         review: { text: "Review", url: `/application/${id}`, active: false },
         evaluation: { text: "Evaluation", url: `/users/evaluations/${id}`, active: false },
-        results: { text: "Results", url: "", active: true }
+        results: { text: "Results", url: `/users/evaluations/results/${id}`, active: true }
       },
       active: 3
     };
@@ -49,7 +49,7 @@ class EvaluationResults extends Component {
     if (!evaluation) return null;
 
     this.sector = enterprise.Sector ? enterprise.Sector.name : "Water";
-    const imgName = `/sectors/${this.sector}.jpg`;
+    const imgName = enterprise.Sector.image && `/sectors/${enterprise.Sector.image}` || enterprise.Sector.link;
     const message = utils.getMessage(
       enterprise,
       evaluation,
@@ -81,15 +81,15 @@ class EvaluationResults extends Component {
           <div className="row flow-text center">
             <h3 className="col s12">Evaluation Results</h3>
           </div>
-          <KivaMessage message={message.message} />
+          <KivaMessage message={message.message} description={message.description} />
           <div className="row">{this.renderEvaluation()}</div>
           <div className="row">
-            <div className="col s6">
-              <Link to={"/user"} className="btn button-large btn-results">
+            <div className="col s6 center">
+              <Link to={`/users/evaluations/${this.props.match.params.id}`} className="btn button-large btn-results">
                 Previous Page
               </Link>
             </div>
-            <div className="col s6">
+            <div className="col s6 center">
               <Link to={message.page} className="btn button-large btn-results">
                 {message.text}
               </Link>
@@ -149,7 +149,6 @@ class EvaluationResults extends Component {
 
   renderEvaluation() {
     const { evaluation } = this.props;
-    console.log(evaluation);
     let text = "";
     return (
       <div>

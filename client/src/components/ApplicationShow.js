@@ -21,18 +21,22 @@ class ApplicationShow extends Component {
     super(props);
     const id = this.props.match.params.id;
     this.state = {
-      menu: {
-        review: { text: "Review", url: `/application/${id}`, active: true },
-        evaluation: { text: "Evaluation", url: `/users/evaluations/${id}`, active: false },
-        results: { text: "Results", url: "", active: false }
-      },
       topMenu: {
         profile: { active: true },
         vet: { active: false },
         training: { active: false }
       }
     };
-    let sector = "";
+
+    this.menu = {
+      review: { text: "Review", url: `/application/${id}`, active: true },
+      evaluation: {
+        text: "Evaluation",
+        url: `/users/evaluations/${id}`,
+        active: false
+      },
+      results: { text: "Results", url: `/users/evaluations/results/${id}`, active: false }
+    };
   }
 
   componentDidMount() {
@@ -42,10 +46,6 @@ class ApplicationShow extends Component {
     this.props.fetchOfficialEvaluations();
     this.props.fetchEnterpriseComments(this.props.match.params.id);
   }
-
-  onSubMenuChange = (menu, active) => {
-    this.setState({ menu, active });
-  };
 
   renderCards() {
     return (
@@ -60,10 +60,7 @@ class ApplicationShow extends Component {
             mainText={`$${this.props.enterprise.loan.toLocaleString()}`}
             description="USD"
           />
-          <Card
-            name="GEOGRAPHICAL LOCATION"
-            mainText={this.props.enterprise.Country.name}
-          />
+          <Card name="COUNTRY" mainText={this.props.enterprise.Country.name} />
         </div>
       </div>
     );
@@ -80,32 +77,32 @@ class ApplicationShow extends Component {
             </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>
-              <img src={PDF} />
-              <a href={this.props.enterprise.loanInquiry}>
-                {this.props.enterprise.loanInquiry
-                  ? "Initial Loan Inquiry"
-                  : "Initial Loan Inquiry: N/A"}
-              </a>
-            </td>
-            <td>
-              <img src={PDF} />
-              <a href={this.props.enterprise.loanApplication}>
-                {this.props.enterprise.loanApplication
-                  ? "Loan Application"
-                  : "Loan Application: N/A"}
-              </a>
-            </td>
-            <td>
-              <img src={PDF} />
-              <a href={this.props.enterprise.boardAndManagement}>
-                {this.props.enterprise.boardAndManagement
-                  ? "Board and Management Team"
-                  : "Board and Management Team: N/A"}
-              </a>
-            </td>
-          </tr>
+            <tr>
+              <td>
+                <img src={PDF} />
+                <a href={this.props.enterprise.loanInquiry}>
+                  {this.props.enterprise.loanInquiry
+                    ? "Initial Loan Inquiry"
+                    : "Initial Loan Inquiry: N/A"}
+                </a>
+              </td>
+              <td>
+                <img src={PDF} />
+                <a href={this.props.enterprise.loanApplication}>
+                  {this.props.enterprise.loanApplication
+                    ? "Loan Application"
+                    : "Loan Application: N/A"}
+                </a>
+              </td>
+              <td>
+                <img src={PDF} />
+                <a href={this.props.enterprise.boardAndManagement}>
+                  {this.props.enterprise.boardAndManagement
+                    ? "Board and Management Team"
+                    : "Board and Management Team: N/A"}
+                </a>
+              </td>
+            </tr>
             <tr>
               <td>
                 <img src={PDF} />
@@ -212,45 +209,48 @@ class ApplicationShow extends Component {
         <div className="row center">
           <div className="col s12 m6 l6">
             <h5>Problem</h5>
-            <div className="flow-text card-text">
+            <p className="flow-text card-text left-align">
               {this.props.enterprise.description}
-            </div>
+            </p>
           </div>
           <div className="col s12 m6 l6">
             <h5>Loan Purpose</h5>
-            <div className="flow-text card-text">
+            <p className="flow-text card-text left-align">
               {this.props.enterprise.loanPurpose}
-            </div>
+            </p>
           </div>
         </div>
         <div className="row center">
           <div className="col s12 m6 l6">
             <h5>Business Model</h5>
-            <div className="flow-text card-text">
+            <p className="flow-text card-text left-align">
               {this.props.enterprise.business}
-            </div>
+            </p>
           </div>
 
           <div className="col s12 m6 l6">
             <h5>Selected Metrics</h5>
             <div className="col s10 offset-s2 left-align">
-              <div className="flow-text card-text">
+              <p className="flow-text card-text left-align">
                 <ul id="selected-metrics">
                   <li>
-                    Began operating starting: {this.props.enterprise.beganOperating}
+                    Began operating starting:{" "}
+                    {this.props.enterprise.beganOperating}
                   </li>
                   <li>
-                    Number of paid employees: {this.props.enterprise.paidEmployees}
+                    Number of paid employees:{" "}
+                    {this.props.enterprise.paidEmployees}
                   </li>
                   <li>
                     Ownerhip status: {this.props.enterprise.ownershipStatus}
                   </li>
                   <li>Asset size: {this.props.enterprise.asset}</li>
                   <li>
-                    Previous Year Sales Revenue: {this.props.enterprise.salesRevenue}
+                    Previous Year Sales Revenue:{" "}
+                    {this.props.enterprise.salesRevenue}
                   </li>
                 </ul>
-              </div>
+              </p>
             </div>
           </div>
         </div>
@@ -283,10 +283,14 @@ class ApplicationShow extends Component {
 
     if (!enterprise) return null;
     this.sector = enterprise.Sector.name;
-
-    const imgName = enterprise.Sector.image && `/sectors/${enterprise.Sector.image}` || enterprise.Sector.link;
-
+    const imgName =
+      (enterprise.Sector.image && `/sectors/${enterprise.Sector.image}`) ||
+      enterprise.Sector.link;
     const toPage = utils.getPage(enterprise, officialEvaluation);
+    const showResults = utils.showResults(enterprise, officialEvaluation);
+
+    this.menu.evaluation.url = toPage;
+
     return (
       <div>
         <TopMenu menu={this.state.topMenu} />
@@ -307,7 +311,7 @@ class ApplicationShow extends Component {
           </div>
         </div>
         <div className="row flow-text dashboard">
-          <SubMenu menu={this.state.menu} />
+          <SubMenu menu={this.menu} />
         </div>
         <div className="container">
           {this.renderCards()}

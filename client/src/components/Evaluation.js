@@ -21,9 +21,8 @@ class ApplicationEvaluate extends Component {
       menu: {
         review: { text: "Review", url: `/application/${id}`, active: false },
         evaluation: { text: "Evaluation", url: `/users/evaluations/${id}`, active: true },
-        results: { text: "Results", url: "", active: false }
-      },
-      active: 2
+        results: { text: "Results", url: `/users/evaluations/results/${id}`, active: false }
+      }
     };
   }
 
@@ -31,6 +30,7 @@ class ApplicationEvaluate extends Component {
     window.scrollTo(0, 0);
     this.props.fetchEnterprise(this.props.match.params.id);
     this.props.fetchUserEvaluation(this.props.match.params.id);
+    this.props.fetchOfficialEvaluations();
   }
 
   onSubMenuChange = (menu, active) => {
@@ -52,13 +52,16 @@ class ApplicationEvaluate extends Component {
   }
 
   render() {
-    const { auth, enterprise } = this.props;
+    const { auth, enterprise, officialEvaluation } = this.props;
     // redirect user if not logged
     if (!auth) return null;
     if (!enterprise) return null;
 
-    this.sector = enterprise.Sector ? enterprise.Sector.name : "Water";
-    const imgName = `/sectors/${this.sector}.jpg`;
+    this.sector = enterprise.Sector.name;
+    const imgName = enterprise.Sector.image && `/sectors/${enterprise.Sector.image}` || enterprise.Sector.link;
+    if (utils.showResults(enterprise, officialEvaluation)) {
+      this.props.history.push(utils.getPage(enterprise, officialEvaluation))
+    }
 
     return (
       <div>
@@ -89,11 +92,12 @@ class ApplicationEvaluate extends Component {
   }
 }
 
-function mapStateToProps({ auth, enterprises, evaluations }, ownProps) {
+function mapStateToProps({ auth, enterprises, evaluations, officialEvaluations }, ownProps) {
   return {
     auth,
     enterprise: enterprises[ownProps.match.params.id],
-    evaluation: evaluations[ownProps.match.params.id]
+    evaluation: evaluations[ownProps.match.params.id],
+    officialEvaluation: officialEvaluations[ownProps.match.params.id],
   };
 }
 export default connect(mapStateToProps, actions)(ApplicationEvaluate);
