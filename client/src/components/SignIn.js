@@ -3,9 +3,15 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import _ from "lodash";
+import ForgotPass from "./ForgotPass"
 
 class SignIn extends Component {
-
+  constructor(props) {
+    super(props)
+    this.state = {
+      hide: 'hide',
+    }
+  }
   handleFormSubmit(values) {
     this.props.signInUser(values, this.props.history);
   }
@@ -31,7 +37,9 @@ class SignIn extends Component {
       </div>
     );
   }
-
+  handleForgot() {
+      this.setState({hide:''})
+  }
   render(){
     const { handleSubmit } = this.props;
 
@@ -60,7 +68,11 @@ class SignIn extends Component {
       <button className="btn" id="signup">
         <div>Sign In</div>
       </button>
+      <div className="row">
+        <p><a onClick={this.handleForgot.bind(this)} className="grey-text col s12 center">Forgot Password?</a></p>
+      </div>
       </form>
+      <ForgotPass hide={this.state.hide} />
     </div>
     )
   }
