@@ -137,7 +137,7 @@ class EvaluationForm extends Component {
           <Field name="exclude" text="Check here if you want to EXCLUDE your score on this application in your overall score calculation." component={this.renderCheckBox} />
         </div>
         {error && <div className="red-text">{error}</div>}
-        <div className="col s12 m6 offset-m3">
+        <div className="col s12 m6 offset-m3 center">
           <button className="btn button-large">Submit Evaluation</button>
         </div>
       </form>
