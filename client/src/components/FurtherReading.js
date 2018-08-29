@@ -12,6 +12,7 @@ import _ from 'lodash';
 
 class FurtherReading extends Component {
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.props.fetchRecomendations();
   }
   render() {
