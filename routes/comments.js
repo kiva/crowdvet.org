@@ -15,7 +15,7 @@ module.exports = app => {
       const { id } = req.params;
       const result = await Comments.findAll({
         where: { enterprise_id: id, comment_id: null },
-        include: [{ model: Comments, as: "Replies", include: [ { model: Users } ] }, { model: CommentVotes }]
+        include: [{ model: Comments, as: "Replies", include: [ { model: Users } ] }, { model: CommentVotes }, { model: Users }]
       });
 
       return res.status(200).send(result);
@@ -36,7 +36,12 @@ module.exports = app => {
         text
       });
 
-      return res.status(200).send(comment);
+      const result = await Comments.findOne({
+        where: { id: comment.id },
+        include: [{model: Users}]
+      });
+
+      return res.status(200).send(result);
     } catch (e) {
       console.log(e);
     }
