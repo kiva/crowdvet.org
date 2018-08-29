@@ -55,12 +55,13 @@ class Filter extends Component {
   onHandleResetClick(e) {
     e.preventDefault()
     this.props.fetchEnterprises();
-    this.props.dispatch(reset('filterForm'));
+    this.props.dispatch(reset('FilterForm'));
   }
 
   renderCheckBox = field => {
     const id = idgen();
     const { input: { value, onChange } } = field
+    console.log(value)
     return (<div className="row">
       <div className="col s12 left-align">
         <label>
@@ -69,6 +70,7 @@ class Filter extends Component {
             id={id}
             type="checkbox"
             typeid={field.id}
+            checked={field.input.value ? "checked" : ""}
           />
           <label htmlFor={id}>{field.text}</label>
         </label>
@@ -107,4 +109,4 @@ class Filter extends Component {
   }
 }
 
-export default connect(null, actions)(reduxForm({ form: "filterForm" })(Filter));
+export default connect(null, actions)(reduxForm({ form: "FilterForm" })(Filter));
