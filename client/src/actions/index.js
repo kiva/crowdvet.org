@@ -26,6 +26,8 @@ import {
   UPDATE_SETTINGS,
   UPDATE_SETTINGS_ERROR,
   CLEAR_MESSAGES,
+  PASS_RESET_REQ_SUCCESS,
+  RESET_PASS_SUCCESS
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -180,6 +182,56 @@ export const updateUserSettings = values => async dispatch => {
     dispatch({ type: UPDATE_SETTINGS_ERROR, payload: "An error accurred, please try again later." });
   }
 };
+
+export const resetPassword = (formData) => dispatch => {
+  return axios.put('/api/resetpass', {
+    ...formData
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    return response.json();
+  })
+  .then(data => {
+    dispatch(resetPassSuccess(data));
+  })
+  .catch(error => {
+
+  })
+}
+
+export const sendResetPasswordEmail = (formData) => dispatch => {
+  return fetch('/api/forgotpass', {
+    headers: new Headers({ 'Content-Type': 'application/json' }),
+    method: "PUT",
+    body: JSON.stringify(formData)
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    return response.json();
+  })
+  .then(data => {
+    dispatch(passResetReqSuccess(data));
+  })
+  .catch(error => {
+
+  })
+}
+
+
+export const passResetReqSuccess = (data) => ({
+  type: PASS_RESET_REQ_SUCCESS,
+  data,
+})
+
+
+export const resetPassSuccess = (data) => ({
+  type: RESET_PASS_SUCCESS,
+  data,
+})
 
 export const updateUser = values => async dispatch => {
   const res = await axios.patch(`/api/users`, { attributes: { ...values } });
