@@ -8,11 +8,23 @@ import Dropdown from "./Dropdown";
 import { Button, NavItem } from "react-materialize";
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { learn: { active: false } };
+  }
+
   componentDidMount() {
     window.jQuery(document).ready(function() {
       window.jQuery(".button-collapse").sideNav();
     });
   }
+
+  onHandleMenuClick(state) {
+    return () => {
+        this.setState( state );
+    }
+  }
+
   renderSingIn() {
     if (this.props.auth) {
       return [
@@ -20,15 +32,19 @@ class Header extends Component {
           <Link to={"/user"}>{this.props.auth.name}</Link>
         </li>,
         <li key="2">
-            <Dropdown
-              trigger={
-                <div>
-                  <a><i className="material-icons right">arrow_drop_down</i></a>
-                </div>
-              }
-            >
-              <a style={{color:"black"}} href={"/auth/logout"}>Sign Out</a>
-            </Dropdown>
+          <Dropdown
+            trigger={
+              <div>
+                <a>
+                  <i className="material-icons right">arrow_drop_down</i>
+                </a>
+              </div>
+            }
+          >
+            <a style={{ color: "black" }} href={"/auth/logout"}>
+              Sign Out
+            </a>
+          </Dropdown>
         </li>
       ];
     }
@@ -41,7 +57,13 @@ class Header extends Component {
     );
   }
   render() {
-    const startVetting = this.props.auth && <Link to={"/vet/enterprises"}>Start Vetting</Link> || <Link className="modal-trigger" to={"#modal1"}>Start Vetting</Link>
+    const startVetting = (this.props.auth && (
+      <Link onClick={this.onHandleMenuClick.bind(this)({learn: { active: false }})} to={"/vet/enterprises"}>Start Vetting</Link>
+    )) || (
+      <Link onClick={this.onHandleMenuClick.bind(this)({learn: { active: false }})} className="modal-trigger" to={"#modal1"}>
+        Start Vetting
+      </Link>
+    );
     return (
       <div>
         <nav>
@@ -49,29 +71,37 @@ class Header extends Component {
             <Link to={"/"} className="left brand-logo">
               Crowdvetting at <img src={logo} className="App-logo" alt="logo" />
             </Link>
-            <a href="#" data-activates="mobile-demo" className="button-collapse">
+            <a
+              href="#"
+              data-activates="mobile-demo"
+              className="button-collapse"
+            >
               <i className="material-icons">menu</i>
             </a>
             <ul className="right hide-on-med-and-down">
               <li>
-                <Link to={"/learn"}>Learn about Crowdvetting</Link>
+
+                <Link to={"/learn"} onClick={this.onHandleMenuClick.bind(this)({learn: { active: true }})}
+                 className={ this.state.learn.active && "weight-500" }>Learn about Crowdvetting</Link>
               </li>
-              <li>
-                {startVetting}
-              </li>
+              <li>{startVetting}</li>
               {this.renderSingIn()}
             </ul>
           </div>
 
-        <ul className="side-nav" id="mobile-demo">
-          <li>
-            <Link to={"/learn"}>Learn about Crowdvetting</Link>
-          </li>
-          <li>
-            <Link to={"/badges"}>Take Action</Link>
-          </li>
-          {this.renderSingIn()}
-        </ul>
+          <ul className="side-nav" id="mobile-demo">
+            <li>
+              <Link
+                to={"/learn"}
+              >
+                Learn about Crowdvetting
+              </Link>
+            </li>
+            <li>
+              <Link to={"/badges"}>Take Action</Link>
+            </li>
+            {this.renderSingIn()}
+          </ul>
         </nav>
       </div>
     );
