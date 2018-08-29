@@ -1,8 +1,11 @@
 const passport = require("passport");
 const requireLogin = require("../middlewares/requireLogin");
-const HttpStatus = require('http-status');
-const jwt = require('jwt-simple');
-const keys = require('../config/keys');
+const HttpStatus = require("http-status");
+const jwt = require("jwt-simple");
+const keys = require("../config/keys");
+const {sendEmail} = require('../services/emailer');
+const uuid = require("uuid/v4");
+const APP_URL_BASE = process.env.APP_URL_BASE || 'http://localhost:3000';
 
 module.exports = app => {
   const { Users } = app.datasource.models.Enterprises.model;
@@ -59,33 +62,68 @@ module.exports = app => {
     })(req, res, next);
   });
 
-//Admin token auth
-app.post('/api/token', (req, res) => {
-  if(req.body.email && req.body.password) {
-    const {email, password} = req.body;
+  //Admin token auth
+  app.post("/api/token", (req, res) => {
+    if (req.body.email && req.body.password) {
+      const { email, password } = req.body;
 
-    Users.findOne({where: {email}})
-    .then(user => {
-      if(Users.isPassword(user.password, password)) {
-        const payload = {id: user.id}
-        res.json({
-        token: jwt.encode(payload, keys.jwtSecret)
+      Users.findOne({ where: { email } })
+        .then(user => {
+          if (Users.isPassword(user.password, password)) {
+            const payload = { id: user.id };
+            res.json({
+              token: jwt.encode(payload, keys.jwtSecret)
+            });
+          } else {
+            res.sendStatus(HttpStatus.UNAUTHORIZED);
+          }
         })
-      } else {
-        res.sendStatus(HttpStatus.UNAUTHORIZED)
-      }
-    })
-    .catch(err => {
-      res.sendStatus(HttpStatus.UNAUTHORIZED)
-    })
-  } else {
-    res.sendStatus(HttpStatus.UNAUTHORIZED)
-  }
-})
+        .catch(err => {
+          res.sendStatus(HttpStatus.UNAUTHORIZED);
+        });
+    } else {
+      res.sendStatus(HttpStatus.UNAUTHORIZED);
+    }
+  });
 
-  //AUTH REQUIRED
-  app.get("/api/blogs", requireLogin, async (req, res) => {
-    res.send("logueadooo");
+  app.put("/api/forgotpass", async (req, res) => {
+    if (!req.body) return res.status(400).json({ message: "No Request Body" });
+    if (!req.body.email)
+      return res.status(400).json({ message: "No Email in Request Body" });
+
+    const token = uuid();
+    const emailData = {
+      to: req.body.email,
+      subject: "Password Reset Instructions",
+      text: `Please use the following link for instructions to reset your password: ${APP_URL_BASE}/resetpass/${token}`,
+      html: `<p>Please use the link below for instructions to reset your password.</p><p>${APP_URL_BASE}/resetpass/${token}</p>`
+    };
+
+    try {
+      await Users.update(
+        { resetPassLink: token },
+        { where: { email: req.body.email } }
+      );
+      sendEmail(emailData);
+      return res
+        .status(200)
+        .json({ message: `Email has been sent to ${req.body.email}` });
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  app.put("/api/resetpass", async (req, res) => {
+    const { resetPassLink, newPassword } = req.body;
+    try {
+      await Users.update(
+        { password: Users.hash(newPassword), resetPassLink: null },
+        { where: {resetPassLink } }
+      );
+      return res.status(200);
+    } catch (e) {
+      console.log(e);
+    }
   });
 
   app.get("/auth/logout", (req, res) => {
