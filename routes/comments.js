@@ -84,14 +84,14 @@ module.exports = app => {
         CommentVotes.destroy({ where: { user_id, comment_id: id } });
         const comment = await Comments.findOne({
           where: { id },
-          include: [{ model: Comments, as: "Replies", include: [ { model: Users } ] }, { model: CommentVotes }]
+          include: [{ model: Comments, as: "Replies", include: [ { model: Users } ] }, { model: CommentVotes }, { model: Users }]
         });
         return res.status(200).send(comment);
       }
       const newVote = await CommentVotes.create({ user_id, comment_id: id });
       const comment = await Comments.findOne({
         where: { id },
-        include: [{ model: Comments, as: "Replies", include: [ { model: Users } ] }, { model: CommentVotes }]
+        include: [{ model: Comments, as: "Replies", include: [ { model: Users } ] }, { model: CommentVotes }, { model: Users }]
       });
 
       return res.status(200).send(comment);
