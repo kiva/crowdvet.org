@@ -18,9 +18,17 @@ class EvaluationResults extends Component {
     const id = this.props.match.params.id;
     this.state = {
       menu: {
-        1: { text: "Review", url: `/application/${id}` },
-        2: { text: "Evaluation", url: `/users/evaluations/${id}` },
-        3: { text: "Results", url:"" }
+        review: { text: "Review", url: `/application/${id}`, active: false },
+        evaluation: {
+          text: "Evaluation",
+          url: `/users/evaluations/${id}`,
+          active: false
+        },
+        results: {
+          text: "Results",
+          url: `/users/evaluations/results/${id}`,
+          active: true
+        }
       },
       active: 3
     };
@@ -104,8 +112,10 @@ class EvaluationResults extends Component {
     ];
     const evaluationResult = utils.getScoreAndAccuracy(votes, officialVotes);
 
-    this.sector = enterprise.Sector ? enterprise.Sector.name : "Water";
-    const imgName = `/sectors/${this.sector}.jpg`;
+    const imgName =
+      (enterprise.Sector.image && `/sectors/${enterprise.Sector.image}`) ||
+      enterprise.Sector.link;
+
     const message = `KIVA ${officialEvaluation.status.toUpperCase()} THIS LOAN`;
     let background;
     switch (officialEvaluation.status) {
@@ -311,7 +321,7 @@ const impactChoices = [
   {
     score: 1,
     text:
-      "This company has no discernable social impact at all. Most for-profit companies fall into this category rating."
+      "This indicates any social enterprise you feel has negative social impact, or takes advantage of people - either the people it claims to serve, or other parties."
   },
   {
     score: 2,
@@ -364,7 +374,7 @@ const modelChoices = [
   {
     score: 5,
     text:
-      "This business does not display robust profits, as it is reinvestmenting its profit into growth of the company."
+      "This business does not display robust profits, as it is reinvesting its profit into growth of the company."
   },
   {
     score: 6,

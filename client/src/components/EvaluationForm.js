@@ -14,7 +14,7 @@ class EvaluationForm extends Component {
       <div>
         <textarea
           className="materialize-textarea"
-          placeholder="type your comment here"
+          placeholder="Type your comment here"
             type="text"
           {...field.input}
         />
@@ -157,7 +157,7 @@ const impactChoices = [
   {
     score: 1,
     text:
-      "This company has no discernable social impact at all. Most for-profit companies fall into this category rating."
+      "This indicates any social enterprise you feel has negative social impact, or takes advantage of people - either the people it claims to serve, or other parties."
   },
   {
     score: 2,
@@ -210,7 +210,7 @@ const modelChoices = [
   {
     score: 5,
     text:
-      "This business does not display robust profits, as it is reinvestmenting its profit into growth of the company."
+      "This business does not display robust profits, as it is reinvesting its profit into growth of the company."
   },
   {
     score: 6,

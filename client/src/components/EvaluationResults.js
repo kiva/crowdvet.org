@@ -18,8 +18,16 @@ class EvaluationResults extends Component {
     this.state = {
       menu: {
         review: { text: "Review", url: `/application/${id}`, active: false },
-        evaluation: { text: "Evaluation", url: `/users/evaluations/${id}`, active: false },
-        results: { text: "Results", url: `/users/evaluations/results/${id}`, active: true }
+        evaluation: {
+          text: "Evaluation",
+          url: `/users/evaluations/${id}`,
+          active: false
+        },
+        results: {
+          text: "Results",
+          url: `/users/evaluations/results/${id}`,
+          active: true
+        }
       },
       active: 3
     };
@@ -36,20 +44,71 @@ class EvaluationResults extends Component {
     this.setState({ menu, active });
   };
 
+  renderMessage() {
+    const { enterprise } = this.props;
+    const imgName =
+      (enterprise.Sector.image && `/sectors/${enterprise.Sector.image}`) ||
+      enterprise.Sector.link;
+
+    return (
+      <div>
+        <TopMenu onSubMenuChange={this.onSubMenuChange} />
+        <div className="image-margin">
+          <div className="row">
+            <div className="col s12 center img-header">
+              <h2 id="title-img" className="center">
+                {enterprise.name}
+                <h3><Countdown date={enterprise.endDate} renderer={utils.timeRenderer} /></h3>
+              </h2>
+            </div>
+            <img
+              className="responsive-img img-pic"
+              src={imgName}
+              width="100%"
+              alt=""
+            />
+          </div>
+        </div>
+        <div className="row flow-text dashboard">
+          <SubMenu menu={this.state.menu} />
+        </div>
+        <div className="container">
+          <div className="row center">
+            <div className="col s10 offset-s1">
+              <h4>
+                Results visible only after you complete the evaluation for this
+                enterprise.
+                <br /><br /> Please go to the evaluation page to vote.
+                <br/><br /> Once the vetting period ends, you can see how your score compares to the crowd and
+                Kiva’s scores.
+              </h4>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col s12 m4 offset-m4 center">
+              <Link
+                to={`/users/evaluations/${this.props.match.params.id}`}
+                className="btn button-large btn-results"
+              >
+                Evaluate
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   render() {
-    const {
-      auth,
-      questions,
-      enterprise,
-      evaluation,
-      officialEvaluation
-    } = this.props;
+    const { auth, enterprise, evaluation, officialEvaluation } = this.props;
     if (!auth) return null;
     if (!enterprise) return null;
-    if (!evaluation) return null;
+    if (!evaluation) return this.renderMessage();
 
-    this.sector = enterprise.Sector ? enterprise.Sector.name : "Water";
-    const imgName = enterprise.Sector.image && `/sectors/${enterprise.Sector.image}` || enterprise.Sector.link;
+    const imgName =
+      (enterprise.Sector.image && `/sectors/${enterprise.Sector.image}`) ||
+      enterprise.Sector.link;
+
     const message = utils.getMessage(
       enterprise,
       evaluation,
@@ -81,11 +140,17 @@ class EvaluationResults extends Component {
           <div className="row flow-text center">
             <h3 className="col s12">Evaluation Results</h3>
           </div>
-          <KivaMessage message={message.message} description={message.description} />
+          <KivaMessage
+            message={message.message}
+            description={message.description}
+          />
           <div className="row">{this.renderEvaluation()}</div>
           <div className="row">
             <div className="col s6 center">
-              <Link to={`/users/evaluations/${this.props.match.params.id}`} className="btn button-large btn-results">
+              <Link
+                to={`/users/evaluations/${this.props.match.params.id}`}
+                className="btn button-large btn-results"
+              >
                 Previous Page
               </Link>
             </div>
@@ -152,48 +217,83 @@ class EvaluationResults extends Component {
     let text = "";
     return (
       <div>
-          <div className="row">
-            {this.renderRadios("impact", impactChoices, impactQuestion)}
-          </div>
-          <div className="row">
-            <div className="col s12">
-              <p>{evaluation.impact}: {_.mapKeys(impactChoices, "score")[evaluation.impact].text}</p>
-            </div>
-            <div className="col s12">
-              <p><input disabled={true} type="text" value={evaluation.impactComment} /></p>
-            </div>
-          </div>
-          <div className="row">
-            {this.renderRadios("model", modelChoices, modelQuestion)}
-          </div>
-          <div className="row">
-            <div className="col s12">
-              <p>{evaluation.model}: {_.mapKeys(modelChoices, "score")[evaluation.model].text}</p>
-            </div>
-            <div className="col s12">
-              <p><input disabled={true} type="text" value={evaluation.modelComment} /></p>
-            </div>
-          </div>
-          <div className="row">
-            {this.renderRadios(
-              "prioritization",
-              prioritizationChoices,
-              prioritizationQuestion
-            )}
-          </div>
-          <div className="row">
-            <div className="col s12">
-            <p>{evaluation.prioritization}: {_.mapKeys(prioritizationChoices, "score")[evaluation.prioritization].text}</p>
-            </div>
-            <div className="col s12">
-              <p><input disabled={true} type="text" value={evaluation.prioritizationComment} /></p>
-            </div>
-          </div>
         <div className="row">
-            <div className="question">4. What else should Kiva know about this enterprise?</div>
-            <div className="col s12 answer-result">
-              <p><input disabled={true} type="text" value={evaluation.comment} /></p>
-            </div>
+          {this.renderRadios("impact", impactChoices, impactQuestion)}
+        </div>
+        <div className="row">
+          <div className="col s12">
+            <p>
+              {evaluation.impact}:{" "}
+              {_.mapKeys(impactChoices, "score")[evaluation.impact].text}
+            </p>
+          </div>
+          <div className="col s12">
+            <p>
+              <input
+                disabled={true}
+                type="text"
+                value={evaluation.impactComment}
+              />
+            </p>
+          </div>
+        </div>
+        <div className="row">
+          {this.renderRadios("model", modelChoices, modelQuestion)}
+        </div>
+        <div className="row">
+          <div className="col s12">
+            <p>
+              {evaluation.model}:{" "}
+              {_.mapKeys(modelChoices, "score")[evaluation.model].text}
+            </p>
+          </div>
+          <div className="col s12">
+            <p>
+              <input
+                disabled={true}
+                type="text"
+                value={evaluation.modelComment}
+              />
+            </p>
+          </div>
+        </div>
+        <div className="row">
+          {this.renderRadios(
+            "prioritization",
+            prioritizationChoices,
+            prioritizationQuestion
+          )}
+        </div>
+        <div className="row">
+          <div className="col s12">
+            <p>
+              {evaluation.prioritization}:{" "}
+              {
+                _.mapKeys(prioritizationChoices, "score")[
+                  evaluation.prioritization
+                ].text
+              }
+            </p>
+          </div>
+          <div className="col s12">
+            <p>
+              <input
+                disabled={true}
+                type="text"
+                value={evaluation.prioritizationComment}
+              />
+            </p>
+          </div>
+        </div>
+        <div className="row">
+          <div className="question">
+            4. What else should Kiva know about this enterprise?
+          </div>
+          <div className="col s12 answer-result">
+            <p>
+              <input disabled={true} type="text" value={evaluation.comment} />
+            </p>
+          </div>
         </div>
       </div>
     );
@@ -230,7 +330,7 @@ const impactChoices = [
   {
     score: 1,
     text:
-      "This company has no discernable social impact at all. Most for-profit companies fall into this category rating."
+      "This indicates any social enterprise you feel has negative social impact, or takes advantage of people - either the people it claims to serve, or other parties."
   },
   {
     score: 2,
@@ -283,7 +383,7 @@ const modelChoices = [
   {
     score: 5,
     text:
-      "This business does not display robust profits, as it is reinvestmenting its profit into growth of the company."
+      "This business does not display robust profits, as it is reinvesting its profit into growth of the company."
   },
   {
     score: 6,
