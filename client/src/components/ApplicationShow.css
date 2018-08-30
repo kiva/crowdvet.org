@@ -29,3 +29,7 @@ ul#selected-metrics > li {
 table a {
   color:black;
 }
+
+.min-height-card {
+  min-height: 182px;
+}

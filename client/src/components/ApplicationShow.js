@@ -24,7 +24,7 @@ class ApplicationShow extends Component {
       topMenu: {
         profile: { active: true },
         vet: { active: false },
-        training: { active: false }
+        faqs: { active: false }
       }
     };
 
@@ -68,15 +68,15 @@ class ApplicationShow extends Component {
   renderTable() {
     return (
       <div>
-        <table className="centered">
+        <table >
           <thead>
             <tr>
-              <th colSpan="3" className="table-name">
+              <th colSpan="3" className="table-name center">
                 View Application Materials
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="left-align">
             <tr>
               <td>
                 <img src={PDF} />
@@ -206,21 +206,21 @@ class ApplicationShow extends Component {
   renderContent() {
     return (
       <div>
-        <div className="row center">
+        <div className="row left-align">
           <div className="col s12 m6 l6">
             <h5>Problem</h5>
             <p className="flow-text card-text left-align">
               {this.props.enterprise.description}
             </p>
           </div>
-          <div className="col s12 m6 l6">
+          <div className="col s12 m5 offset-m1 left-align">
             <h5>Loan Purpose</h5>
             <p className="flow-text card-text left-align">
               {this.props.enterprise.loanPurpose}
             </p>
           </div>
         </div>
-        <div className="row center">
+        <div className="row left-align">
           <div className="col s12 m6 l6">
             <h5>Business Model</h5>
             <p className="flow-text card-text left-align">
@@ -228,9 +228,9 @@ class ApplicationShow extends Component {
             </p>
           </div>
 
-          <div className="col s12 m6 l6">
+          <div className="col s12 m5 offset-m1">
             <h5>Selected Metrics</h5>
-            <div className="col s10 offset-s2 left-align">
+            <div className="col s12  left-align">
               <p className="flow-text card-text left-align">
                 <ul id="selected-metrics">
                   <li>
