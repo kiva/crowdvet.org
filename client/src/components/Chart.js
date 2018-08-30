@@ -6,16 +6,7 @@ import Dots from "./Dots";
 
 class LineChart extends Component {
   render() {
-    // var data = [
-    //   { score: 1, count: 180 },
-    //   { score: 2, count: 250 },
-    //   { score: 3, count: 150 },
-    //   { score: 4, count: 496 },
-    //   { score: 5, count: 140 },
-    //   { score: 6, count: 380 }
-    // ];
     const { data, max } = this.props
-    console.log(data, max)
     var margin = { top: 5, right: 50, bottom: 20, left: 50 },
       w = this.props.width - (margin.left + margin.right),
       h = this.props.height - (margin.top + margin.bottom);
