@@ -16,13 +16,13 @@ import _ from "lodash";
 
 class Profile extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       menu: { vetted: { active: true }, history: { active: false } },
       topMenu: {
         profile: { active: true },
         vet: { active: false },
-        training: { active: false }
+        faqs: { active: false }
       }
     };
   }
