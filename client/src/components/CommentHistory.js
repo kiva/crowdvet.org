@@ -26,9 +26,6 @@ class CommentHistory extends Component {
         </div>
         {renderComments(comments, this.props.enterprises)}
         <div className={`col s12 m8 offset-m2 gray-background center ${hide}`}><a onClick={this.onHandleClick}className="btn-flat">Load More</a></div>
-        <div className="col s12">
-          <h4 className="center">Certificates History</h4>
-        </div>
       </div>
     );
   }
