@@ -4,13 +4,15 @@ import SignUpModal from "./SignUpModal";
 import { Link } from "react-router-dom";
 import "./Landing.css";
 import world from "./world.svg";
-import HowWorks from "./HowItWorks"
+import HowWorks from "./HowItWorks";
 
 class Landing extends Component {
   renderText() {
     return (
       <div className="text row flow-text">
-        <p className="col s12" id="kiva-message">Here at Kiva, we're constantly asking</p>
+        <p className="col s12" id="kiva-message">
+          Here at Kiva, we're constantly asking
+        </p>
         <div className="flow-text col s12">
           How can you help social enterprises make the world
         </div>
@@ -32,22 +34,29 @@ class Landing extends Component {
   renderRecent() {
     return (
       <div className="recent flow-text">
-        <div className="center-align ">Recent Loan Activity</div>
+        <div className="center-align ">Testimonials</div>
       </div>
     );
   }
 
   renderPrefooter() {
     return (
-      <div className="flow-text" id="prefooter">
-        <div className="center-align" id="prefooter">
-          “Crowdvet.org gave me a chance to experience what its like to
-        </div>
-        <div className="center-align">
-          work at a non-profit, and a sense of how I could help.”
-        </div>
-        <div id="after-text" className="center-align">
-          Lauren S., Graduate Student @ Hult School of Business
+      <div className="row">
+        <div className="col s12 m8 offset-m2">
+          <div className="flow-text" id="prefooter">
+            <div className="center-align" id="prefooter">
+              “Crowdvetting is a great opportunity to learn due diligence skills
+              and put your business education into practice to benefit social
+              enterprises. It’s also an exciting way to engage with Kiva’s work
+              and play a role in the social entrepreneurship ecosystem. I would
+              recommend this opportunity for anyone who’s interested in gaining
+              real-world experience in the impact field!”
+            </div>
+
+            <div id="after-text" className="center-align">
+              Miriam F., Graduate Student @ The Fletcher School, Tufts University
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -55,10 +64,12 @@ class Landing extends Component {
 
   renderButton() {
     return (
-      <div className="center-align">
-        <a className="btn" id="evaluate">
-          Evaluate a Sample Loan
-        </a>
+      <div className="row center">
+        <div className="col s12  m4 offset-m4">
+        <button className="btn" id="evaluate">
+          Contact us at crowdvet@kiva.org
+        </button>
+        </div>
       </div>
     );
   }
@@ -67,30 +78,32 @@ class Landing extends Component {
     return (
       <div className="container">
         <div className="row">
-                <div className="col s12 m6">
-                  <div style={{ marginTop: "40px"}}>
-                    <iframe
-                      src="https://player.vimeo.com/video/210506986?embedparameter=value"
-                      width="440"
-                      height="248"
-                      frameBorder="0"
-                      allowFullScreen
-                    />
-                  </div>
-                  </div>
-                  <div className="col s12 m6">
-                    <div className="video-text">
-                      <h3 className="center-align" id="title">
-                        Kiva + You
-                      </h3>
-                      <p className="flow-text">
-                        Crowdvet.org aims to harness the knowledge of the crowd to
-                        give social enterprises the capital they need to scale.
-                      </p>
-                      <Link to={"/learn"} className="btn">Learn About CrowdVetting</Link>
-                    </div>
-                  </div>
+          <div className="col s12 m6">
+            <div style={{ marginTop: "40px" }}>
+              <iframe
+                src="https://player.vimeo.com/video/210506986?embedparameter=value"
+                width="440"
+                height="248"
+                frameBorder="0"
+                allowFullScreen
+              />
+            </div>
           </div>
+          <div className="col s12 m6">
+            <div className="video-text">
+              <h3 className="center-align" id="title">
+                Kiva + You
+              </h3>
+              <p className="flow-text">
+                Crowdvet.org aims to harness the knowledge of the crowd to give
+                social enterprises the capital they need to scale.
+              </p>
+              <Link to={"/learn"} className="btn">
+                Learn About CrowdVetting
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -102,7 +115,7 @@ class Landing extends Component {
         {this.renderVideo()}
         {this.renderText()}
         <div className="container">
-          <HowWorks auth={this.props.auth}/>
+          <HowWorks auth={this.props.auth}  learn={{ text:"FAQs", url: "/faqs" }}/>
         </div>
         {this.renderWorld()}
         {this.renderRecent()}

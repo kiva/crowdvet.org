@@ -30,7 +30,9 @@
 }
 
 #prefooter {
-  margin-top: 76px;
+  margin-top: 75px;
+  font-size: 20px;
+
 }
 
 #after-text {
@@ -43,10 +45,10 @@
   background-color: #61a63a;
   margin-top: 47px;
   margin-bottom: 37px;
-  width: 357px;
+  width:100%;
+  max-width: 350px;
   height: 80px;
-  font-size: 24px;
-  padding-top: 20px;
+  font-size: 18px;
 }
 
 #learn-btn {
