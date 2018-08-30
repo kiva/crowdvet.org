@@ -19,7 +19,7 @@ class VetEnterprises extends Component {
       topMenu: {
         profile: { active: false },
         vet: { active: true },
-        training: { active: false }
+        faqs: { active: false }
       }
     };
   }
