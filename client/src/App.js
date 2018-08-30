@@ -17,7 +17,8 @@ import * as actions from "./actions";
 import HowWorks from "./components/HowWorks";
 import Terms from "./components/Terms";
 import FurtherReading from "./components/FurtherReading";
-import ResetPassword from "./components/ResetPass"
+import ResetPassword from "./components/ResetPass";
+import Faqs from "./components/Faqs"
 import "./App.css";
 
 class App extends Component {
@@ -37,6 +38,7 @@ class App extends Component {
           />
           <Route path="/users/evaluations/:id" component={ApplicationEvaluate}
           />
+          <Route exact path="/faqs" component={Faqs} />
           <Route exact path="/learn" component={LearnAbout} />
           <Route exact path="/how-works" component={HowWorks} />
           <Route exact path="/terms" component={Terms} />
