@@ -84,7 +84,7 @@ class HowWorks extends Component {
           </p>
           <div className="col s12 center font-26 green-text">Step 3 </div>
           <div className="col s12 center font-26">
-            Receive feedback, scores, and badges
+            Receive feedback and scores
           </div>
         </div>
         <div className="row">

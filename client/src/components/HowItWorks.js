@@ -38,7 +38,7 @@ const HowItWorks = props => {
         </p>
         <div className="col s12 center font-26 green-text">Step 3 </div>
         <div className="col s12 center font-26">
-          Receive feedback, scores, and badges
+          Receive feedback and scores
         </div>
       </div>
       <div className="row">
@@ -50,8 +50,8 @@ const HowItWorks = props => {
       <div className="row" style={{ marginTop: "50px" }}>
         <p className="col s6 center">{startVetting}</p>
         <p className="col s6 center">
-          <Link className="btn-flat learn-more-btn" to={"/further-reading"}>
-            Learn More
+          <Link className="btn-flat learn-more-btn" to={props.learn ? props.learn.url : "/further-reading"}>
+            { props.learn ?  props.learn.text : "Learn More"}
           </Link>
         </p>
       </div>
