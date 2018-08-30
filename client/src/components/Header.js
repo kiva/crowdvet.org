@@ -10,7 +10,7 @@ import { Button, NavItem } from "react-materialize";
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = { learn: { active: false } };
+    this.state = { learn: { active: false }, user: {active:false} };
   }
 
   componentDidMount() {
@@ -29,7 +29,8 @@ class Header extends Component {
     if (this.props.auth) {
       return [
         <li key="1">
-          <Link to={"/user"}>{this.props.auth.name}</Link>
+          <Link to={"/user"} onClick={this.onHandleMenuClick.bind(this)({learn: { active: false }, user:{active:true}})}
+           className={`font-16 ${ this.state.user.active && "weight-500"}`}>{this.props.auth.name}</Link>
         </li>,
         <li key="2">
           <Dropdown
@@ -58,9 +59,9 @@ class Header extends Component {
   }
   render() {
     const startVetting = (this.props.auth && (
-      <Link onClick={this.onHandleMenuClick.bind(this)({learn: { active: false }})} to={"/vet/enterprises"}>Start Vetting</Link>
+      <Link onClick={this.onHandleMenuClick.bind(this)({learn: { active: false },user:{active:true}})} className="font-16" to={"/vet/enterprises"}>Start Vetting</Link>
     )) || (
-      <Link onClick={this.onHandleMenuClick.bind(this)({learn: { active: false }})} className="modal-trigger" to={"#modal1"}>
+      <Link onClick={this.onHandleMenuClick.bind(this)({learn: { active: false }, user:{active:true}})} className="font-16 modal-trigger" to={"#modal1"}>
         Start Vetting
       </Link>
     );
@@ -81,8 +82,8 @@ class Header extends Component {
             <ul className="right hide-on-med-and-down">
               <li>
 
-                <Link to={"/learn"} onClick={this.onHandleMenuClick.bind(this)({learn: { active: true }})}
-                 className={ this.state.learn.active && "weight-500" }>Learn about Crowdvetting</Link>
+                <Link to={"/learn"} onClick={this.onHandleMenuClick.bind(this)({learn: { active: true }, user: {active:false} })}
+                 className={ `font-16 ${this.state.learn.active && "weight-500"} `}>Learn about Crowdvetting</Link>
               </li>
               <li>{startVetting}</li>
               {this.renderSingIn()}
@@ -98,7 +99,7 @@ class Header extends Component {
               </Link>
             </li>
             <li>
-              <Link to={"/badges"}>Take Action</Link>
+              {startVetting}
             </li>
             {this.renderSingIn()}
           </ul>

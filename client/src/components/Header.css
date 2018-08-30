@@ -6,6 +6,10 @@
   margin-left: 10%;
 }
 
-.weight-500{
+.weight-500 {
   font-weight: 500;
+}
+
+.font-16 {
+  font-size: 16px;
 }
