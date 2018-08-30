@@ -85,7 +85,7 @@ class LearnAbout extends Component {
         <p className="center">
           <img src={dseGlance} />
         </p>
-        <p>*The DSE program is very new and growing, so several loans are still in the repayment stage</p>
+        <p className="col s12 center">*The DSE program is very new and growing, so several loans are still in the repayment stage</p>
         <div className="col s6 center">{startVetting}</div>
         <div className="col s6 center">
           <Link className="btn-flat learn-more-btn" to={"/how-works"}>
