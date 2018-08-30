@@ -22,7 +22,7 @@ class TopMenu extends Component {
           </Link>
         </div>
         <div className="col s4 top-menu">
-          <button className={`btn btn-flat top-menu btn-large ${this.props.menu.training.active && activeClass || inactiveClass}`}>Training</button>
+          <Link to={"/faqs"} className={`btn btn-flat top-menu btn-large ${this.props.menu.faqs.active && activeClass || inactiveClass}`}>FAQs</Link>
         </div>
       </div>
     );
@@ -34,7 +34,7 @@ TopMenu.defaultProps = {
   menu : {
     profile: { active: true },
     vet: { active: false },
-    training: { active: false }
+    faqs: { active: false }
   }
 };
 
