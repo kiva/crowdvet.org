@@ -93,7 +93,7 @@ export const signUpUser = (
   axios
     .post(`/auth/signup`, { email, password, name })
     .then(response => {
-      dispatch({ type: FETCH_USER, payload: response.data });
+      dispatch({ type: FETCH_USER, payload: response.data.user  });
       history.push("/user");
     })
     .catch(error => {
@@ -105,7 +105,7 @@ export const signInUser = ({ email, password }, history) => async dispatch => {
   axios
     .post(`/auth/login`, { email, password })
     .then(response => {
-      dispatch({ type: FETCH_USER, payload: response.data });
+      dispatch({ type: FETCH_USER, payload: response.data.user });
       history.push("/user");
     })
     .catch(error => {
