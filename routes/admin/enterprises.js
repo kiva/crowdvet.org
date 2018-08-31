@@ -176,19 +176,16 @@ module.exports = app => {
 
   app.get("/api/admin/enterprises", async (req, res) => {
     try {
-      result = await Enterprises.findAll({
-        include: [
-          { model: Evaluations, as: "Evaluations" },
-          { model: Sectors },
-          { model: Images },
-          { model: Comments, attributes: ["id"] }
-        ]
-      });
+      const { _start, _end } = req.query;
+      const result = await Enterprises.findAndCountAll({
+        offset:_start,
+        limit: _end,
 
+      });
       return res
         .status(200)
-        .set("x-Total-Count", result.length)
-        .send(result);
+        .set("x-Total-Count", result.count)
+        .send(result.rows);
     } catch (e) {
       console.log(e);
     }
