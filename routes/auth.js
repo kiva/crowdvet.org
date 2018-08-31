@@ -67,7 +67,7 @@ module.exports = app => {
     if (req.body.email && req.body.password) {
       const { email, password } = req.body;
 
-      Users.findOne({ where: { email } })
+      Users.findOne({ where: { email, admin:true } })
         .then(user => {
           if (Users.isPassword(user.password, password)) {
             const payload = { id: user.id };
@@ -86,6 +86,7 @@ module.exports = app => {
     }
   });
 
+  //Forgot Pass process
   app.put("/api/forgotpass", async (req, res) => {
     if (!req.body) return res.status(400).json({ message: "No Request Body" });
     if (!req.body.email)
