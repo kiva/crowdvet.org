@@ -38,6 +38,7 @@ require('./routes/admin/evaluations')(app);
 require('./routes/admin/sectors')(app);
 require('./routes/admin/users')(app);
 require('./routes/admin/recomendations')(app);
+require('./routes/admin/comments')(app)
 
 if (['production'].includes(process.env.NODE_ENV)) {
   app.use(express.static('client/build'));
