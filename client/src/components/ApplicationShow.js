@@ -334,7 +334,7 @@ class ApplicationShow extends Component {
             <CommentForm enterprise_id={enterprise.id} />
           </div>
           <div className="center-align">
-            <Link className="btn" to={toPage} id="evaluate">
+            <Link className="btn button-large" to={toPage} style={{lineHeight:"80px"}}>
               Continue to Evaluation
             </Link>
           </div>
