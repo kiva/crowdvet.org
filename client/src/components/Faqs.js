@@ -233,9 +233,11 @@ class LearnAbout extends Component {
                   After you complete an evaluation, you can continue to review
                   and reevaluate the enterprise until the crowdvetting period
                   ends.
-                  <br />
+                  <br /><br />
                   Once the enterprise is closed for vetting, Kiva’s staff will
-                  post their votes and final decision. Users will then receive
+                  post their votes and final decision.
+                  <br />
+                  Users will then receive
                   their individual score and accuracy rating on their profile.
                   If an enterprise is approved, it will be posted to the Kiva
                   website for funding within 1-2 weeks.
@@ -270,7 +272,7 @@ class LearnAbout extends Component {
                   In this event, the amount raised will be refunded back to the
                   lenders.
                 </span>
-                <br />
+                <br /><br/>
                 <span>
                   We know that it can be difficult to see some loans miss their
                   funding goal, which is why we keep working hard to reach new
