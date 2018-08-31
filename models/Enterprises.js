@@ -403,7 +403,6 @@ module.exports = (sequelize, DataType) => {
       primaryKey: true,
       autoIncrement: true
     },
-
     text: {
       type: DataType.STRING,
       allowNull: true
