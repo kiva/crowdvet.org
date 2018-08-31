@@ -9,8 +9,9 @@ import { EnterprisesList, EnterprisesEdit } from './EnterprisesList';
 import { EvaluationsList, EvaluationsEdit, EvaluationsCreate } from './Evaluations';
 import { KivaEvaluationsList, KivaEvaluationsEdit, KivaEvaluationsCreate } from './KivaEvaluations';
 import { SectorsList, SectorsEdit, SectorsCreate } from './Sectors';
+import { CommentsList, CommentsEdit } from './Comments';
 import { CountriesList, CountriesEdit, CountriesCreate } from './Country';
-import { UsersList, UsersEdit, UsersCreate } from './Users';
+import { UsersList, UsersEdit } from './Users';
 import { RecomendationsList, RecomendationsEdit, RecomendationsCreate } from './Recomendations';
 import { AdminsList, AdminsEdit, AdminsCreate } from './Admins';
 
@@ -37,7 +38,8 @@ const AppAdmin = () => (
     <Resource name="sectors" list={SectorsList} edit={SectorsEdit} create={SectorsCreate}/>
     <Resource name="countries" list={CountriesList} edit={CountriesEdit} create={CountriesCreate}/>
     <Resource name="recomendations" list={RecomendationsList} edit={RecomendationsEdit} create={RecomendationsCreate}/>
-    <Resource name="users" list={UsersList}/>
+    <Resource name="comments" list={CommentsList} edit={CommentsEdit} />
+    <Resource name="users" list={UsersList} edit={UsersEdit}/>
     <Resource name="admins" list={AdminsList} edit={AdminsEdit} create={AdminsCreate}/>
   </Admin>
 );
