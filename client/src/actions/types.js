@@ -24,3 +24,4 @@ export const UPDATE_SETTINGS_ERROR = 'update_settings_error';
 export const CLEAR_MESSAGES = 'clear_messages';
 export const PASS_RESET_REQ_SUCCESS = 'PASS_RESET_REQ_SUCCESS';
 export const RESET_PASS_SUCCESS = 'RESET_PASS_SUCCESS';
+export const DELETE_COMMENT = 'delete_comment'

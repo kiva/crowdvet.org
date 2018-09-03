@@ -27,7 +27,8 @@ import {
   UPDATE_SETTINGS_ERROR,
   CLEAR_MESSAGES,
   PASS_RESET_REQ_SUCCESS,
-  RESET_PASS_SUCCESS
+  RESET_PASS_SUCCESS,
+  DELETE_COMMENT
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -130,6 +131,11 @@ export const Evaluate = (
 export const removeUserEvaluation = evaluation => async dispatch => {
   const res = await axios.delete(`/api/users/evaluations/${evaluation.id}`);
   dispatch({ type: DELETE_EVALUATION, payload: evaluation.enterprise_id });
+};
+
+export const deleteComment = id => async dispatch => {
+  const res = await axios.delete(`/api/comments/${id}`);
+  dispatch({ type: DELETE_COMMENT, payload: id });
 };
 
 export const fetchCrowdVotes = () => async dispatch => {
