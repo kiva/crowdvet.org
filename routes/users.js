@@ -4,7 +4,7 @@ const _ = require("lodash");
 const uuid = require("uuid/v1");
 const AWS = require("aws-sdk");
 const keys = require("../config/keys");
-const BUCKET_NAME = "data-store-blog";
+
 
 module.exports = app => {
   const {
@@ -145,11 +145,13 @@ module.exports = app => {
       s3.getSignedUrl(
         "putObject",
         {
-          Bucket: BUCKET_NAME,
+          Bucket: keys.BUCKET_NAME,
           ContentType: "image/jpeg",
           Key: key
         },
-        (err, url) => res.send({ key, url, bucketUrl: "https://s3-sa-east-1.amazonaws.com/" + BUCKET_NAME + "/" })
+        (err, url) => {
+          res.send({ key, url, bucketUrl: keys.BUCKET_URL + keys.BUCKET_NAME + "/" })
+        }
       );
     } catch (e) {
       console.log(e);
