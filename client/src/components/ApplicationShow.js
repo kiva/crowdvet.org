@@ -287,7 +287,6 @@ class ApplicationShow extends Component {
       (enterprise.Sector.image && `/sectors/${enterprise.Sector.image}`) ||
       enterprise.Sector.link;
     const toPage = utils.getPage(enterprise, officialEvaluation);
-    const showResults = utils.showResults(enterprise, officialEvaluation);
 
     this.menu.evaluation.url = toPage;
 
