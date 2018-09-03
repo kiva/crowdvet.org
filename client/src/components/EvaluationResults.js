@@ -105,6 +105,8 @@ class EvaluationResults extends Component {
     if (!enterprise) return null;
     if (!evaluation) return this.renderMessage();
 
+    const previousPage =  utils.showResults(enterprise, officialEvaluation) ? `/application/${this.props.match.params.id}` : `/users/evaluations/${this.props.match.params.id}`
+
     const imgName =
       (enterprise.Sector.image && `/sectors/${enterprise.Sector.image}`) ||
       enterprise.Sector.link;
@@ -148,7 +150,7 @@ class EvaluationResults extends Component {
           <div className="row">
             <div className="col s6 center">
               <Link
-                to={`/users/evaluations/${this.props.match.params.id}`}
+                to={previousPage}
                 className="btn button-large btn-results"
               >
                 Previous Page
