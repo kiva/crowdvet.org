@@ -157,12 +157,12 @@ class EvaluationResults extends Component {
 
           <div className="row">{this.renderResults()}</div>
           <div className="row">
-            <div className="col s6">
-              <Link to={"/user"} className="btn button-large btn-results">
+            <div className="col s6 center">
+              <Link to={`/users/evaluations/${evaluation.enterprise_id}`} className="btn button-large btn-results">
                 Previous Page
               </Link>
             </div>
-            <div className="col s6">
+            <div className="col s6 center">
               <Link to={"/user"} className="btn button-large btn-results">
                 Exit
               </Link>
