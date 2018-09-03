@@ -21,6 +21,7 @@ class CommentItem extends Component {
   constructor(props) {
     super(props);
     this.state = { hidden: true };
+    this.onDeleteComment = this.onDeleteComment.bind(this);
   }
 
   onHandleClick() {
@@ -32,6 +33,11 @@ class CommentItem extends Component {
     const vote = !this.state.vote;
     this.props.VoteComment({ id, vote });
   }
+
+  onDeleteComment() {
+    const { id } = this.props.comment;
+    this.props.deleteComment(id)
+  }
   render() {
     const { comment, user } = this.props;
 
@@ -39,7 +45,6 @@ class CommentItem extends Component {
     const heartImg = userVotes[user.id] ? heart : heartGrey;
 
     const hide = this.state.hidden ? "hide" : "";
-    console.log(comment, "con com")
     return (
       <li>
         <div className="row collapsible-header grey-background comment-height">
@@ -83,6 +88,9 @@ class CommentItem extends Component {
                 className="col s12 m1"
               >
                 <img src={reply} />
+              </div>
+              <div className="col s12 m1 offset-m8">
+                <button onClick={this.onDeleteComment} className="btn-flat">Delete</button>
               </div>
             </div>
           </div>
