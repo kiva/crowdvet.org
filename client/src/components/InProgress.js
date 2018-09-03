@@ -5,8 +5,7 @@ import * as actions from '../actions';
 import _ from 'lodash';
 import "./InProgress.css"
 import Countdown from "react-countdown-now";
-import {Carousel} from "react-materialize";
-
+import Carousel from "./Carousel-mz";
 
 class InProgress extends Component {
 

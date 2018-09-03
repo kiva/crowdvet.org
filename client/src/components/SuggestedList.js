@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 import Countdown from "react-countdown-now";
-import { Carousel } from "react-materialize";
+import Carousel from "./Carousel-mz";
+
 
 class SuggestedList extends Component {
   renderImages(images, enterprise) {

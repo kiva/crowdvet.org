@@ -5,7 +5,7 @@ import * as actions from "../actions";
 import _ from "lodash";
 import VettedEnterpriseItem from "./VettedEnterpriseItem";
 import "./Enterprises.css";
-      import {Carousel} from 'react-materialize';
+
 
 class VettedEnterpisesList extends Component {
   constructor(props) {

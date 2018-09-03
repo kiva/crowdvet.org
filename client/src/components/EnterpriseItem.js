@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import _ from "lodash";
-import { Carousel } from "react-materialize";
+import Carousel from "./Carousel-mz";
 
 class EnterpriseItem extends Component {
   renderImages(images) {

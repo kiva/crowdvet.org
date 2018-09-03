@@ -8,7 +8,6 @@ import InProgress from "./InProgress";
 import Suggested from "./Suggested";
 import _ from "lodash";
 import moment from "moment";
-
 import * as actions from "../actions";
 
 class VetEnterprises extends Component {
