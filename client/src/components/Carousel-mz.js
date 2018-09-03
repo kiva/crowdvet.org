@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 class Carousel extends React.Component {
   constructor(props) {
     super(props);
-
     this.renderFixedItem = this.renderFixedItem.bind(this);
   }
 
@@ -15,6 +14,21 @@ class Carousel extends React.Component {
 
     if (typeof $ !== "undefined") {
       $(`#${carouselId}`).carousel(options);
+      // start carrousel
+
+      // move next carousel
+      $(".moveNextCarousel").click(function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $(".carousel").carousel("next");
+      });
+
+      // move prev carousel
+      $(".movePrevCarousel").click(function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $(".carousel").carousel("prev");
+      });
     }
   }
 
@@ -66,7 +80,29 @@ class Carousel extends React.Component {
             { "carousel-slider": options.fullWidth },
             className
           )}
-        >
+        > <div className="carousel-fixed-item middle-indicator">
+          <div className="left">
+            <a
+              href="prev"
+              className="movePrevCarousel middle-indicator-text content-indicator"
+            >
+              <i className="material-icons  middle-indicator-text">
+                chevron_left
+              </i>
+            </a>
+          </div>
+
+          <div className="right">
+            <a
+              href="next"
+              className=" moveNextCarousel middle-indicator-text content-indicator"
+            >
+              <i className="material-icons right middle-indicator-text">
+                chevron_right
+              </i>
+            </a>
+          </div>
+        </div>
           {this.renderFixedItem()}
           {this.renderFixedText()}
           {React.Children.map(elemsToRender, this.renderItems)}

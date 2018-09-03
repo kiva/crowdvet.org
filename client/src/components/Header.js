@@ -37,7 +37,7 @@ class Header extends Component {
             trigger={
               <div>
                 <a>
-                  <i className="material-icons right">arrow_drop_down</i>
+                  <i className="material-icons right-header">arrow_drop_down</i>
                 </a>
               </div>
             }
@@ -69,7 +69,7 @@ class Header extends Component {
       <div>
         <nav>
           <div className="nav-wrapper">
-            <Link to={"/"} className="left brand-logo">
+            <Link to={"/"} className="left-header brand-logo">
               Crowdvetting at <img src={logo} className="App-logo" alt="logo" />
             </Link>
             <a
