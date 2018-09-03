@@ -130,3 +130,21 @@
 .image-margin{
   margin-bottom:-26px;
 }
+
+.center-80 {
+  height: 80px;
+  line-height: 80px;
+}
+
+.no-margin {
+  margin:0;
+}
+
+.left-15 {
+  margin-left: 15px;
+}
+
+.margin-20 {
+  margin-top:50px;
+  margin-bottom:30px;
+}

@@ -178,7 +178,7 @@ class EvaluationResults extends Component {
     const content = _.map(choices, choice => {
       const id = idgen();
       return (
-        <div key={idgen()} className="col s12 m2 center">
+        <div key={idgen()} className="col s2 center">
           <label className="radio-evaluation">
             <input
               id={id}
@@ -197,9 +197,7 @@ class EvaluationResults extends Component {
 
     return (
       <div>
-        <div className="row">
-          <div className="question">{question.text}</div>
-        </div>
+          <div className="col s12 question margin-20">{question.text}</div>
         <div className="row">
           {content}
         </div>
@@ -211,7 +209,7 @@ class EvaluationResults extends Component {
     const { evaluation, officialEvaluation, crowdVotes } = this.props;
 
     return (
-      <div className="row">
+      <div>
         <div className="row">
           {this.renderRadios("impact", evaluation, impactChoices, impactQuestion, false)}
         </div>
@@ -228,6 +226,11 @@ class EvaluationResults extends Component {
           <div className="col s12">
             <strong>Kiva's Vote:</strong>
             <p>{officialEvaluation.impact}: {_.mapKeys(impactChoices, "score")[officialEvaluation.impact].text}</p>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col s12">
+            <strong className="left center-80">Crowd Average:</strong><h4 className="left center-80 no-margin left-15">{getAverage(_.map(crowdVotes, "impact"))}</h4>
           </div>
         </div>
         <br />
@@ -251,6 +254,9 @@ class EvaluationResults extends Component {
           <strong>Kiva's Vote:</strong>
           <p>{officialEvaluation.model}: {_.mapKeys(modelChoices, "score")[officialEvaluation.model].text}</p>
         </div>
+        <div className="col s12">
+            <strong className="left center-80">Crowd Average:</strong><h4 className="left center-80 no-margin left-15">{getAverage(_.map(crowdVotes, "model"))}</h4>
+        </div>
         <div className="row">
           <div className="col s12">
             <LineChart data={utils.getCrowdVotes(crowdVotes, "model")} max={crowdVotes.length} chartId={idgen()} />
@@ -273,6 +279,9 @@ class EvaluationResults extends Component {
             <p>{officialEvaluation.prioritization}: {_.mapKeys(prioritizationChoices, "score")[officialEvaluation.prioritization].text}</p>
           </div>
         </div>
+        <div className="col s12">
+            <strong className="left center-80">Crowd Average:</strong><h4 className="left center-80 no-margin left-15">{getAverage(_.map(crowdVotes, "prioritization"))}</h4>
+        </div>
         <div className="row">
           <div className="col s12">
             <LineChart data={utils.getCrowdVotes(crowdVotes, "prioritization")} max={crowdVotes.length} chartId={idgen()}/>
@@ -282,6 +291,12 @@ class EvaluationResults extends Component {
     );
   }
 }
+
+
+function getAverage(data) {
+    const r = _.map(_.compact(data), n => parseInt(n, 10));
+    return _.round(_.sum(r) / r.length, 4);
+  }
 
 function mapStateToProps(
   {
