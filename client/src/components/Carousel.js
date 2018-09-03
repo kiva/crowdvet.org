@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import carousel from "./caroussel-1.png";
+import carousel2 from "./Education.jpg"
+import carousel3 from "./Agriculture.jpg"
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import "./Carousel.css";
@@ -82,10 +84,10 @@ class Carousel extends Component {
             <img src={carousel} alt="" />
           </a>
           <a className="carousel-item" href="#two!">
-            <img src={carousel} alt="" />
+            <img src={carousel2} alt="" />
           </a>
           <a className="carousel-item" href="#three!">
-            <img src={carousel} alt="" />
+            <img src={carousel3} alt="" />
           </a>
         </div>
       </div>

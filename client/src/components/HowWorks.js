@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Carousel from "./Carousel-mz";
 import carousel from "./caroussel-1.png";
+import carousel2 from "./Education.jpg"
+import carousel3 from "./Agriculture.jpg"
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import idgen from "./idgen";
@@ -31,7 +33,7 @@ class HowWorks extends Component {
           }}
         />
         <Carousel
-          images={[carousel, carousel]}
+          images={[carousel, carousel2,carousel3]}
           options={{ fullWidth: true, indicators: true }}
           carouselId={idgen().toString()}
           fixedText={header}
