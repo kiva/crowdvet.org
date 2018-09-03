@@ -3,7 +3,6 @@ const jotFormAPI = require("../../services/jotForm");
 const uuid = require("uuid/v1");
 const AWS = require("aws-sdk");
 const keys = require("../../config/keys");
-const BUCKET_NAME = "data-store-blog";
 const _ = require("lodash");
 
 const s3 = new AWS.S3({
@@ -57,7 +56,7 @@ module.exports = app => {
       );
       s3.createBucket(function() {
         var params = {
-          Bucket: BUCKET_NAME,
+          Bucket: keys.BUCKET_NAME,
           Key: `${id}/${uuid()}.jpeg`,
           Body: buff,
           ContentEncoding: "base64",
