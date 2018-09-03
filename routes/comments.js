@@ -100,4 +100,20 @@ module.exports = app => {
     }
   });
 
+
+  app.delete(
+    "/api/comments/:id",
+    requireLogin,
+    async (req, res) => {
+      try {
+        const { id } = req.params;
+        const user_id = req.user.id;
+        const comment = await Comments.findOne({ where: { id, user_id }})
+        await comment.destroy();
+        res.status(200).send({ data: true });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  );
 };
