@@ -499,7 +499,7 @@ module.exports = (sequelize, DataType) => {
   Enterprises.hasMany(Comments);
   Users.hasMany(Comments);
   Users.hasMany(Evaluations);
-  Comments.hasMany(Comments, { as: "Replies" });
+  Comments.hasMany(Comments, { as: "Replies", onDelete: 'CASCADE'});
   Comments.hasMany(CommentVotes);
   Comments.belongsTo(Users);
   Users.hasMany(CommentVotes);
