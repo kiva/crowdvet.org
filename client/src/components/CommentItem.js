@@ -45,6 +45,7 @@ class CommentItem extends Component {
     const heartImg = userVotes[user.id] ? heart : heartGrey;
 
     const hide = this.state.hidden ? "hide" : "";
+    const deleteBtn = user.id === comment.User.id ? <button onClick={this.onDeleteComment} className="btn-flat">Delete</button> : "";
     return (
       <li>
         <div className="row collapsible-header grey-background comment-height">
@@ -90,7 +91,7 @@ class CommentItem extends Component {
                 <img src={reply} />
               </div>
               <div className="col s12 m1 offset-m8">
-                <button onClick={this.onDeleteComment} className="btn-flat">Delete</button>
+                {deleteBtn}
               </div>
             </div>
           </div>
