@@ -13,21 +13,21 @@ class Carousel extends React.Component {
     const { options = {}, carouselId } = this.props;
 
     if (typeof $ !== "undefined") {
-      $(`#${carouselId}`).carousel(options);
+      $(this._carousel).carousel(options);
       // start carrousel
 
       // move next carousel
-      $(".moveNextCarousel").click(function(e) {
+      $(this._carousel).find(".moveNextCarousel").click((e) => {
         e.preventDefault();
         e.stopPropagation();
-        $(".carousel").carousel("next");
+        $(this._carousel).carousel("next");
       });
 
       // move prev carousel
-      $(".movePrevCarousel").click(function(e) {
+      $(this._carousel).find(".movePrevCarousel").click((e) => {
         e.preventDefault();
         e.stopPropagation();
-        $(".carousel").carousel("prev");
+        $(this._carousel).carousel("prev");
       });
     }
   }
