@@ -201,9 +201,6 @@ class LearnAbout extends Component {
                 <span>
                   We understand the desire to help everyone, but Kiva cannot
                   approve every single application.
-                </span>
-                <br />
-                <span>
                   Some enterprises are not yet at a stage to receive a working
                   capital loan and approving them may do more harm than good.
                   Kiva will always consider reapplicants in the future when
@@ -236,7 +233,6 @@ class LearnAbout extends Component {
                   <br /><br />
                   Once the enterprise is closed for vetting, Kiva’s staff will
                   post their votes and final decision.
-                  <br />
                   Users will then receive
                   their individual score and accuracy rating on their profile.
                   If an enterprise is approved, it will be posted to the Kiva
