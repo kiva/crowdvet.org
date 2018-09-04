@@ -289,7 +289,7 @@ class EvaluationResults extends Component {
         </div>
         <div className="row">
           <div className="col s12">
-            <div dangerouslySetInnerHTML={{__html: `${officialEvaluation.body}`}} />
+            <div dangerouslySetInnerHTML={{__html: `${!_.isEmpty(officialEvaluation.body) ? officialEvaluation.body : ""}`}} />
           </div>
         </div>
       </div>
