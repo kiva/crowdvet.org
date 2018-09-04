@@ -56,7 +56,7 @@ class Carousel extends Component {
     return (
       <div>
         <div className="carousel carousel-slider" data-indicators="true">
-          <div className="carousel-fixed-item middle-indicator">
+          <div className="carousel-fixed-item middle-indicator" style={{height:"50px"}}>
             <div className="left">
               <a
                 href="prev"

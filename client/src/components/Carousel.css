@@ -1,14 +1,17 @@
 
 .middle-indicator{
    position:absolute;
-   top:50%;
+   top:40%;
    }
+
   .middle-indicator-text{
    font-size: 4.2rem;
   }
+
   a.middle-indicator-text{
     color:white !important;
   }
+
 .content-indicator{
     width: 64px;
     height: 64px;
@@ -25,7 +28,7 @@
 .right-arrow {
   margin-right: 5%;
 }
-  
+
 .left-arrow {
   margin-left: 5%;
 }
