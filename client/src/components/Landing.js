@@ -98,7 +98,7 @@ class Landing extends Component {
   }
   renderContact(){
     return(
-      <div className="row">
+      <div className="row" style={{marginTop:"50px"}}>
       <p className="col s12 m4 offset-m4 center grey-text">Crowdvetting is a project of Kiva's Department of Strategic Initiatives
         Contact us at crowdvet@kiva.org</p>
       </div>
