@@ -5,6 +5,7 @@ import * as actions from '../actions';
 import List from "./SuggestedList"
 import _ from 'lodash';
 import moment from "moment";
+import mtz from "moment-timezone";
 
 class Suggested extends Component {
   componentDidMount() {
@@ -21,7 +22,7 @@ class Suggested extends Component {
 function mapStateToProps({suggested, auth}) {
   return {
     sectors: auth.UsersSectors,
-    suggested: _.filter(suggested, e => moment().isBefore(e.endDate))
+    suggested: _.filter(suggested, e => moment().isBefore(mtz.tz(e.endDate, "America/Los_Angeles").format()))
   }
 }
 
