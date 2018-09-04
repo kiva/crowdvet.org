@@ -1,4 +1,5 @@
 const requireLogin = require("../middlewares/requireLogin");
+const HttpStatus = require('http-status');
 
 module.exports = app => {
   const { Countries } = app.datasource.models.Enterprises.model;
@@ -11,7 +12,7 @@ module.exports = app => {
         .set("x-Total-Count", result.length)
         .send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -21,7 +22,7 @@ module.exports = app => {
       const result = await Countries.findOne({ where: { id } });
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 };

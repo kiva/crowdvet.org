@@ -1,5 +1,6 @@
 const passport = require("passport");
 const requireLogin = require("../middlewares/requireLogin");
+const HttpStatus = require('http-status');
 const _ = require("lodash");
 
 module.exports = app => {
@@ -24,7 +25,7 @@ module.exports = app => {
         .set("x-Total-Count", result.length)
         .send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -61,7 +62,7 @@ module.exports = app => {
 
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -74,7 +75,7 @@ module.exports = app => {
       });
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 };

@@ -1,5 +1,6 @@
 const passport = require("passport");
 const requireLogin = require("../middlewares/requireLogin");
+const HttpStatus = require('http-status');
 
 module.exports = app => {
   const { Recomendations } = app.datasource.models.Enterprises.model;
@@ -14,7 +15,7 @@ module.exports = app => {
         .set("x-Total-Count", result.length)
         .send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 };

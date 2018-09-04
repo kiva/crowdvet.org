@@ -4,7 +4,7 @@ const _ = require("lodash");
 const uuid = require("uuid/v1");
 const AWS = require("aws-sdk");
 const keys = require("../config/keys");
-
+const HttpStatus = require('http-status');
 
 module.exports = app => {
   const {
@@ -32,7 +32,7 @@ module.exports = app => {
         .set("x-Total-Count", result.length)
         .send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -82,7 +82,7 @@ module.exports = app => {
         .set("x-Total-Count", result.length)
         .send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -94,7 +94,7 @@ module.exports = app => {
       });
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -104,7 +104,7 @@ module.exports = app => {
       await Evaluations.destroy({ where: { id } });
       res.status(200).send({ data: true });
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -114,7 +114,7 @@ module.exports = app => {
       const result = await Users.findOne({ where: { id } });
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -134,7 +134,7 @@ module.exports = app => {
         });
         return res.status(200).send(result);
       } catch (e) {
-        console.log(e);
+        res.status(HttpStatus.BAD_REQUEST).send();
       }
     }
   );
@@ -154,7 +154,7 @@ module.exports = app => {
         }
       );
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -169,7 +169,7 @@ module.exports = app => {
       });
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -194,7 +194,7 @@ module.exports = app => {
 
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -205,7 +205,7 @@ module.exports = app => {
       const result = await Users.update({ name }, { where: { id } });
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 };
