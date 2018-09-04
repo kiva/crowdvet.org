@@ -18,7 +18,7 @@ module.exports = app => {
           .set("x-Total-Count", result.count)
           .send(result.rows);
       } catch (e) {
-        console.log(e);
+        res.status(HttpStatus.BAD_REQUEST).send();
       }
     }
   );
@@ -32,7 +32,7 @@ module.exports = app => {
         const result = await Comments.findOne({ where: { id } });
         return res.status(200).send(result);
       } catch (e) {
-        console.log(e);
+        res.status(HttpStatus.BAD_REQUEST).send();
       }
     }
   );
@@ -46,7 +46,7 @@ module.exports = app => {
         await Comments.destroy({ where: { id } });
         res.status(200).send({ data: true });
       } catch (e) {
-        console.log(e);
+        res.status(HttpStatus.BAD_REQUEST).send();
       }
     }
   );

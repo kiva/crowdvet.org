@@ -1,5 +1,6 @@
 const passport = require("passport");
 const _ = require("lodash");
+const HttpStatus = require('http-status');
 
 module.exports = app => {
   const { Evaluations } = app.datasource.models.Enterprises.model;
@@ -14,7 +15,7 @@ module.exports = app => {
         .set("x-Total-Count", result.length)
         .send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -40,7 +41,7 @@ module.exports = app => {
 
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -53,7 +54,7 @@ module.exports = app => {
         await Evaluations.destroy({ where: { id } });
         res.status(200).send({ data: true });
       } catch (e) {
-        console.log(e);
+        res.status(HttpStatus.BAD_REQUEST).send();
       }
     }
   );
@@ -67,7 +68,7 @@ module.exports = app => {
       });
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -79,7 +80,7 @@ module.exports = app => {
       });
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -93,7 +94,7 @@ module.exports = app => {
         .set("x-Total-Count", result.length)
         .send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
   app.post(
@@ -126,7 +127,7 @@ module.exports = app => {
         });
         return res.status(200).send(evaluation);
       } catch (e) {
-        console.log(e);
+        res.status(HttpStatus.BAD_REQUEST).send();
       }
     }
   );
@@ -161,7 +162,7 @@ module.exports = app => {
 
         return res.status(200).send(result);
       } catch (e) {
-        console.log(e);
+        res.status(HttpStatus.BAD_REQUEST).send();
       }
     }
   );
@@ -181,7 +182,7 @@ module.exports = app => {
 
         return res.status(200).send(result);
       } catch (e) {
-        console.log(e);
+        res.status(HttpStatus.BAD_REQUEST).send();
       }
     }
   );
@@ -195,7 +196,7 @@ module.exports = app => {
         await Evaluations.destroy({ where: { id } });
         res.status(200).send({ data: true });
       } catch (e) {
-        console.log(e);
+        res.status(HttpStatus.BAD_REQUEST).send();
       }
     }
   );
@@ -209,7 +210,7 @@ module.exports = app => {
         await Evaluations.destroy({ where: { id } });
         res.status(200).send({ data: true });
       } catch (e) {
-        console.log(e);
+        res.status(HttpStatus.BAD_REQUEST).send();
       }
     }
   );

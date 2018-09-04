@@ -1,4 +1,5 @@
 const passport = require("passport");
+const HttpStatus = require('http-status');
 
 module.exports = app => {
   const { Enterprises, Evaluations, Sectors } = app.datasource.models.Enterprises.model;
@@ -11,7 +12,7 @@ module.exports = app => {
         .set("x-Total-Count", result.length)
         .send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -21,7 +22,7 @@ module.exports = app => {
       const result = await Sectors.findOne({ where: { id } });
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -31,7 +32,7 @@ module.exports = app => {
       await Sectors.destroy({ where: { id } });
       res.status(200).send({ data: true });
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -42,7 +43,7 @@ module.exports = app => {
       });
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -56,7 +57,7 @@ module.exports = app => {
       );
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 };

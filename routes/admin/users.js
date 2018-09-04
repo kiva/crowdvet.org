@@ -23,7 +23,7 @@ module.exports = app => {
         .set("x-Total-Count", result.length)
         .send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -33,7 +33,7 @@ module.exports = app => {
       await Users.destroy({ where: { id } });
       res.status(200).send({data: true});
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -54,7 +54,7 @@ module.exports = app => {
       const result = await Users.update({ ...req.body }, { where: { id } });
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send()
     }
   });
 
@@ -69,7 +69,7 @@ module.exports = app => {
         .set("x-Total-Count", result.length)
         .send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -79,7 +79,7 @@ module.exports = app => {
       const result = await Users.findOne({ where: { id } });
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -89,7 +89,7 @@ module.exports = app => {
       const result = await Users.update({ ...req.body, password: Users.hash(req.body.password) }, { where: { id } });
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -98,7 +98,7 @@ module.exports = app => {
       const result = await Users.create({ ...req.body, admin: true });
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -108,7 +108,7 @@ module.exports = app => {
         await Users.destroy({ where: { id, admin: true } });
         res.status(200).send({data: true});
       } catch (e) {
-        console.log(e);
+        res.status(HttpStatus.BAD_REQUEST).send();
       }
     });
 };

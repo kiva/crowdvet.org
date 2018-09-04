@@ -33,7 +33,7 @@ module.exports = app => {
           .set("x-Total-Count", form.data.content.count)
           .send(result.data.content);
       } catch (e) {
-        console.log(e);
+        res.status(HttpStatus.BAD_REQUEST).send();
       }
     }
   );
@@ -44,7 +44,7 @@ module.exports = app => {
         await Enterprises.destroy({ where: { id } });
         res.status(200).send({ data: true });
       } catch (e) {
-        console.log(e);
+        res.status(HttpStatus.BAD_REQUEST).send();
       }
     });
 
@@ -124,7 +124,7 @@ module.exports = app => {
         await Promise.all(promises);
         res.status(200).send();
       } catch (e) {
-        console.log(e);
+        res.status(HttpStatus.BAD_REQUEST).send();
         res.status(402).send({ message: "Can not process identity" });
       }
     }
@@ -169,7 +169,7 @@ module.exports = app => {
 
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -186,7 +186,7 @@ module.exports = app => {
         .set("x-Total-Count", result.count)
         .send(result.rows);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
@@ -199,7 +199,7 @@ module.exports = app => {
       });
       return res.status(200).send(result);
     } catch (e) {
-      console.log(e);
+      res.status(HttpStatus.BAD_REQUEST).send();
     }
   });
 
