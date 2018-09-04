@@ -106,7 +106,8 @@ module.exports = app => {
           status,
           model,
           impact,
-          prioritization
+          prioritization,
+          body
         } = req.body;
         const user_id = req.user.id;
 
@@ -120,9 +121,9 @@ module.exports = app => {
           status,
           impact,
           model,
+          body,
           prioritization
         });
-        console.log(evaluation);
         return res.status(200).send(evaluation);
       } catch (e) {
         console.log(e);
@@ -141,7 +142,7 @@ module.exports = app => {
           model,
           impact,
           prioritization,
-          comment
+          body
         } = req.body;
         const { id } = req.params;
         const user_id = req.user.id;
@@ -153,7 +154,7 @@ module.exports = app => {
             model,
             impact,
             prioritization,
-            comment
+            body
           },
           { where: { id } }
         );
