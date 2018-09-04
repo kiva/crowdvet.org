@@ -15,6 +15,7 @@ import CommentList from "./CommentList";
 import utils from "./utils";
 import _ from "lodash";
 import moment from "moment";
+import mtz from "moment-timezone"
 
 class ApplicationShow extends Component {
   constructor(props) {
@@ -268,7 +269,7 @@ class ApplicationShow extends Component {
     }
 
     return (
-      <Countdown date={enterprise.endDate} renderer={utils.timeRenderer} />
+      <Countdown date={mtz.tz(enterprise.endDate, "America/Los_Angeles").format()} renderer={utils.timeRenderer} />
     );
   }
 

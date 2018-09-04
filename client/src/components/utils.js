@@ -1,5 +1,6 @@
 import _ from "lodash";
 import moment from "moment";
+import mtz from "moment-timezone"
 import React from 'react';
 
 function getScoreAndAccuracy(votes, officialVotes) {
@@ -174,7 +175,7 @@ function isPending(officialEvaluation) {
 }
 
 function isOpen(enterprise) {
-  return moment().isBefore(enterprise.endDate);
+  return moment().isBefore(mtz.tz(enterprise.endDate, "America/Los_Angeles").format());
 }
 
 function getPage(enterprise, officialEvaluation) {

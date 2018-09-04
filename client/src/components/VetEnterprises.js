@@ -8,7 +8,9 @@ import InProgress from "./InProgress";
 import Suggested from "./Suggested";
 import _ from "lodash";
 import moment from "moment";
+import mtz from "moment-timezone";
 import * as actions from "../actions";
+
 
 class VetEnterprises extends Component {
   constructor(props) {
@@ -73,7 +75,7 @@ class VetEnterprises extends Component {
           />
           <Enterprises
             enterprises={_.filter(this.props.enterprises, e =>
-              moment().isBefore(e.endDate)
+              moment().isBefore(mtz.tz(e.endDate, "America/Los_Angeles").format())
             )}
             sectors={this.props.sectors}
             countries={this.props.countries}
@@ -87,7 +89,7 @@ class VetEnterprises extends Component {
           <Suggested />
           <Enterprises
             enterprises={_.filter(this.props.enterprises, e =>
-              moment().isBefore(e.endDate)
+              moment().isBefore(mtz.tz(e.endDate, "America/Los_Angeles").format())
             )}
             sectors={this.props.sectors}
             countries={this.props.countries}
