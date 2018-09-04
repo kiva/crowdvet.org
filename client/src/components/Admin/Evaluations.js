@@ -137,6 +137,8 @@ export const EvaluationsEdit = props => (
           { id: '6', name: 'The social impact of this company has been documented and tested with a study or similarly rigorous measure, with demonstrated proof. Or, the company is following an established social impact model which has been tested and demonstrated by research.' }
       ]} />
 
+      <LongTextInput label="" source="impactComment" />
+
       <RadioButtonGroupInput fullWidth source="model" choices={[
           { id: '1', name: 'This business is not making money. It is dependant on donations and grants.​' },
           { id: '2', name: 'This business has some income, but is mostly dependent on grants and donations, somewhere around a 20:80 ratio.' },
@@ -145,6 +147,7 @@ export const EvaluationsEdit = props => (
           { id: '5', name: 'This business does not display robust profits, as it is reinvestmenting its profit into growth of the company.' },
           { id: '6', name: 'This company is already healthily profitable and sustainable, and has the ability to scale.​' }
       ]} />
+      <LongTextInput label="Model" source="modelComment" />
 
       <RadioButtonGroupInput fullWidth source="prioritization" choices={[
           { id: '1', name: 'I really wouldn’t recommend moving forward with this enterprise.' },
@@ -154,6 +157,9 @@ export const EvaluationsEdit = props => (
           { id: '5', name: 'This sounds mostly great. Only a few minor concerns with business model/social enterprise/other.' },
           { id: '6', name: 'This is a definite yes. If everything checks out, let’s send this to crowdfunding right now.' }
       ]} />
+
+      <LongTextInput label="Prioritization" source="prioritizationComment" />
+      <LongTextInput label="What else" source="comment" />
     </SimpleForm>
   </Edit>
 );
