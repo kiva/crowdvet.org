@@ -255,7 +255,7 @@ function getMessage(enterprise, evaluation, officialEvaluation) {
     return {
       message: "BELOW ARE THE RESULTS YOU SUBMITTED",
       page: `/evaluations/results/${enterprise.id}`,
-      text: "Evaluation Results"
+      text: "Continue"
     }
   }
 }
