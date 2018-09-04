@@ -287,6 +287,11 @@ class EvaluationResults extends Component {
             <LineChart data={utils.getCrowdVotes(crowdVotes, "prioritization")} max={crowdVotes.length} chartId={idgen()}/>
           </div>
         </div>
+        <div className="row">
+          <div className="col s12">
+            <div dangerouslySetInnerHTML={{__html: `${officialEvaluation.body}`}} />
+          </div>
+        </div>
       </div>
     );
   }
