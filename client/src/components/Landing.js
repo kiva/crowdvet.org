@@ -62,17 +62,6 @@ class Landing extends Component {
     );
   }
 
-  renderButton() {
-    return (
-      <div className="row center">
-        <div className="col s12  m4 offset-m4">
-        <button className="btn" id="evaluate">
-          Contact us at crowdvet@kiva.org
-        </button>
-        </div>
-      </div>
-    );
-  }
 
   renderVideo() {
     return (
@@ -107,6 +96,14 @@ class Landing extends Component {
       </div>
     );
   }
+  renderContact(){
+    return(
+      <div className="row">
+      <p className="col s12 m4 offset-m4 center grey-text">Crowdvetting is a project of Kiva's Department of Strategic Initiatives
+        Contact us at crowdvet@kiva.org</p>
+      </div>
+    )
+  }
   render() {
     return (
       <div>
@@ -120,7 +117,7 @@ class Landing extends Component {
         {this.renderWorld()}
         {this.renderRecent()}
         {this.renderPrefooter()}
-        {this.renderButton()}
+        {this.renderContact()}
       </div>
     );
   }
