@@ -350,7 +350,14 @@ module.exports = (sequelize, DataType) => {
       type: DataType.BOOLEAN,
       allowNull: false,
       defaultValue: false
-    }
+    },
+    body: {
+      type: DataType.STRING,
+      allowNull: true,
+      validate: {
+        notEmpty: false
+      }
+    },
   });
 
   const Sectors = sequelize.define("Sectors", {
