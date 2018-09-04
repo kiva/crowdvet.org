@@ -230,7 +230,7 @@ class EvaluationResults extends Component {
         </div>
         <div className="row">
           <div className="col s12">
-            <strong className="left center-80">Crowd Average:</strong><h4 className="left center-80 no-margin left-15">{getAverage(_.map(crowdVotes, "impact"))}</h4>
+            <strong className="left center-80">Crowd Average:</strong><strong className="left center-80 no-margin left-15">{getAverage(_.map(crowdVotes, "impact"))}</strong>
           </div>
         </div>
         <br />
@@ -255,7 +255,7 @@ class EvaluationResults extends Component {
           <p>{officialEvaluation.model}: {_.mapKeys(modelChoices, "score")[officialEvaluation.model].text}</p>
         </div>
         <div className="col s12">
-            <strong className="left center-80">Crowd Average:</strong><h4 className="left center-80 no-margin left-15">{getAverage(_.map(crowdVotes, "model"))}</h4>
+            <strong className="left center-80">Crowd Average:</strong><strong className="left center-80 no-margin left-15">{getAverage(_.map(crowdVotes, "model"))}</strong>
         </div>
         <div className="row">
           <div className="col s12">
@@ -280,7 +280,7 @@ class EvaluationResults extends Component {
           </div>
         </div>
         <div className="col s12">
-            <strong className="left center-80">Crowd Average:</strong><h4 className="left center-80 no-margin left-15">{getAverage(_.map(crowdVotes, "prioritization"))}</h4>
+            <strong className="left center-80">Crowd Average:</strong><strong className="left center-80 no-margin left-15">{getAverage(_.map(crowdVotes, "prioritization"))}</strong>
         </div>
         <div className="row">
           <div className="col s12">
