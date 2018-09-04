@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Carousel from "./Carousel";
 import SignUpModal from "./SignUpModal";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Landing.css";
 import world from "./world.svg";
@@ -123,4 +124,8 @@ class Landing extends Component {
   }
 }
 
-export default Landing;
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+export default connect(mapStateToProps)(Landing);
