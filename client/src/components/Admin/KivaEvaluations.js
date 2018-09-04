@@ -24,6 +24,7 @@ import {
   SimpleFormIterator,
   TabbedForm, FormTab, DateField
 } from "react-admin";
+import RichTextInput from 'ra-input-rich-text';
 
 import Radio from "./Radio";
 import Choices from './Choices'
@@ -35,9 +36,9 @@ const required = (message = 'Required') =>
 export const KivaEvaluationsList = props => (
   <List {...props}>
     <Datagrid>
-      <ReferenceField label="Users" source="user_id" reference="users">
-        <TextField source="name" />
-      </ReferenceField>
+    <ReferenceField label="Users" source="user_id" reference="admins">
+      <TextField source="name" />
+    </ReferenceField>
 
       <ReferenceField
         label="Enterprise"
@@ -99,7 +100,7 @@ export const KivaEvaluationsCreate = props => {
             { id: '6', name: 'This is a definite yes. If everything checks out, let’s send this to crowdfunding right now.' }
         ]} />
 
-
+        <RichTextInput source="body" />
     </SimpleForm>
     </Create>
   );
@@ -151,7 +152,7 @@ export const KivaEvaluationsEdit = props => {
             { id: '5', name: 'This sounds mostly great. Only a few minor concerns with business model/social enterprise/other.' },
             { id: '6', name: 'This is a definite yes. If everything checks out, let’s send this to crowdfunding right now.' }
         ]} />
-
+        <RichTextInput source="body" />
 
       </SimpleForm>
     </Edit>
