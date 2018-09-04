@@ -13,13 +13,13 @@ import {
   SelectInput,
   SimpleForm,
   TextInput,
-  DateInput,
   BooleanInput,
   ImageField,
   ImageInput,
   ArrayInput,
   SimpleFormIterator,
-  BooleanField
+  BooleanField,
+  DateInput
 } from 'react-admin';
 
 export const EnterprisesList = props => (
@@ -86,8 +86,7 @@ export const EnterprisesEdit = props => (
       <LongTextInput label="Short Description max 150 characters"  validate={ [required(), length()]} source="shortDescription"  />
       <LongTextInput label="Description" source="description"  />
       <TextInput label="Began Operating" source="beganOperating" validate={ number() } />
-      <DateInput label="End Date" source="endDate" validate={required()} />
-
+      <DateInput source="endDate" label="End Date"  format={dateFormatter} parse={dateParser} validate={required()}  />
       <ImageField source="Images" src="url" title="Picture" />
 
       <ImageInput source="pictures" label="Related pictures" multiple accept="image/*" placeholder={<p>Drop your files here 600 x 400</p>}>
@@ -104,3 +103,13 @@ export const EnterprisesEdit = props => (
     </SimpleForm>
   </Edit>
 );
+
+const dateFormatter = v => {
+  const d = new Date(v)
+  const yy = d.getFullYear().toString();
+  const mm = (d.getMonth() + 1).toString();
+  const day = (d.getDate() + 1 ).toString();
+  return `${yy}-${mm}-${day}`;
+};
+
+const dateParser = v => v;
