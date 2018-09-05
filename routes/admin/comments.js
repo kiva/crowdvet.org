@@ -1,4 +1,5 @@
 const passport = require("passport");
+const HttpStatus = require('http-status');
 
 module.exports = app => {
   const { Comments, Users } = app.datasource.models.Enterprises.model;

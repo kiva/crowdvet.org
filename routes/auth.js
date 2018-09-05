@@ -7,6 +7,7 @@ const {sendEmail} = require('../services/emailer');
 const uuid = require("uuid/v4");
 const APP_URL_BASE = keys.APP_URL_BASE;
 
+
 module.exports = app => {
   const { Users } = app.datasource.models.Enterprises.model;
 
@@ -110,7 +111,7 @@ module.exports = app => {
         .status(200)
         .json({ message: `Email has been sent to ${req.body.email}` });
     } catch (e) {
-      console.log(e);
+      res.sendStatus(HttpStatus.UNAUTHORIZED);
     }
   });
 
@@ -123,7 +124,7 @@ module.exports = app => {
       );
       return res.status(200);
     } catch (e) {
-      console.log(e);
+      res.sendStatus(HttpStatus.UNAUTHORIZED);
     }
   });
 

@@ -4,6 +4,7 @@ const uuid = require("uuid/v1");
 const AWS = require("aws-sdk");
 const keys = require("../../config/keys");
 const _ = require("lodash");
+const HttpStatus = require('http-status');
 
 const s3 = new AWS.S3({
   accessKeyId: keys.accessKeyId,
