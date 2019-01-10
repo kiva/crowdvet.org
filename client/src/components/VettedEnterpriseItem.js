@@ -27,7 +27,7 @@ class EnterpriseItem extends Component {
               }
 
              <div className="card-title flow-text">
-              <p id="investment-card">investment {investment}:</p>
+              <p id="investment-card">Investment {investment}:</p>
               <p id="card-vetted">{renderName(enterprise.name)}</p>
               <Link to={`/application/${enterprise.id}`} id="read-card">
                 Read More >>
