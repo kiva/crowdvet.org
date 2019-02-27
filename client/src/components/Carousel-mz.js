@@ -36,7 +36,7 @@ class Carousel extends React.Component {
     if (typeof child === "string") {
       return (
         <a className="carousel-item">
-          <img src={child} />
+          <img src={child} alt="images of people we have helped"/>
         </a>
       );
     }
