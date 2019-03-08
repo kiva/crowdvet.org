@@ -175,7 +175,7 @@ class LearnAbout extends Component {
                 </table>
                 <p>User score according to the table below (1 - and 2 +) would be 7 with an accuracy rating of 50%.</p>
                 <div className="center">
-                <img  class="responsive-img"  src={tableConversion} />
+                <img  class="responsive-img"  src={tableConversion} alt="table conversion"/>
                 </div>
               </div>
               <br />

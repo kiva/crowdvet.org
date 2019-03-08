@@ -15,7 +15,7 @@ import CommentList from "./CommentList";
 import utils from "./utils";
 import _ from "lodash";
 import moment from "moment";
-import mtz from "moment-timezone"
+import mtz from "moment-timezone";
 
 class ApplicationShow extends Component {
   constructor(props) {
@@ -36,7 +36,11 @@ class ApplicationShow extends Component {
         url: `/users/evaluations/${id}`,
         active: false
       },
-      results: { text: "Results", url: `/users/evaluations/results/${id}`, active: false }
+      results: {
+        text: "Results",
+        url: `/users/evaluations/results/${id}`,
+        active: false
+      }
     };
   }
 
@@ -69,7 +73,7 @@ class ApplicationShow extends Component {
   renderTable() {
     return (
       <div>
-        <table >
+        <table>
           <thead>
             <tr>
               <th colSpan="3" className="table-name center">
@@ -80,7 +84,7 @@ class ApplicationShow extends Component {
           <tbody className="left-align">
             <tr>
               <td>
-                <img src={PDF} />
+                <img src={PDF} alt="pdf loan inquiry"/>
                 <a href={this.props.enterprise.loanInquiry}>
                   {this.props.enterprise.loanInquiry
                     ? "Initial Loan Inquiry"
@@ -88,7 +92,7 @@ class ApplicationShow extends Component {
                 </a>
               </td>
               <td>
-                <img src={PDF} />
+                <img src={PDF} alt="pdf loan application"/>
                 <a href={this.props.enterprise.loanApplication}>
                   {this.props.enterprise.loanApplication
                     ? "Loan Application"
@@ -96,7 +100,7 @@ class ApplicationShow extends Component {
                 </a>
               </td>
               <td>
-                <img src={PDF} />
+                <img src={PDF} alt="pdf board and management"/>
                 <a href={this.props.enterprise.boardAndManagement}>
                   {this.props.enterprise.boardAndManagement
                     ? "Board and Management Team"
@@ -106,13 +110,13 @@ class ApplicationShow extends Component {
             </tr>
             <tr>
               <td>
-                <img src={PDF} />
+                <img src={PDF} alt="pdf certificate of incorporation"/>
                 <a href={this.props.enterprise.certificateIncorporation}>
                   Certificate of Incorporation
                 </a>
               </td>
               <td>
-                <img src={PDF} />
+                <img src={PDF} alt="pdf business plan"/>
                 <a href={this.props.enterprise.businessPlan}>
                   {this.props.enterprise.businessPlan
                     ? "Business Plan"
@@ -120,7 +124,7 @@ class ApplicationShow extends Component {
                 </a>
               </td>
               <td>
-                <img src={PDF} />
+                <img src={PDF} alt="pdf impact study"/>
                 <a href={this.props.enterprise.impactStudy}>
                   {this.props.enterprise.impactStudy
                     ? "Impact Study"
@@ -130,7 +134,7 @@ class ApplicationShow extends Component {
             </tr>
             <tr>
               <td>
-                <img src={PDF} />
+                <img src={PDF} alt="pdf management team"/>
                 <a href={this.props.enterprise.managementTeam}>
                   {this.props.enterprise.managementTeam
                     ? "Management Team Profile"
@@ -138,7 +142,7 @@ class ApplicationShow extends Component {
                 </a>
               </td>
               <td>
-                <img src={PDF} />
+                <img src={PDF} alt="pdf board of directors"/>
                 <a href={this.props.enterprise.boardOfDirectors}>
                   {this.props.enterprise.boardOfDirectors
                     ? "Board of Directors"
@@ -146,7 +150,7 @@ class ApplicationShow extends Component {
                 </a>
               </td>
               <td>
-                <img src={PDF} />
+                <img src={PDF} alt="pdf annual report"/>
                 <a href={this.props.enterprise.anualReport}>
                   {this.props.enterprise.anualReport
                     ? "Annual Report"
@@ -167,7 +171,7 @@ class ApplicationShow extends Component {
           <tbody>
             <tr>
               <td>
-                <img src={Excel} />
+                <img src={Excel} alt="excel zero tool"/>
                 <a href={this.props.enterprise.zeroTool}>
                   {this.props.enterprise.zeroTool
                     ? " Zero Tool"
@@ -175,7 +179,7 @@ class ApplicationShow extends Component {
                 </a>
               </td>
               <td>
-                <img src={PDF} />
+                <img src={PDF} alt="pdf historical financial statements"/>
                 <a href={this.props.enterprise.historicalFinancial}>
                   {this.props.enterprise.historicalFinancial
                     ? "Historical Financial Statements"
@@ -183,7 +187,7 @@ class ApplicationShow extends Component {
                 </a>
               </td>
               <td>
-                <img src={PDF} />
+                <img src={PDF} alt="pdf" alt="year to date financial statements"/>
                 <a href={this.props.enterprise.YDTFinancial}>
                   {this.props.enterprise.YDTFinancial
                     ? "YTD Financial Statements"
@@ -191,7 +195,7 @@ class ApplicationShow extends Component {
                 </a>
               </td>
               <td>
-                <img src={PDF} />
+                <img src={PDF} alt="latest financial statements"/>
                 <a href={this.props.enterprise.latestFinancial}>
                   {this.props.enterprise.latestFinancial
                     ? "Latest Financial Statements"
@@ -269,7 +273,10 @@ class ApplicationShow extends Component {
     }
 
     return (
-      <Countdown date={mtz.tz(enterprise.endDate, "America/Los_Angeles").format()} renderer={utils.timeRenderer} />
+      <Countdown
+        date={mtz.tz(enterprise.endDate, "America/Los_Angeles").format()}
+        renderer={utils.timeRenderer}
+      />
     );
   }
 
@@ -334,7 +341,11 @@ class ApplicationShow extends Component {
             <CommentForm enterprise_id={enterprise.id} />
           </div>
           <div className="center-align">
-            <Link className="btn button-large" to={toPage} style={{lineHeight:"80px"}}>
+            <Link
+              className="btn button-large"
+              to={toPage}
+              style={{ lineHeight: "80px" }}
+            >
               Continue to Evaluation
             </Link>
           </div>
@@ -360,4 +371,7 @@ function mapStateToProps(
   };
 }
 
-export default connect(mapStateToProps, actions)(ApplicationShow);
+export default connect(
+  mapStateToProps,
+  actions
+)(ApplicationShow);

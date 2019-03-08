@@ -80,9 +80,9 @@ class ProfileHeader extends Component {
           <br />
           <div className="row">
             <div className="col s12 m4 l3">
-              <div className="thumb"><img src={this.props.auth.image} alt="" className="circle responsive-img" /></div>
+              <div className="thumb"><img src={this.props.auth.image} alt="authentication" className="circle responsive-img" /></div>
               <p className="valign-wrapper" style={{cursor: "pointer"}} onClick={this.onClickHandler.bind(this)}>
-                <span><img src={camera} /></span>
+                <span><img alt="camera" src={camera} /></span>
                 <span className="small valign-wrapper" style={{marginLeft:"5px"}}>Upload New Image</span>
               </p>
             </div>

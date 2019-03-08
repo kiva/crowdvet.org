@@ -18,7 +18,7 @@ import HowWorks from "./components/HowWorks";
 import Terms from "./components/Terms";
 import FurtherReading from "./components/FurtherReading";
 import ResetPassword from "./components/ResetPass";
-import Faqs from "./components/Faqs"
+import Faqs from "./components/Faqs";
 import "./App.css";
 
 class App extends Component {
@@ -30,13 +30,22 @@ class App extends Component {
       <div>
         <Header />
         <Switch>
-          <Route exact path="/users/evaluations/results/:id" component={EvaluationResults} />
-          <Route exact path="/evaluations/results/:id" component={EvaluationResultsViz} />
+          <Route
+            exact
+            path="/users/evaluations/results/:id"
+            component={EvaluationResults}
+          />
+          <Route
+            exact
+            path="/evaluations/results/:id"
+            component={EvaluationResultsViz}
+          />
           <Route exact path="/vet/enterprises" component={VetEnterprises} />
           <Route exact path="/user" component={UserProfile} />
-          <Route exact path="/application/:id" component={ApplicationShow}
-          />
-          <Route path="/users/evaluations/:id" component={ApplicationEvaluate}
+          <Route exact path="/application/:id" component={ApplicationShow} />
+          <Route
+            path="/users/evaluations/:id"
+            component={ApplicationEvaluate}
           />
           <Route exact path="/faqs" component={Faqs} />
           <Route exact path="/learn" component={LearnAbout} />
@@ -52,4 +61,7 @@ class App extends Component {
   }
 }
 
-export default connect(null, actions)(App);
+export default connect(
+  null,
+  actions
+)(App);

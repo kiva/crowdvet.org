@@ -65,7 +65,7 @@ class LearnAbout extends Component {
           big for microfinance, yet too small for traditional banking.
         </p>
         <p className="center">
-          <img src={missingMiddle} />
+          <img src={missingMiddle} alt="missing middle"/>
         </p>
         <p className="col s12 center font-26">
           The Direct-to-Social Enterprise program is a pilot program that aims
@@ -73,7 +73,7 @@ class LearnAbout extends Component {
           efficient way.
         </p>
         <p className="center">
-          <img src={financial} />
+          <img src={financial} alt="financial"/>
         </p>
         <p className="col s12 center font-26">
           CrowdVet.org, a pilot project under the DSE program, crowdsources the
@@ -85,7 +85,7 @@ class LearnAbout extends Component {
           DSE Program at a Glance
         </p>
         <p className="center">
-          <img src={dseGlance} />
+          <img src={dseGlance} alt="DSE program"/>
         </p>
         <p className="col s12 center">*The DSE program is very new and growing, so several loans are still in the repayment stage</p>
         <div className="col s6 center">{startVetting}</div>

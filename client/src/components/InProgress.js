@@ -37,7 +37,7 @@ class InProgress extends Component {
           <div className="card">
             <div className="card-image" id="card-progress">
             { !_.isEmpty(enterprise.Images) ?
-              this.renderImages(enterprise.Images, enterprise) : <img style={{height:"230px"}} src={enterprise.image1} />
+              this.renderImages(enterprise.Images, enterprise) : <img alt="enterprise" style={{height:"230px"}} src={enterprise.image1} />
             }
             </div>
             <div className="card-content">
