@@ -5,7 +5,7 @@ function ReplyItem({reply, date, user}) {
   return(
     <div className="row grey-background">
     <li className="col s2 grey-background">
-      <p><img className="circle responsive-img" src={user.image} style={{maxWidth:"50px"}}/></p>
+      <p><img alt="image of user" className="circle responsive-img" src={user.image} style={{maxWidth:"50px"}}/></p>
       <p className="comment-height">{user.name}</p>
     </li>
     <li className="col s8 grey-background">
