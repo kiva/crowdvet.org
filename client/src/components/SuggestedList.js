@@ -39,7 +39,7 @@ class SuggestedList extends Component {
               {!_.isEmpty(enterprise.Images) ? (
                 this.renderImages(enterprise.Images, enterprise)
               ) : (
-                <img style={{ height: "230px" }} src={enterprise.image1} />
+                <img alt="enterprise" style={{ height: "230px" }} src={enterprise.image1} />
               )}
             </div>
             <div className="card-content">

@@ -23,7 +23,7 @@ class EnterpriseItem extends Component {
           <div className="card-image">
 
               { !_.isEmpty(enterprise.Images) ?
-                this.renderImages(enterprise.Images) : <img src={enterprise.image1} alt="Enterprise Image" />
+                this.renderImages(enterprise.Images) : <img src={enterprise.image1} alt="Enterprise" />
               }
 
              <div className="card-title flow-text">
