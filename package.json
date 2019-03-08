@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deviget/crowdvet.org.git"
+    "url": "git+https://github.com/kiva/crowdvet.org.git"
   },
   "keywords": [
     "crowdvet"
@@ -25,9 +25,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/deviget/crowdvet.org/issues"
+    "url": "https://github.com/kiva/crowdvet.org/issues"
   },
-  "homepage": "https://github.com/deviget/crowdvet.org#readme",
+  "homepage": "https://github.com/kiva/crowdvet.org#readme",
   "dependencies": {
     "@material-ui/core": "^1.3.0",
     "aws-sdk": "^2.279.1",
