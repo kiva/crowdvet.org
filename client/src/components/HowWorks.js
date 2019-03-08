@@ -75,14 +75,14 @@ class HowWorks extends Component {
           <div className="col s12 center font-26 green-text">Step 1</div>
           <div className="col s12 center font-26">Join at any time</div>
           <p className="center">
-            <img src={arrow} alt="image of an arrow"/>
+            <img src={arrow} alt="arrow"/>
           </p>
           <div className="col s12 center font-26 green-text">Step 2</div>
           <div className="col s12 center font-26">
             Vet any number of enterprises at your own pace
           </div>
           <p className="center">
-            <img src={arrow} alt="image of an arrow"/>
+            <img src={arrow} alt="arrow"/>
           </p>
           <div className="col s12 center font-26 green-text">Step 3 </div>
           <div className="col s12 center font-26">

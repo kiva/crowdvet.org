@@ -64,6 +64,7 @@ class CommentItem extends Component {
                 <img
                   className="circle responsive-img"
                   src={comment.User.image}
+                  alt="user"
                   style={{ maxWidth: "50px" }}
                 />
               </p>
@@ -82,13 +83,13 @@ class CommentItem extends Component {
                 onClick={this.onHandleVote.bind(this)}
                 className="col s12 m1"
               >
-                <img src={heartImg} />
+                <img src={heartImg} alt="heart"/>
               </div>
               <div
                 onClick={this.onHandleClick.bind(this)}
                 className="col s12 m1"
               >
-                <img src={reply} />
+                <img src={reply} alt="reply"/>
               </div>
               <div className="col s12 m1 offset-m8">
                 {deleteBtn}

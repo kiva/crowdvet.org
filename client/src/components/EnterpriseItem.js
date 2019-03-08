@@ -41,7 +41,7 @@ class EnterpriseItem extends Component {
           {!_.isEmpty(enterprise.Images) ? (
             this.renderImages(enterprise.Images)
           ) : (
-            <img src={enterprise.image1} />
+            <img src={enterprise.image1} alt="enterprise"/>
           )}
         </div>
       </div>
