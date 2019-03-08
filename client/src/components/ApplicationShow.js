@@ -15,7 +15,7 @@ import CommentList from "./CommentList";
 import utils from "./utils";
 import _ from "lodash";
 import moment from "moment";
-import mtz from "moment-timezone"
+import mtz from "moment-timezone";
 
 class ApplicationShow extends Component {
   constructor(props) {
@@ -36,7 +36,11 @@ class ApplicationShow extends Component {
         url: `/users/evaluations/${id}`,
         active: false
       },
-      results: { text: "Results", url: `/users/evaluations/results/${id}`, active: false }
+      results: {
+        text: "Results",
+        url: `/users/evaluations/results/${id}`,
+        active: false
+      }
     };
   }
 
@@ -69,7 +73,7 @@ class ApplicationShow extends Component {
   renderTable() {
     return (
       <div>
-        <table >
+        <table>
           <thead>
             <tr>
               <th colSpan="3" className="table-name center">
@@ -269,7 +273,10 @@ class ApplicationShow extends Component {
     }
 
     return (
-      <Countdown date={mtz.tz(enterprise.endDate, "America/Los_Angeles").format()} renderer={utils.timeRenderer} />
+      <Countdown
+        date={mtz.tz(enterprise.endDate, "America/Los_Angeles").format()}
+        renderer={utils.timeRenderer}
+      />
     );
   }
 
@@ -334,7 +341,11 @@ class ApplicationShow extends Component {
             <CommentForm enterprise_id={enterprise.id} />
           </div>
           <div className="center-align">
-            <Link className="btn button-large" to={toPage} style={{lineHeight:"80px"}}>
+            <Link
+              className="btn button-large"
+              to={toPage}
+              style={{ lineHeight: "80px" }}
+            >
               Continue to Evaluation
             </Link>
           </div>
@@ -360,4 +371,7 @@ function mapStateToProps(
   };
 }
 
-export default connect(mapStateToProps, actions)(ApplicationShow);
+export default connect(
+  mapStateToProps,
+  actions
+)(ApplicationShow);
