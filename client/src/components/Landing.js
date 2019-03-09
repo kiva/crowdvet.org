@@ -103,7 +103,7 @@ class Landing extends Component {
       <p className="col s12 m4 offset-m4 center grey-text">
       Crowdvetting is a project of Kiva's Department of Strategic Initiatives
       </p>
-      <p className="col s12 m4 offset-m4 center grey-text">
+      <p id="contact-us" className="col s12 m4 offset-m4 center grey-text">
         Contact us at crowdvet@kiva.org</p>
       </div>
     )

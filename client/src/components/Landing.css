@@ -32,7 +32,6 @@
 #prefooter {
   margin-top: 75px;
   font-size: 20px;
-
 }
 
 #after-text {
@@ -45,7 +44,7 @@
   background-color: #61a63a;
   margin-top: 47px;
   margin-bottom: 37px;
-  width:100%;
+  width: 100%;
   max-width: 350px;
   height: 80px;
   font-size: 18px;
@@ -89,4 +88,13 @@
   font-size: 27px;
   padding-top: 13px;
   background-color: #13b5ea;
+}
+
+@media only screen and (max-width: 708px) and (min-width: 492px) {
+  #contact-us {
+    width: 100%;
+    margin-left: auto;
+
+    text-align: center;
+  }
 }
