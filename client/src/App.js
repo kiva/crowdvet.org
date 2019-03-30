@@ -13,6 +13,7 @@ import EvaluationResults from "./components/EvaluationResults";
 import EvaluationResultsViz from "./components/EvaluationResultsViz";
 import LineChart from "./components/Chart";
 import LearnAbout from "./components/LearnAbout";
+import Partnerships from "./components/Partnerships/Partnerships";
 import * as actions from "./actions";
 import HowWorks from "./components/HowWorks";
 import Terms from "./components/Terms";
@@ -49,6 +50,7 @@ class App extends Component {
           />
           <Route exact path="/faqs" component={Faqs} />
           <Route exact path="/learn" component={LearnAbout} />
+          <Route exact path="/partnerships" component={Partnerships} />
           <Route exact path="/how-works" component={HowWorks} />
           <Route exact path="/terms" component={Terms} />
           <Route exact path="/further-reading" component={FurtherReading} />
