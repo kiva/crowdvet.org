@@ -39,7 +39,7 @@ class Comment extends Component {
 
           <div className="row">
             <div className="col s12 m4 offset-m8">
-              <button className="btn btn-comment">Submit</button>
+              <button className="btn btn-comment">Submit Comment</button>
             </div>
           </div>
         </form>
