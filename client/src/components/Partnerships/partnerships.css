@@ -1,0 +1,158 @@
+/* Reusable Styling */
+.green-color {
+  color: #49953F;
+}
+
+.btn-cta {
+  box-sizing: content-box;
+  font-size: 1.25rem;
+  padding: 0.8rem 4rem;
+  background-color: #49953F;
+  text-transform: uppercase;
+  transition: background-color 0.15s linear;
+}
+
+.btn-cta:hover {
+  background-color: rgba(73, 149, 63, 0.9);
+}
+
+.btn-cta:focus  {
+  background-color: rgba(73, 149, 63, 0.8);
+}
+
+/* Header */
+.partnerships {
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  width:80%;
+  z-index: 1000;
+}
+
+.center-element {
+  position: absolute;
+  transform: translate(-50%,-50%);
+  left: 50%;
+  top: 50%
+}
+
+/* Content */
+.partnerships-content {
+  font-size: 1.1035rem;
+  padding-top: 43px;
+  padding-bottom: 17px;
+}
+
+.process-section-title {
+  margin-top: 32px;
+  margin-bottom: 22px;
+}
+
+/* Process Steps */
+.process-step-image-container {
+  height: 80px;
+}
+
+.process-step-image {
+  height: 100%;
+  width: auto;
+}
+
+.process-step-number {
+  font-size: 1rem;
+  color: rgba(73, 149, 63, 0.9);
+  margin-top: 8px;
+}
+
+.process-step-title {
+  background-color: #49953F;
+  /* TODO DELETE */
+  background-color: rgba(73, 149, 63, 0.9);
+  border: 1px solid #5b9f52;
+  color: white;
+  border-radius: 6px;
+  padding: 8px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  margin-top: 7px;
+  margin-bottom: 32px;
+}
+
+.process-step-wrapper:last-child .process-step-title {
+  margin-bottom: 16px;
+}
+
+.partnerships-get-started-button {
+  margin-top: 10px;
+}
+
+@media only screen and (min-width: 993px) {
+  .process-step-title {
+    margin-bottom: 0;
+    min-height: 88px;
+  }
+
+  .process-step-wrapper:last-child .process-step-title {
+    margin-bottom: 0;
+  }
+}
+
+/* CTA */
+.partnerships-ottom-section {
+  margin-top: 40px;
+}
+
+/* Our Partners */
+.process-our-partners-title {
+  margin-top: 57px;
+  margin-bottom: 16px;
+}
+
+.partnerships-our-partners-image-row {}
+
+.partnerships-our-partners-image-container {
+  height: 40px;
+  margin-bottom: 20px;
+  object-fit: contain;
+}
+
+.partnerships-our-partners-image-container.partnerships-our-partners-image-container-tall {
+  height: 80px;
+}
+
+.partnerships-our-partners-image {
+  max-height: 100%;
+  max-width: 95%;
+}
+
+@media only screen and (min-width: 993px) {
+  .partnerships-our-partners-image-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+    height: 80px;
+  }
+
+  .partnerships-our-partners-image-container {
+    width: 30%;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.process-cta-description {
+  margin-bottom: 8px;
+  margin-top: 0;
+}
+
+/* Sync Styles With Learn More Page */
+.partnerships-content h4 {
+  font-size: 1.793rem;
+  line-height: 1.4;
+  font-weight: 500;
+}

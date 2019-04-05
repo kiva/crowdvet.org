@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import * as actions from "../actions";
 import logo from "./logo.svg";
 import "./Header.css";
 import Dropdown from "./Dropdown";
@@ -80,6 +79,15 @@ class Header extends Component {
               <i className="material-icons">menu</i>
             </a>
             <ul className="right hide-on-med-and-down">
+              <li>
+                <Link
+                  to={"/partnerships"}
+                  onClick={this.onHandleMenuClick.bind(this)({learn: { active: true }, user: {active:false} })}
+                  className={ `font-16 ${this.state.learn.active && "weight-500"} `}
+                >
+                  Partner With Us
+                </Link>
+              </li>
               <li>
 
                 <Link to={"/learn"} onClick={this.onHandleMenuClick.bind(this)({learn: { active: true }, user: {active:false} })}
