@@ -38,9 +38,7 @@ class Carousel extends Component {
         Start Vetting
       </Link>
     )) || (
-      <Link className="btn modal-trigger" to={"#modal1"}>
-        Join Today
-      </Link>
+      <div></div>
     );
     return (
       <div className="carousel-text row">
