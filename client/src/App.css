@@ -1,19 +1,22 @@
+/* General Styles */
+body {
+  padding: 0;
+}
+
 .App {
   text-align: center;
 }
-.nav-wrapper {
-  background-color: #247037;
-  color: white;
-  font-size: 23px;
-  font-family: 'Roboto', sans-serif;
+
+/* Useful Shared Styles */
+.inactive-text {
+  color: #247037;
 }
+
 .top-menu {
   font-size: 16px;
   font-weight: 500;
 }
-.inactive-text {
-  color: #247037;
-}
+
 .active-text {
   text-decoration: underline;
 }

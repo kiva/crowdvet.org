@@ -1,9 +1,8 @@
-.right-header {
-  font-size: 16px;
-  margin-right: 35px;
-}
-.left-header {
-  margin-left: 10%;
+.nav-wrapper {
+  background-color: #247037;
+  color: white;
+  font-size: 23px;
+  font-family: 'Roboto', sans-serif;
 }
 
 .weight-500 {
@@ -12,4 +11,9 @@
 
 .font-16 {
   font-size: 16px;
+}
+
+.button-collapse.hamburger-menu-button {
+  margin: 0;
+  padding-right: 18px;
 }

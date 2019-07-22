@@ -20,7 +20,7 @@ class Header extends Component {
 
   onHandleMenuClick(state) {
     return () => {
-        this.setState( state );
+      this.setState( state );
     }
   }
 
@@ -29,7 +29,7 @@ class Header extends Component {
       return [
         <li key="1">
           <Link to={"/user"} onClick={this.onHandleMenuClick.bind(this)({learn: { active: false }, user:{active:true}})}
-           className={`font-16 ${ this.state.user.active && "weight-500"}`}>{this.props.auth.name}</Link>
+                className={`font-16 ${ this.state.user.active && "weight-500"}`}>{this.props.auth.name}</Link>
         </li>,
         <li key="2">
           <Dropdown
@@ -56,46 +56,60 @@ class Header extends Component {
       </li>
     );
   }
-  render() {
-    const startVetting = (this.props.auth && (
-      <Link onClick={this.onHandleMenuClick.bind(this)({learn: { active: false },user:{active:true}})} className="font-16" to={"/vet/enterprises"}>Start Vetting</Link>
-    )) || (
-      <Link onClick={this.onHandleMenuClick.bind(this)({learn: { active: false }, user:{active:true}})} className="font-16 modal-trigger" to={"#modal1"}>
-        Start Vetting
-      </Link>
+
+  renderStartVetting() {
+    return this.props.auth && (
+      <li>
+        <Link
+          onClick={this.onHandleMenuClick.bind(this)({learn: { active: false },user:{active:true}})}
+          className="font-16"
+          to={"/vet/enterprises"}
+        >
+          Start Vetting
+        </Link>
+      </li>
     );
+  }
+
+  render() {
     return (
       <div>
         <nav>
           <div className="nav-wrapper">
-            <Link to={"/"} className="left-header brand-logo">
-              Crowdvetting at <img src={logo} className="App-logo" alt="logo" />
-            </Link>
-            <a
-              href="#"
-              data-activates="mobile-demo"
-              className="button-collapse"
-            >
-              <i className="material-icons">menu</i>
-            </a>
-            <ul className="right hide-on-med-and-down">
-              <li>
-                <Link
-                  to={"/partnerships"}
-                  onClick={this.onHandleMenuClick.bind(this)({learn: { active: true }, user: {active:false} })}
-                  className={ `font-16 ${this.state.learn.active && "weight-500"} `}
-                >
-                  Partner With Us
-                </Link>
-              </li>
-              <li>
-
-                <Link to={"/learn"} onClick={this.onHandleMenuClick.bind(this)({learn: { active: true }, user: {active:false} })}
-                 className={ `font-16 ${this.state.learn.active && "weight-500"} `}>Learn about Crowdvetting</Link>
-              </li>
-              <li>{startVetting}</li>
-              {this.renderSingIn()}
-            </ul>
+            <div className="container">
+              <Link to={"/"} className="left-header brand-logo">
+                Crowdvetting at <img src={logo} className="App-logo" alt="logo" />
+              </Link>
+              <a
+                href="#"
+                data-activates="mobile-demo"
+                className="button-collapse hamburger-menu-button"
+              >
+                <i className="material-icons">menu</i>
+              </a>
+              <ul className="right hide-on-med-and-down">
+                <li>
+                  <Link
+                    to={"/partnerships"}
+                    onClick={this.onHandleMenuClick.bind(this)({learn: { active: true }, user: {active:false} })}
+                    className={ `font-16 ${this.state.learn.active && "weight-500"} `}
+                  >
+                    Partner With Us
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/learn"}
+                    onClick={this.onHandleMenuClick.bind(this)({learn: { active: true }, user: {active:false} })}
+                    className={ `font-16 ${this.state.learn.active && "weight-500"} `}
+                  >
+                    Learn about Crowdvetting
+                  </Link>
+                </li>
+                {this.renderStartVetting()}
+                {this.renderSingIn()}
+              </ul>
+            </div>
           </div>
 
           <ul className="side-nav" id="mobile-demo">
@@ -106,9 +120,7 @@ class Header extends Component {
                 Learn about Crowdvetting
               </Link>
             </li>
-            <li>
-              {startVetting}
-            </li>
+            {this.renderStartVetting()}
             {this.renderSingIn()}
           </ul>
         </nav>
