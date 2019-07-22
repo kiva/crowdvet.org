@@ -1,0 +1,16 @@
+.btn-submenu {
+  height: 100%;
+  text-transform: none;
+}
+
+.line-50 {
+  line-height: 50px;
+}
+
+.dark-grey {
+  color: #4A4A4A;
+}
+
+.sub-header-row {
+  margin-bottom: 0;
+}

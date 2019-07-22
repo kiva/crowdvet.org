@@ -88,24 +88,6 @@ class Header extends Component {
                 <i className="material-icons">menu</i>
               </a>
               <ul className="right hide-on-med-and-down">
-                <li>
-                  <Link
-                    to={"/partnerships"}
-                    onClick={this.onHandleMenuClick.bind(this)({learn: { active: true }, user: {active:false} })}
-                    className={ `font-16 ${this.state.learn.active && "weight-500"} `}
-                  >
-                    Partner With Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={"/learn"}
-                    onClick={this.onHandleMenuClick.bind(this)({learn: { active: true }, user: {active:false} })}
-                    className={ `font-16 ${this.state.learn.active && "weight-500"} `}
-                  >
-                    Learn about Crowdvetting
-                  </Link>
-                </li>
                 {this.renderStartVetting()}
                 {this.renderSingIn()}
               </ul>
@@ -113,13 +95,6 @@ class Header extends Component {
           </div>
 
           <ul className="side-nav" id="mobile-demo">
-            <li>
-              <Link
-                to={"/learn"}
-              >
-                Learn about Crowdvetting
-              </Link>
-            </li>
             {this.renderStartVetting()}
             {this.renderSingIn()}
           </ul>

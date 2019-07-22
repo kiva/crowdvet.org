@@ -1,0 +1,217 @@
+/* Shared Styles */
+
+.green-section {
+  background-color: #407C40;
+  text-align: center;
+  color: white;
+}
+
+.gray-section {
+  background-color: #f5f5f5;
+}
+
+.landing-container {
+  padding-top: 32px;
+  padding-bottom: 16px;
+}
+
+.title-block-green {
+  color:#49953F;
+  font-size: 26px;
+  text-align: center;
+  line-height: 38px;
+  margin-top: 0;
+}
+
+.heavy-title {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.subtitle-block {
+  font-size: 22px;
+  line-height: 30px;
+  text-align: center;
+}
+
+/* Carousel */
+
+.carousel-text {
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.carousel-text .btn {
+  width: 280px;
+  height: 60px;
+  font-size: 27px;
+  padding-top: 13px;
+  background-color: #13b5ea;
+}
+
+/* Intro */
+
+.landing-container-intro {
+  padding-top: 32px;
+}
+
+/* Video */
+
+.video-title {
+  margin: 0 0 17px;
+}
+
+.video-text-row {
+  margin-bottom: 0;
+}
+
+.video-text {
+  text-align: center;
+  padding: 32px 0;
+}
+
+.video-subtitle {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+  max-width: 100%;
+  height: 0;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* About DSE */
+#about-dse {
+  padding-top: 24px;
+  padding-bottom: 8px;
+}
+
+.about-dse-above-image {
+  margin-bottom: 32px;
+}
+
+/* How CrowdVet Works */
+#how-crowdvet-works {
+  padding: 24px 0 28px;
+}
+
+.how-works-title {
+  font-size: 34px;
+  font-weight: bold;
+}
+
+.set-schedule-title {
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+.how-works-arrow {
+  margin-top: 16px;
+  margin-bottom: -8px;
+}
+
+.how-works-result-title {
+  margin-top: 32px;
+}
+
+/* Get Started */
+.get-started-container {
+  text-align: center;
+  padding: 42px 0 32px;
+}
+
+.get-started-subsection {
+  margin-bottom: 64px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.get-started-subsection:last-of-type {
+  margin-bottom: 0;
+}
+
+.get-started-title {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.get-started-content {
+  font-size: 22px;
+  margin: 8px 0 24px 0;
+}
+
+.landing-get-started-button {
+}
+
+/* Testimonials */
+.testimonials-section-title {
+  padding: 32px 0;
+}
+
+.testimonials-container {
+  padding: 48px 0;
+}
+
+.testimonial {
+  font-size: 20px;
+}
+
+.testimonial-name {
+  font-size: 18px;
+  color: #61a63a;
+  margin-top: 16px;
+}
+
+.contact-label {
+  margin-top: 38px;
+  margin-bottom: 0;
+}
+
+/* MISC */
+
+.text-section {
+  font-size: 32px;
+}
+
+#kiva-message {
+  color: #a8d340;
+  font-size: 28px;
+}
+
+.world {
+  margin-top: 33px;
+  color: #407c40;
+  font-size: 32px;
+  text-align: center;
+}
+
+#evaluate {
+  background-color: #61a63a;
+  margin-top: 47px;
+  margin-bottom: 37px;
+  width: 100%;
+  max-width: 350px;
+  height: 80px;
+  font-size: 18px;
+}
+
+@media only screen and (max-width: 708px) and (min-width: 492px) {
+  #contact-us {
+    width: 100%;
+    margin-left: auto;
+
+    text-align: center;
+  }
+}

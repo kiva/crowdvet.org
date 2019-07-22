@@ -177,7 +177,7 @@ class Partnerships extends Component {
             Click below for a more detailed walk through of our partnerships process and access to training materials
           </p>
           <a
-            className="btn btn-lg btn-cta partnerships-get-started-button"
+            className="btn btn-lg btn-cta btn-cta-green partnerships-get-started-button"
             href="https://docs.google.com/document/d/1rnLZYUkfZXZVKtXVm049FyPJZ5oFnLRktWPLr4Ka0yM/edit"
             target="_blank"
           >
