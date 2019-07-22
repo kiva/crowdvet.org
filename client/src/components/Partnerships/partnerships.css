@@ -3,23 +3,6 @@
   color: #49953F;
 }
 
-.btn-cta {
-  box-sizing: content-box;
-  font-size: 1.25rem;
-  padding: 0.8rem 4rem;
-  background-color: #49953F;
-  text-transform: uppercase;
-  transition: background-color 0.15s linear;
-}
-
-.btn-cta:hover {
-  background-color: rgba(73, 149, 63, 0.9);
-}
-
-.btn-cta:focus  {
-  background-color: rgba(73, 149, 63, 0.8);
-}
-
 /* Header */
 .partnerships {
   font-size: 40px;

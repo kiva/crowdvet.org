@@ -1,19 +1,53 @@
+/* General Styles */
+body {
+  padding: 0;
+}
+
 .App {
   text-align: center;
 }
-.nav-wrapper {
-  background-color: #247037;
-  color: white;
-  font-size: 23px;
-  font-family: 'Roboto', sans-serif;
+
+/* Useful Shared Styles */
+.inactive-text {
+  color: #247037;
 }
+
 .top-menu {
   font-size: 16px;
   font-weight: 500;
 }
-.inactive-text {
-  color: #247037;
-}
+
 .active-text {
   text-decoration: underline;
+}
+
+/* Component Styles */
+.btn-cta {
+  box-sizing: content-box;
+  font-size: 1.25rem;
+  padding: 0.8rem 4rem;
+  background-color: #13B5EA;
+  text-transform: uppercase;
+  transition: background-color .15s linear, box-shadow .15s linear;
+  border-radius: 2px;
+}
+
+.btn-cta:hover {
+  background-color: rgba(19, 181, 234, 0.9);
+}
+
+.btn-cta:focus  {
+  background-color: rgba(19, 181, 234, 0.8);
+}
+
+.btn-cta.btn-cta-green {
+  background-color: #49953F;
+}
+
+.btn-cta.btn-cta-green:hover {
+  background-color: rgba(73, 149, 63, 0.9);
+}
+
+.btn-cta.btn-cta-green:focus  {
+  background-color: rgba(73, 149, 63, 0.8);
 }

@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Landing from "./components/Landing";
+import Landing from "./components/Landing/Landing";
 import UserProfile from "./components/Profile";
 import ApplicationShow from "./components/ApplicationShow";
 import ApplicationEvaluate from "./components/Evaluation";

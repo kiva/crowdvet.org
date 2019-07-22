@@ -14,7 +14,7 @@ const Footer = () => {
             </p>
             <p className="grey-text text-lighten-4">Explore</p>
             <p>
-              <ul class="siteFooter-links">
+              <ul className="siteFooter-links">
                 <li>
                   <a className="green-footer"href="https://www.kiva.org/gifts" >
                     Gifts

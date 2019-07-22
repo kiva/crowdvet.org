@@ -24,7 +24,6 @@ import { connect } from "react-redux";
 import idgen from "../idgen";
 import "./partnerships.css";
 import SignUpModal from "../SignUpModal";
-import SubMenu from "../SubMenuLearn";
 
 class Partnerships extends Component {
   constructor(props) {
@@ -135,13 +134,6 @@ class Partnerships extends Component {
 
     return (
       <div>
-        <SubMenu
-          menu={{
-            about: { active: true },
-            howWorks: { active: false },
-            further: { active: false }
-          }}
-        />
         <Carousel
           images={[carousel, carousel2,carousel3]}
           options={{ fullWidth: true, indicators: true }}
@@ -154,7 +146,7 @@ class Partnerships extends Component {
     );
   }
 
-  renderContent() {//TODO: DELETE LINE 87
+  renderContent() {
 
     return (
       <div className="row partnerships-content center">
@@ -185,7 +177,7 @@ class Partnerships extends Component {
             Click below for a more detailed walk through of our partnerships process and access to training materials
           </p>
           <a
-            className="btn btn-lg btn-cta partnerships-get-started-button"
+            className="btn btn-lg btn-cta btn-cta-green partnerships-get-started-button"
             href="https://docs.google.com/document/d/1rnLZYUkfZXZVKtXVm049FyPJZ5oFnLRktWPLr4Ka0yM/edit"
             target="_blank"
           >
