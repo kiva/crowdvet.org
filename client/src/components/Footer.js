@@ -196,7 +196,7 @@ const Footer = () => {
                   your loan.
                 </div>
                 <p >
-                  © 2018 Kiva. All rights reserved.
+                  © 2019 Kiva. All rights reserved.
                 </p>
               </div>
             </div>
