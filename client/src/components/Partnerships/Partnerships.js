@@ -152,13 +152,13 @@ class Partnerships extends Component {
       <div className="row partnerships-content center">
         <div className="col s12">
           <h4 className="green-color">
-            If you are a Professor, a Student group, or an event organizer, and would like to host a Crowdvet session in your class, meeting or event, you can partner with us
+            You can partner with us to host a session on Crowdvet in your classroom, student group, meeting or event.
           </h4>
         </div>
         <div className="col s12">
           <p>
             Crowdvet provides our vetters with the opportunity to practice and develop their investing skills and
-            gain real Impact Investing experience while helping Kiva speed up the Due Diligence process provide loans
+            gain real Impact Investing experience. It helps Kiva speed up our Due Diligence process to provide loans
             to our Direct to Social Enterprise program applicants faster.
           </p>
           <p>
