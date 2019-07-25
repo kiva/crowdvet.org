@@ -18,20 +18,20 @@ class Landing extends Component {
     this.getStartedSectionData = [
       {
         title: 'Let’s Get Started',
-        content: `We have developed a training site for CrowdVet. You will be required to create a separate login. Then come back to CrowdVet and sign up with us.`,
-        buttonTitle: 'Go to Training Site',
-        href: 'https://training.crowdvet.org',
+        content: `Please visit the link below and watch our training videos to familiarize yourself with Crowdvet.`,
+        buttonTitle: 'Go to Training',
+        href: 'https://docs.google.com/presentation/d/1HXLdSswjd2-I5SIcrbJeYz3530npFwleyYOuHqAwYpY/edit?usp=sharing',
       },
       {
         title: 'Get Certified',
-        content: `Here's a document with certification details.`,
+        content: `You can earn an impact investing certificate by vetting regularly with Crowdvet. Click below to learn more`,
         buttonTitle: 'Learn More',
-        href: 'https://google.com',
+        href: 'https://docs.google.com/presentation/d/1n3VvjQBPzj-3gD8ryQ2zVZ3jNWCFMGV557IIHMgj7Q8/edit?usp=sharing',
         halfWidth: true,
       },
       {
         title: 'Become a Partner',
-        content: `Partner with crowdvet. Click to learn more.`,
+        content: `You can partner with us to run crowdvet sessions in your classroom, student group, or at an event`,
         buttonTitle: 'Learn More',
         to: '/partnerships',
         halfWidth: true,
