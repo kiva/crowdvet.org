@@ -73,6 +73,7 @@ class SignUp extends Component {
         <div className="col s12">
           <span>Sign Up with Us</span>
         </div>
+/*
         <form
           className="col s12"
           onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
@@ -107,6 +108,7 @@ class SignUp extends Component {
               />
             </div>
           </div>
+*/
           <p>
           <Field
             name="terms"
@@ -151,6 +153,11 @@ class SignUp extends Component {
                     <img src={Google} id="google" alt="logo" />
                     <div>Sign Up with Google</div>
                   </a>
+//made changes
+		  <a href={"/auth/goodle"} className="btn signup">
+	             <img src={Google} id="google" alt="logo" />
+		      <div>Sign In with Google</div>
+		  </a>
                 </span>
               </div>
               <div className="col s12 m6">
