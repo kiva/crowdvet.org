@@ -24,7 +24,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./routes/auth')(app);
+//require('./routes/auth')(app);
 require('./routes/evaluations')(app);
 require('./routes/sectors')(app);
 require('./routes/countries')(app);

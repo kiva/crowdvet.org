@@ -8,7 +8,7 @@ import logoGreen from "./logo-green.svg";
 import Google from "./Google.svg";
 import "./Modal.css";
 import _ from "lodash";
-import SignIn from "./SignIn";
+//import SignIn from "./SignIn";
 import idgen from "./idgen";
 
 class SignUp extends Component {
@@ -57,10 +57,12 @@ class SignUp extends Component {
           type="checkbox"
           checked={field.input.value ? "checked" : ""}
         />
+
         <label htmlFor={field.id}>
         I agree to the terms of Kivas volunteer agreement.
         <Link to={"/terms"} className="green-text"> Terms of Agreement * </Link>
         </label>
+
         <div className="text-help">{touched ? error : ""}</div>
       </div>
     );
@@ -70,43 +72,12 @@ class SignUp extends Component {
     const { handleSubmit } = this.props;
     return (
       <div className="row">
-        <div className="col s12">
-          <span>Sign Up with Us</span>
-        </div>
+
         <form
           className="col s12"
           onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         >
-          <div className="row">
-            <div className="input-field col s12">
-              <Field label="Name" name="name" component={this.renderField} />
-            </div>
-          </div>
-          <div className="row">
-            <div className="input-field col s12">
-              <Field label="Email" name="email" component={this.renderField} />
-            </div>
-          </div>
-          <div className="row">
-            <div className="input-field col s12">
-              <Field
-                label="Password"
-                name="password"
-                type="password"
-                component={this.renderField}
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="input-field col s12">
-              <Field
-                label="Confirm Password"
-                name="confirmPassword"
-                type="password"
-                component={this.renderField}
-              />
-            </div>
-          </div>
+
           <p>
           <Field
             name="terms"
@@ -118,14 +89,12 @@ class SignUp extends Component {
             {this.renderAlert()}
           </div>
           <div className="row">
-            <button className="btn" id="signup">
-              <div>Sign Up</div>
-            </button>
           </div>
         </form>
       </div>
     );
   }
+
   render() {
     return (
       <div className="center-align">
@@ -135,25 +104,28 @@ class SignUp extends Component {
               <img src={logoGreen} alt="logo" />
             </div>
             <small>Enabling Dreams All Around the world</small>
+
             <div className="row">
-              <div className="grid col s12 m6">
-                <span className="flow-text small">
-                  Welcome Back, please Sign In
-                </span>
-                {<SignIn history={this.props.history} />}
-              </div>
-              <div className="grid col s12 m6">
-                <span className="flow-text small">
-                  Connect a Social Media Account
-                </span>
+
+              <div className="grid col s6 m3">
+
                 <span className="flow-text">
                   <a href={"/auth/google"} className="btn signup">
                     <img src={Google} id="google" alt="logo" />
                     <div>Sign Up with Google</div>
                   </a>
                 </span>
+
+
+              <div className="grid col s24 m12">
+                <span className="flow-text">
+                  <a href={"/auth/google"} className="btn signin">
+                      <img src={Google} id="google" alt="logo" />
+                      <div>Sign In with Google</div>
+                  </a>
+                </span>
               </div>
-              <div className="col s12 m6">
+
                 <br />
                 <div>{this.renderForm()}</div>
               </div>
